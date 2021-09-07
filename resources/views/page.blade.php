@@ -8,7 +8,7 @@
   >
     <h2 class="text-black font-display">@php(the_title())</h2>
   </page-header>
-  <div class="list-style-enable container pt-10">
+  <div class="list-style-enable container py-10">
       @php(the_content())
   </div>
 @endsection
