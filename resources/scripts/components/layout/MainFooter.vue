@@ -120,8 +120,10 @@ export default {
 <style lang="scss">
 .main-footer {
     .content-menus .nav {
-        @apply lg:flex-row w-full justify-between;
-
+        @apply lg:flex-row -mx-4 w-full justify-between;
+        >li {
+            @apply mx-4;
+        }
         >li>a {
             @apply font-semibold text-xl text-white w-full whitespace-nowrap opacity-100;
         }
