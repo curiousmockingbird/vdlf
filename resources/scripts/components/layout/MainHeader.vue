@@ -1,14 +1,12 @@
 <template>
-    <header class="header   bg-primary  fixed z-50 w-screen ">
-        <div class="container mx-auto">
-            <div class="flex flex-row justify-between py-8 lg:py-5">
-                <a :href="$settings.app_url" class="logo self-start font-display font-hairline">
-                    <svg-vue
-                        icon="logo.consortium-white"
-                        alt="Consortium"
-                        width="288px"
-                        height="65px"
-                    ></svg-vue>
+    <header class="header bg-primary  fixed z-50 w-screen ">
+        <div class="mx-auto container pl-10">
+            <div class="flex flex-row justify-between">
+                <a :href="$settings.app_url" class="logo self-center font-display font-hairline">
+                    <img :src="$images+'/logo.png'" class="icon max-w-full h-auto"
+                    alt="VDLF"
+                    width="137px"
+                    height="57px" />
                 </a>
 
                 <button
@@ -22,18 +20,27 @@
                     />
                     <XIcon v-else class="block h-8 w-8 self-center text-white" aria-hidden="true" />
                 </button>
-
-                <div class="lg:flex hidden">
+                <div class="lg:flex justify-center hidden self-center">
+                    <div class="language-switcher ml-8">
+                        <div class="relative form-select w-28">
+                            <select class="w-full cursor-pointer" v-model="language" @change="changeLanguage($event)">
+                                <option value="en">ENG</option>
+                                <option value="es">ESP</option>
+                            </select>
+                        </div>
+                    </div>
                     <nav
-                        class="desktop-nav hidden justify-self-center place-self-center hidden lg:block w-full "
+                        class="desktop-nav ml-8 hidden justify-self-center place-self-center hidden lg:block w-full "
                         ref="nav"
                     >
                         <slot />
                     </nav>
-
+                </div>
+                <div class="flex">
+                    <a href="#" class="py-8 text-white font-bold px-10">Membership</a>
+                    <a href="#" class="py-8 text-white font-bold px-10 bg-gradient-to-r from-primary to-secondary underline">Donate</a>
                     <button
-                        class="text-white border-0 hidden lg:block border-0 px-4 hover:outline-none active:outline-none fill-current outline-none justify-self-center place-self-center"
-                        style="background: transparent;"
+                        class="text-white py-8 h-full border-0 hidden lg:block border-0 px-4 hover:outline-none active:outline-none fill-current outline-none"
                         @click="openSearchBar()"
                     >
                         <svg-vue
@@ -93,6 +100,7 @@ export default {
             scrollTop: true,
             navOpen: false,
             activeClass: "active",
+            language:"en",
         };
     },
     components: {
@@ -123,6 +131,26 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+
+.language-switcher {
+    .form-select {
+        @apply p-0 rounded-md relative border-2 text-white border-white;
+        &:before {
+            content:"";
+            background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkiIGhlaWdodD0iMTEiIHZpZXdCb3g9IjAgMCAxOSAxMSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEgMS40MjUyOUw5LjQ4NTI4IDkuOTEwNTdMMTcuOTcwNiAxLjQyNTI5IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K");
+            @apply absolute block right-4 inset-y-1/2 origin-center bg-no-repeat bg-contain;
+            width: 14px;
+            height: 7px;
+            transform:translateY(-50%);
+        }
+        select {
+            appearance: none;
+            @apply py-2 px-3 mx-6 -left-6 relative z-30 uppercase tracking-wide w-full font-semibold;
+            background-color: transparent;
+        }
+    }
+}
+
 nav.white-nav {
     a {
         @apply text-white;
@@ -156,7 +184,7 @@ nav {
         }
     }
     a {
-        @apply font-body text-base text-white font-medium transition-colors leading-tight py-5 lg:whitespace-nowrap;
+        @apply font-body text-base text-black font-semibold transition-colors leading-tight py-8 lg:whitespace-nowrap;
 
         &:active,
         &:hover {
@@ -170,7 +198,7 @@ nav {
     }
     ul > li {
         a {
-            @apply px-3 lg:px-0 lg:pl-2 lg:pr-4 xl:px-5;
+            @apply px-2 xl:px-3;
         }
         ul.sub-menu {
             background: rgba(255, 255, 255, 0.959);
@@ -210,12 +238,6 @@ nav {
                 opacity: 1;
             }
         }
-    }
-}
-.search-bar {
-    background: rgba(255, 255, 255, 0.308);
-    input::placeholder {
-        color: #fff;
     }
 }
 

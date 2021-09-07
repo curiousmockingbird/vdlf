@@ -1,7 +1,69 @@
-body {
-  @apply font-sans;
-}
-
 .brand {
   @apply text-3xl font-medium text-indigo-500;
+}
+
+main {
+  padding-top: 100px;
+
+  @screen lg {
+    padding-top: 88px;
+  }
+
+  .elementor-section.elementor-section-boxed>.elementor-container {
+    @apply container mx-auto lg:px-10 xl:px-16;
+  }
+}
+
+.list-style-enable {
+  ul {
+    @apply list-disc my-3;
+  }
+
+  ol {
+    @apply list-decimal;
+  }
+
+  ul,
+  ol {
+    li {
+      @apply ml-5;
+    }
+  }
+
+  strong {
+    @apply font-bold;
+  }
+}
+
+.text-formatting-enable {
+  ul {
+    @apply list-disc my-3;
+  }
+
+  ol {
+    @apply list-decimal;
+  }
+
+  ul,
+  ol {
+    li {
+      @apply ml-5;
+    }
+  }
+
+  a {
+    @apply underline font-bold;
+
+    &:hover {
+      @apply text-primary;
+    }
+  }
+
+  strong {
+    @apply font-bold;
+  }
+
+  p {
+    @apply my-3
+  }
 }

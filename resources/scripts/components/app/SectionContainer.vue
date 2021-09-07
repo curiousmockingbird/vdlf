@@ -1,5 +1,5 @@
 <template>
-    <section class="section bg-bbBlank relative" :class="[sectionClasses]">
+    <section class="section bg-primary relative" :class="[sectionClasses]">
         <slot name="beforeContainer" />
         <div class="container mx-auto z-10 relative" :class="containerClasses">
             <slot />

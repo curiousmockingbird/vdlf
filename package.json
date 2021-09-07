@@ -38,7 +38,9 @@
     "sass-loader": "11.1.1",
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^22.0.0",
-    "tailwindcss": "^2.1.2"
+    "svg-vue3": "^0.2.1",
+    "tailwindcss": "^2.2.4",
+    "vue-template-compiler": "^2.6.14"
   },
   "peerDependencies": {
     "@vue-hero-icons/outline": "^1.7.2",
@@ -48,12 +50,11 @@
     "es6-promise": "^4.2.8",
     "gsap": "^3.6.1",
     "jquery": "^3.5.1",
-    "laravel-mix-svg-vue": "^0.3.2",
+    "laravel-mix-svg-vue": "^0.3.7",
     "lodash": "^4.17.20",
     "popper.js": "^1.16.1",
     "svg-vue": "^0.1.2",
-    "vue": "^2.6.12",
-    "vue-carousel": "^0.18.0",
+    "vue": "^2.6.14",
     "vue-js-modal": "^2.0.0-rc.6",
     "vue-loader": "^15.9.6",
     "vue-loading-overlay": "^3.4.2",

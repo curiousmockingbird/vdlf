@@ -38,7 +38,7 @@
 }
 
 .content-title h2 {
-    @apply text-primary font-semibold;
+    @apply font-semibold;
     line-height: 1.2em;
     letter-spacing: 1.2px;
     @screen md {

@@ -1,111 +1,62 @@
 <template>
-    <footer class="main-footer bg-primary">
-        <div class="container mx-auto  ">
-            <div class="w-full flex mb-10">
-                <svg-vue
-                    icon="logo.consortium-white"
-                    alt="Consortium"
-                    width="288px"
-                    height="65px"
-                ></svg-vue>
+    <footer class="main-footer bg-themeBlack relative">
+        <img class="absolute p-10 w-full h-full left-0 top-0 z-10 object-contain object-center" :src="$images+'/bg-footer.png'" />
+        <div class="container relative z-20">
+            <div class="w-full flex items-center justify-between mb-10">
+                <img :src="$images+'/logo-footer.png'" class="icon max-w-full h-auto"
+                    alt="VDLF"
+                    width="282px"
+                    height="120px" />
+
+                <div class="button-actions -mx-5">
+                    <a href="#" class="text-2xl font-bold font-arial-black p-5 text-primary">Membership</a>
+                    <a href="#" class="text-2xl font-bold font-arial p-5 text-primary">Donate</a>
+                </div>
             </div>
             <div class="flex flex-col md:flex-row">
                 <div class="w-full md:w-1/3 pr-0 md:pr-10 pb-10 md:pb-0 text-sm">
-                    <h3 class="text-white text-xl  font-normal font-display mb-6">
-                        Find Us
+                    <h3 class="text-title">
+                        Contact Us
                     </h3>
-                    <p class="opacity-80 mb-4">
-                        1020 19th Street, NW<br />
-                        Suite 500 <br />
-                        Washington, DC 20036
+                    <p class="opacity-80 text-lg font-display mb-4">
+                        1027 S. 5th Street, 
+                        <br>Milwaukee, WI 53204
+                        <br>Tel. 414-643-1620  
+                        <br>Fax. 414-643-1621 
+                        <br>Email: email@email.com
                     </p>
-                    <p class="opacity-80">(202) 331-8080 <br />info@consortium.org</p>
-                    <div class="hidden md:block">
-                        <h3 class="text-white text-xl  font-normal font-display mb-5 mt-8">
-                            Follow us on Social Media
-                        </h3>
-                        <socialMediaIcon></socialMediaIcon>
-                    </div>
-                </div>
-                <div class="w-full md:w-1/3 pb-10 md:pb-0">
-                    <h3 class="text-white text-xl  font-normal font-display mb-6">
-                        Explore Our Website
+
+                    <h3 class="text-title mt-6">
+                        Subscribe to our newsletter
                     </h3>
+                    <form class="flex w-full h-16 relative">
+                        <input type="text" name="s" class="w-full p-5 h-full pr-20 rounded-md bg-themeGray placeholder-gray-200 focus:outline-none" :value="email" placeholder="Email address..." />
+                        <button type="submit" class="bg-primary w-16 h-full top-0 right-0 flex items-center justify-center absolute rounded-md">
+                            <ChevronRightIcon
+                                class="text-white h-5 w-5 cursor-pointer self-center"
+                                aria-hidden="true"
+                                stroke-width="1"
+                                size="1.5x"
+                            />
+                        </button>
+                    </form>
+                </div>
+                <div class="w-full md:w-2/3 pb-10 md:pb-0">
                     <div class="content-menus">
                         <slot />
                     </div>
                 </div>
-
-                <div class="w-full md:w-1/3 flex  flex-col pb-10 md:pb-0">
-                    <h3 class="text-white text-xl  font-normal font-display mb-7">Contact Us</h3>
-                    <div class="contact-form relative">
-                        <loading :opacity="0" :active.sync="isLoading" :is-full-page="fullPage">
-                        </loading>
-                        <h5
-                            class="p-4 text-red border-2 border-dark bg-lightBlue mt-3"
-                            v-if="warningMessage"
-                        >
-                            {{ warningMessage }}
-                        </h5>
-                        <div
-                            class="p-4 text-white border-2 border-white bg-primary mt-3"
-                            v-if="statusMessage"
-                            v-html="statusMessage"
-                        ></div>
-                        <form
-                            v-else
-                            @submit.prevent="submitForm"
-                            action="#"
-                            class="flex flex-col items-start"
-                        >
-                            <input
-                                type="text"
-                                v-model="name"
-                                required
-                                placeholder="Name"
-                                class=" text-white border-2 bg-primary border-white text-sm py-2 px-4 font-normal placeholder-grey placeholder-opacity-70   rounded-full w-full	"
-                            />
-                            <input
-                                type="email"
-                                v-model="email"
-                                required
-                                placeholder="Email"
-                                class=" text-white border-2 bg-primary border-white text-sm py-2 px-5 mt-4  rounded-full placeholder-grey placeholder-opacity-70	w-full"
-                            />
-                            <input
-                                type="text"
-                                placeholder="Reason for contacting"
-                                v-model="reason"
-                                required
-                                class=" text-white border-2 bg-primary border-white text-sm py-2 px-5 mt-4  rounded-full placeholder-grey placeholder-opacity-70	w-full"
-                            />
-                            <div class="button-actions mt-5 md:mt-3">
-                                <button
-                                    type="submit"
-                                    :disabled="statusMessage != null"
-                                    :class="{ 'disabled:opacity-50': statusMessage != null }"
-                                    class="bg-opacity-0 border-2 border-white font-normal text-white text-sm py-2 px-5 mt-3  rounded-full hover:bg-white hover:text-primary transition-colors"
-                                >
-                                    Submit
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="w-full md:w-1/3 flex  flex-col pb-10 md:pb-0 block md:hidden">
-                    <h3 class="text-white text-2xl  font-display mb-3 mt-10">
-                        Follow us on social media
-                    </h3>
-                    <socialMediaIcon class="md:justify-between"></socialMediaIcon>
-                </div>
             </div>
 
             <div class="w-full flex justify-between items-end pt-10 pb-3">
-                <!-- <div class="logo-footer p-2">
-                    <img :src="$settings.logo_footer" alt="" width="222px" height="59px" />
-                </div> -->
                 <div class="footer-menus">
                     <slot name="navigation" />
+                </div>
+                <div class="flex items-center">
+                    <h3 class="text-white text-xl font-bold font-display mr-10">
+                        Follow us on
+                    </h3>
+                    <socialMediaIcon></socialMediaIcon>
                 </div>
             </div>
         </div>
@@ -113,6 +64,7 @@
 </template>
 <script>
 // Import component
+import { ChevronRightIcon } from "@vue-hero-icons/outline";
 import Loading from "vue-loading-overlay";
 // Import stylesheet
 import "vue-loading-overlay/dist/vue-loading.css";
@@ -131,6 +83,7 @@ export default {
     },
     components: {
         Loading,
+        ChevronRightIcon
     },
     methods: {
         submitForm: function() {
@@ -166,18 +119,34 @@ export default {
 </script>
 <style lang="scss">
 .main-footer {
-    @apply text-white pt-16 pb-5;
+    .content-menus .nav {
+        @apply lg:flex-row w-full justify-between;
+
+        >li>a {
+            @apply font-semibold text-xl text-white w-full whitespace-nowrap opacity-100;
+        }
+
+        a {
+            @apply text-white opacity-80 text-lg font-normal block font-display mb-4;
+        }
+    }
+    .footer-menus .nav >li {
+        @apply mb-0;
+        a {
+            @apply font-display;
+        }
+    }
+    .text-title {
+        @apply text-white text-xl font-semibold font-display mb-4;
+    }
+    > img {
+        mix-blend-mode: luminosity;
+    }
+
+    @apply text-white pt-16 pb-10;
 
     .nav {
         @apply flex flex-col;
-    }
-
-    .nav > li > a {
-        @apply text-base text-sm opacity-75;
-    }
-
-    .nav > li {
-        @apply mb-3;
     }
 
     .footer-menus .nav {

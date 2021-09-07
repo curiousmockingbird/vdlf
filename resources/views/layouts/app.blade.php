@@ -1,20 +1,9 @@
-<div class="max-w-3xl mx-auto">
-
-  <a class="sr-only focus:not-sr-only" href="#main">
-    {{ __('Skip to content') }}
-  </a>
-
+<div id="app" class="invisible">
   @include('partials.header')
-
-    <main id="main" class="py-8 prose main">
-      @yield('content')
-    </main>
-
-    @hasSection('sidebar')
-      <aside class="sidebar">
-        @yield('sidebar')
-      </aside>
-    @endif
+  
+  <main class="main min-h-screen">
+    @yield('content')
+  </main>
 
   @include('partials.footer')
 </div>

@@ -13,12 +13,38 @@ use function Roots\asset;
  *
  * @return void
  */
+
+function get_default_settings()
+{
+    $settings = [
+        'app_url' => site_url(),
+        'ajax_url' => admin_url('admin-ajax.php'),
+        "endpoint" => site_url("wp-json"),
+        'gf_public' => get_field("gravity_public_key", "option") ?? null,
+        'gf_private' => get_field("gravity_private_key", "option") ?? null,
+        'subscribe_form_id' => get_field("subscribe_form_id", "option") ?? null,
+        "images" => asset('images')->uri(),
+        'nonce' => wp_create_nonce('wp_rest'),
+        'fb_url' => get_field("facebook_url", "option") ?? "#",
+        'tw_url' => get_field("twitter_url", "option") ?? "#",
+        'ig_url' => get_field("instagram_url", "option") ?? "#",
+        'yt_url' => get_field("youtube_url", "option") ?? "#",
+        'wa_url' => get_field("whatsapp_url", "option") ?? "#",
+        'tl_url' => get_field("telegram_url", "option") ?? "#",
+        'in_url' => get_field("linkedin_url", "option") ?? "#",
+        'logo' => get_field("logo", "option") && get_field("logo", "option") != "" ? get_field("logo", "option") : null,
+        'logo_footer' => get_field("logo_footer", "option") && get_field("logo_footer", "option") != "" ? get_field("logo_footer", "option") : null,
+    ];
+    return $settings;
+}
+
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_script('sage/vendor.js', asset('scripts/vendor.js')->uri(), ['jquery'], null, true);
     wp_enqueue_script('sage/app.js', asset('scripts/app.js')->uri(), ['sage/vendor.js'], null, true);
-
+    wp_localize_script('sage/app.js', 'SETTINGS', get_default_settings());
     wp_add_inline_script('sage/vendor.js', asset('scripts/manifest.js')->contents(), 'before');
-
+    wp_enqueue_style('Montserrat','https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap', array(), null);
+    wp_enqueue_style('Source-Sans-Pro','https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap', array(), null);
     if (is_single() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
     }
@@ -71,7 +97,10 @@ add_action('after_setup_theme', function () {
      * @link https://developer.wordpress.org/reference/functions/register_nav_menus/
      */
     register_nav_menus([
-        'primary_navigation' => __('Primary Navigation', 'sage')
+        'primary_navigation' => __('Primary Navigation', 'sage'),
+        'mobile_navigation' => __('Mobile Navigation', 'sage'),
+        'footer_navigation' => __('Footer Navigation', 'sage'),
+        'copyright_navigation' => __('Copyright Navigation', 'sage'),
     ]);
 
     /**
@@ -201,4 +230,9 @@ add_action('widgets_init', function () {
         'name' => __('Footer', 'sage'),
         'id' => 'sidebar-footer'
     ] + $config);
+});
+
+add_action('wp_head', function () {
+    echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
+    echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
 });

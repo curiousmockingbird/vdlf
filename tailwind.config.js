@@ -7,7 +7,53 @@ module.exports = {
   },
   darkMode: false, // or 'media' or 'class'
   theme: {
+    container: {
+      padding: {
+        DEFAULT: '1rem',
+        lg: '2rem',
+        xl: '4rem'
+      },
+      center: true,
+      screens: {
+        sm: "100%",
+        md: "100%",
+        lg: "1200px",
+        xl: "1360px",
+        '2xl': "1536px"
+      }
+    },
     extend: {
+      fontSize: {
+        'xs': '.75rem',
+        'sm': '.875rem',
+        'tiny': '.875rem',
+        'base': '1rem',
+        'lg': '1.125rem',
+        'xl': '1.25rem',
+        '2xl': '1.5rem',
+        '3xl': '1.875rem',
+        '4xl': '2.25rem',
+        '5xl': '3rem',
+        '6xl': '4rem',
+        '7xl': '5rem',
+        'display': '4rem',
+        'heading': '1.5rem',
+        'paragraph': '1.125rem'
+      },
+      fontFamily: {
+        display: ["Montserrat", "sans-serif"],
+        body: ["Source Sans Pro", "sans-serif"],
+      },
+      minHeight: {
+        '20': '5rem',
+        '24': '6rem',
+        '28': '7rem'
+      },
+      minWidth: {
+        '0': '0',
+        'half': '50%',
+        'full': '100%'
+      },
       colors: {
         white: '#fff',
         black: '#000',
@@ -17,7 +63,10 @@ module.exports = {
         themeRed: '#871D3D',
         themeBrown: '#A0643D',
         themeMagenta: '#C63973',
-        themeTortilla: '#D09468'
+        themeTortilla: '#D09468',
+        themeBlack: '#1C1C1C',
+        themeOrange: '#F0A241',
+        themeGray: '#636363',
       },
     },
   },
