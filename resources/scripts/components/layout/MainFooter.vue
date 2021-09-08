@@ -2,19 +2,19 @@
     <footer class="main-footer bg-themeBlack relative">
         <img class="absolute p-10 w-full h-full left-0 top-0 z-10 object-contain object-center" :src="$images+'/bg-footer.png'" />
         <div class="container relative z-20">
-            <div class="w-full flex items-center justify-between mb-10">
+            <div class="w-full md:flex items-center justify-between mb-5">
                 <img :src="$images+'/logo-footer.png'" class="icon max-w-full h-auto"
                     alt="VDLF"
                     width="282px"
                     height="120px" />
 
-                <div class="button-actions -mx-5">
+                <div class="button-actions my-3 md:my-0 -mx-5">
                     <a href="#" class="text-2xl font-bold font-arial-black p-5 text-primary">Membership</a>
                     <a href="#" class="text-2xl font-bold font-arial p-5 text-primary">Donate</a>
                 </div>
             </div>
             <div class="flex flex-col md:flex-row">
-                <div class="w-full md:w-1/3 pr-0 md:pr-10 pb-10 md:pb-0 text-sm">
+                <div class="w-full md:w-1/3 pr-0 md:pr-10 pb-5 md:pb-0 text-sm">
                     <h3 class="text-title">
                         Contact Us
                     </h3>
@@ -48,11 +48,11 @@
                 </div>
             </div>
 
-            <div class="w-full flex justify-between items-end pt-10 pb-3">
+            <div class="w-full md:flex justify-between items-end pt-3 md:pt-10 pb-3">
                 <div class="footer-menus">
                     <slot name="navigation" />
                 </div>
-                <div class="flex items-center">
+                <div class="flex items-center justify-center md:justify-end">
                     <h3 class="text-white text-xl font-bold font-display mr-10">
                         Follow us on
                     </h3>
@@ -120,16 +120,22 @@ export default {
 <style lang="scss">
 .main-footer {
     .content-menus .nav {
-        @apply lg:flex-row -mx-4 w-full justify-between;
+        @apply flex-row flex-wrap -mx-4 w-full justify-between;
         >li {
-            @apply mx-4;
+            @apply mx-4 mb-5;
+            @screen sm {
+                width: calc(50% - 2rem);
+            }
+            @screen lg {
+                width: calc(33.33% - 2rem);
+            }
         }
         >li>a {
             @apply font-semibold text-xl text-white w-full whitespace-nowrap opacity-100;
         }
 
         a {
-            @apply text-white opacity-80 text-lg font-normal block font-display mb-4;
+            @apply text-white opacity-80 text-lg font-normal block font-display mb-1;
         }
     }
     .footer-menus .nav >li {
@@ -148,11 +154,11 @@ export default {
     @apply text-white pt-16 pb-10;
 
     .nav {
-        @apply flex flex-col;
+        @apply sm:flex flex-col;
     }
 
     .footer-menus .nav {
-        @apply md:flex-row -mx-3;
+        @apply flex-row -mx-3 my-3 md:my-0 justify-center md:justify-end;
         
         > li > a {
            @apply px-3;    

@@ -3,9 +3,9 @@
 }
 
 main {
-  padding-top: 100px;
-
-  @screen lg {
+  padding-top: 58px;
+  overflow: hidden;
+  @screen md {
     padding-top: 88px;
   }
 
@@ -15,6 +15,9 @@ main {
 }
 
 .list-style-enable {
+  img {
+    max-width: 100%;
+  }
   ul {
     @apply list-disc my-3;
   }

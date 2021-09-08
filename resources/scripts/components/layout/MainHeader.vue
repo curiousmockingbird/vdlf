@@ -8,20 +8,8 @@
                     width="137px"
                     height="57px" />
                 </a>
-
-                <button
-                    class="block ml-5 lg:hidden text-white border-0 focus:outline-none"
-                    @click="toggleMenu"
-                >
-                    <MenuAlt3Icon
-                        v-if="!navOpen"
-                        class="block h-8 w-8 self-center"
-                        aria-hidden="true"
-                    />
-                    <XIcon v-else class="block h-8 w-8 self-center text-white" aria-hidden="true" />
-                </button>
-                <div class="lg:flex justify-center hidden self-center">
-                    <div class="language-switcher ml-8">
+                <div class="flex justify-center self-center">
+                    <div class="language-switcher xl:block hidden mx-3">
                         <div class="relative form-select w-28">
                             <select class="w-full cursor-pointer" v-model="language" @change="changeLanguage($event)">
                                 <option value="en">ENG</option>
@@ -30,15 +18,15 @@
                         </div>
                     </div>
                     <nav
-                        class="desktop-nav ml-8 hidden justify-self-center place-self-center hidden lg:block w-full "
+                        class="desktop-nav mx-3 hidden justify-self-center place-self-center hidden lg:block w-full "
                         ref="nav"
                     >
                         <slot />
                     </nav>
                 </div>
-                <div class="flex">
-                    <a href="#" class="py-8 text-white font-bold px-10">Membership</a>
-                    <a href="#" class="py-8 text-white font-bold px-10 bg-gradient-to-r from-primary to-secondary underline">Donate</a>
+                <div class="hidden sm:flex ml-auto lg:ml-0">
+                    <a href="#" class="py-8 text-white font-bold px-4">Membership</a>
+                    <a href="#" class="py-8 text-white font-bold px-4 underline">Donate</a>
                     <button
                         class="text-white py-8 h-full border-0 hidden lg:block border-0 px-4 hover:outline-none active:outline-none fill-current outline-none"
                         @click="openSearchBar()"
@@ -51,22 +39,28 @@
                         ></svg-vue>
                     </button>
                 </div>
+                <button
+                    class="block ml-5 lg:hidden text-white border-0 focus:outline-none"
+                    @click="toggleMenu"
+                >
+                    <MenuAlt3Icon
+                        v-if="!navOpen"
+                        class="block h-8 w-8 self-center"
+                        aria-hidden="true"
+                    />
+                    <XIcon v-else class="block h-8 w-8 self-center text-white" aria-hidden="true" />
+                </button>
                 <nav
                     class="mobile-nav transition-transform transform-gpu duration-700 shadow-lg"
                     :class="{ '-translate-x-full': !navOpen, 'translate-x-0': navOpen }"
                 >
                     <div class="container">
                         <div class="flex flex-row lg:flex-col justify-between">
-                            <a
-                                :href="$settings.app_url"
-                                class="logo block mt-5 mb-3 self-start font-display font-hairline"
-                            >
-                                <svg-vue
-                                    icon="logo.consortium-white"
-                                    alt="Changewire"
-                                    width="288px"
-                                    height="65px"
-                                ></svg-vue>
+                            <a :href="$settings.app_url" class="logo self-center font-display font-hairline">
+                                <img :src="$images+'/logo-footer.png'" class="icon max-w-full h-auto"
+                                alt="VDLF"
+                                width="137px"
+                                height="57px" />
                             </a>
                             <button
                                 class="text-white border-0 block sm:hidden focus:outline-none"
@@ -177,10 +171,11 @@ nav {
         &.menu-item-has-children:after {
             position: absolute;
             content: url('data:image/svg+xml;charset=UTF-8, <svg width="9" height="6" viewBox="0 0 9 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.666992 0.666748L4.33366 4.66675L8.00033 0.666748" stroke="white"/></svg>');
-            height: 28px;
-            width: 28px;
-            right: -15px;
-            top: 8px;
+            height: 14px;
+            width: 14px;
+            right: -5px;
+            top: 7px;
+            filter: invert(1);
         }
     }
     a {
@@ -198,7 +193,7 @@ nav {
     }
     ul > li {
         a {
-            @apply px-2 xl:px-3;
+            @apply px-3 xl:px-4;
         }
         ul.sub-menu {
             background: rgba(255, 255, 255, 0.959);
@@ -224,7 +219,7 @@ nav {
                 display: flex;
                 margin: 0;
                 a {
-                    @apply text-primary font-semibold py-4 pl-4 pr-14 w-full border-b border-primary border-opacity-10;
+                    @apply text-black font-semibold py-4 pl-4 pr-14 w-full border-b border-primary border-opacity-10;
                 }
                 a:hover {
                     background: rgba(0, 0, 0, 0.034);
@@ -242,7 +237,7 @@ nav {
 }
 
 .mobile-nav {
-    @apply fixed top-0 left-0 bg-primary text-white w-full h-screen md:w-96 overflow-y-auto;
+    @apply fixed top-0 left-0 bg-themeBlack text-white w-full h-screen md:w-96 overflow-y-auto;
     .nav {
         //margin-top: 10px;
         li {
