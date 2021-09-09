@@ -16,26 +16,55 @@ use function Roots\asset;
 
 function get_default_settings()
 {
+    $language = "en";
+    if (function_exists("\pll_current_language")) {
+        $language = \pll_current_language();
+    }
     $settings = [
-        'app_url' => site_url(),
-        'ajax_url' => admin_url('admin-ajax.php'),
-        "endpoint" => site_url("wp-json"),
-        'gf_public' => get_field("gravity_public_key", "option") ?? null,
-        'gf_private' => get_field("gravity_private_key", "option") ?? null,
+        'app_url'           => site_url(),
+        'ajax_url'          => admin_url('admin-ajax.php'),
+        "endpoint"          => site_url("wp-json"),
+        'gf_public'         => get_field("gravity_public_key", "option") ?? null,
+        'gf_private'        => get_field("gravity_private_key", "option") ?? null,
         'subscribe_form_id' => get_field("subscribe_form_id", "option") ?? null,
-        "images" => asset('images')->uri(),
-        'nonce' => wp_create_nonce('wp_rest'),
-        'fb_url' => get_field("facebook_url", "option") ?? "#",
-        'tw_url' => get_field("twitter_url", "option") ?? "#",
-        'ig_url' => get_field("instagram_url", "option") ?? "#",
-        'yt_url' => get_field("youtube_url", "option") ?? "#",
-        'wa_url' => get_field("whatsapp_url", "option") ?? "#",
-        'tl_url' => get_field("telegram_url", "option") ?? "#",
-        'in_url' => get_field("linkedin_url", "option") ?? "#",
-        'logo' => get_field("logo", "option") && get_field("logo", "option") != "" ? get_field("logo", "option") : null,
-        'logo_footer' => get_field("logo_footer", "option") && get_field("logo_footer", "option") != "" ? get_field("logo_footer", "option") : null,
+        "images"            => asset('images')->uri(),
+        'nonce'             => wp_create_nonce('wp_rest'),
+        'fb_url'            => get_field("facebook_url", "option") ?? "#",
+        'tw_url'            => get_field("twitter_url", "option") ?? "#",
+        'ig_url'            => get_field("instagram_url", "option") ?? "#",
+        'yt_url'            => get_field("youtube_url", "option") ?? "#",
+        'wa_url'            => get_field("whatsapp_url", "option") ?? "#",
+        'tl_url'            => get_field("telegram_url", "option") ?? "#",
+        'in_url'            => get_field("linkedin_url", "option") ?? "#",
+        'label'             => get_setting_translations(),
+        'language'          => $language,
+        'logo'              => get_field("logo", "option") && get_field("logo", "option") != "" ? get_field("logo", "option"): null,
+        'logo_footer'       => get_field("logo_footer", "option") && get_field("logo_footer", "option") != "" ? get_field("logo_footer", "option"): null,
     ];
     return $settings;
+}
+
+function get_setting_translations()
+{
+    return [
+        "developed_by"      => __("Website designed and developed by", "sage"),
+        "contact_us"        => __("Contact Us", "sage"),
+        "subscribe_heading" => __("Subscribe to our newsletter", "sage"),
+        "subscribe"         => __("Subscribe", "sage"),
+        "follow_us"         => __("Follow us on", "sage"),
+        "membership"        => __("Membership", "sage"),
+        "donate"            => __("Donate", "sage"),
+        "type_here"         => __("Type Here...", "sage"),
+        "form"              => [
+            "first_name"    => __("First Name", "sage"),
+            "last_name"     => __("Last Name", "sage"), 
+            "email"         => __("Email", "sage"), 
+            "phone"         => __("Phone no.", "sage"), 
+            "organization"  => __("Organization/Business", "sage"),
+            "zip"           => __("Zip Code", "sage"),
+            "email_address" => __("Email Address", "sage"),
+        ],
+    ];
 }
 
 add_action('wp_enqueue_scripts', function () {

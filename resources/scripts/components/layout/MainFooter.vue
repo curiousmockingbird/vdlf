@@ -9,14 +9,14 @@
                     height="120px" />
 
                 <div class="button-actions my-3 md:my-0 -mx-5">
-                    <a href="#" class="text-2xl font-bold font-arial-black p-5 text-primary">Membership</a>
-                    <a href="#" class="text-2xl font-bold font-arial p-5 text-primary">Donate</a>
+                    <a href="#" class="text-2xl font-bold font-arial-black p-5 text-primary">{{ $settings.label.membership }}</a>
+                    <a href="#" class="text-2xl font-bold font-arial p-5 text-primary">{{ $settings.label.donate }}</a>
                 </div>
             </div>
             <div class="flex flex-col md:flex-row">
                 <div class="w-full md:w-1/3 pr-0 md:pr-10 pb-5 md:pb-0 text-sm">
                     <h3 class="text-title">
-                        Contact Us
+                        {{ $settings.label.contact_us }}
                     </h3>
                     <p class="opacity-80 text-base font-display mb-4">
                         1027 S. 5th Street, 
@@ -26,11 +26,11 @@
                         <br>Email: email@email.com
                     </p>
 
-                    <h3 class="text-title mt-6 mb-3">
-                        Subscribe to our newsletter
+                    <h3 class="text-title mt-6 pb-3">
+                        {{ $settings.label.subscribe_heading }}
                     </h3>
                     <form class="flex w-auto h-12 relative md:mr-10 lg:mr-16">
-                        <input type="text" name="s" class="w-full p-3 h-full pr-20 font-display text-base rounded-md bg-themeGray placeholder-gray-200 focus:outline-none" :value="email" placeholder="Email address..." />
+                        <input type="text" name="s" class="w-full p-3 h-full pr-20 font-display text-base rounded-md bg-themeGray placeholder-gray-200 focus:outline-none" :value="email" :placeholder="$settings.label.form.email_address" />
                         <button type="submit" class="bg-primary w-12 h-full top-0 right-0 flex items-center justify-center absolute rounded-md">
                             <ChevronRightIcon
                                 class="text-white h-5 w-5 cursor-pointer self-center"
@@ -43,7 +43,7 @@
 
                     <div class="flex items-center mt-10">
                         <h3 class="text-white text-xl font-semibold font-display mr-5">
-                            Follow us on
+                            {{ $settings.label.follow_us }}
                         </h3>
                         <socialMediaIcon></socialMediaIcon>
                     </div>
@@ -60,7 +60,7 @@
                     <slot name="navigation" />
                 </div>
                 <div class="designby font-display small"
-                    >Website designed and developed by 
+                    >{{ $settings.label.developed_by }}
                     <a href="http://indietechsolutions.com/" class="font-semibold hover:text-primary" target="_blank"
                         >IndieTech Solutions</a
                     >

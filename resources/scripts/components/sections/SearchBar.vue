@@ -1,9 +1,9 @@
 <template>
     <div class="search-bar bg-themeBlack w-full">
         <div class="container mx-auto h-full flex items-center">
-            <form method="GET" :action="this.$settings.app_url" class="py-1 flex items-center justify-center w-full">
-            <input type="text" name="s" class="w-full p-4 rounded-lg" :value="keywords" placeholder="Type here..." />
-            <button type="submit" class="bg-primary rounded-lg p-2 search-button">
+            <form method="GET" :action="this.$settings.app_url" class="relative w-full">
+            <input type="text" name="s" class="w-full p-4 rounded-lg pr-16" :value="keywords" :placeholder="$settings.label.type_here" />
+            <button type="submit" class="bg-primary rounded-lg p-2 search-button absolute right-0 top-0">
                 <SearchIcon
                     class="text-white h-10 w-10 cursor-pointer self-center"
                     aria-hidden="true"
@@ -11,6 +11,7 @@
                     size="1.5x"
                 />
             </button>
+            </form>
             <button type="button" class="bg-lightBlue border-none absolute top-2 right-2" @click="closeSearchBar()">
                 <XIcon
                     class="text-primary h-10 w-10 cursor-pointer self-center text-primary"
@@ -19,7 +20,6 @@
                     size="1.5x"
                 />
             </button>
-            </form>
         </div>
     </div>
 </template>
