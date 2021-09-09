@@ -29,9 +29,9 @@
                     <h3 class="text-title mt-6">
                         Subscribe to our newsletter
                     </h3>
-                    <form class="flex w-full h-16 relative">
-                        <input type="text" name="s" class="w-full p-5 h-full pr-20 font-display rounded-md bg-themeGray placeholder-gray-200 focus:outline-none" :value="email" placeholder="Email address..." />
-                        <button type="submit" class="bg-primary w-16 h-full top-0 right-0 flex items-center justify-center absolute rounded-md">
+                    <form class="flex w-auto h-12 relative md:mr-10 lg:mr-16">
+                        <input type="text" name="s" class="w-full p-3 h-full pr-20 font-display text-lg rounded-md bg-themeGray placeholder-gray-200 focus:outline-none" :value="email" placeholder="Email address..." />
+                        <button type="submit" class="bg-primary w-12 h-full top-0 right-0 flex items-center justify-center absolute rounded-md">
                             <ChevronRightIcon
                                 class="text-white h-5 w-5 cursor-pointer self-center"
                                 aria-hidden="true"
@@ -40,6 +40,13 @@
                             />
                         </button>
                     </form>
+
+                    <div class="flex items-center mt-10">
+                        <h3 class="text-white text-xl font-semibold font-display mr-5">
+                            Follow us on
+                        </h3>
+                        <socialMediaIcon></socialMediaIcon>
+                    </div>
                 </div>
                 <div class="w-full md:w-2/3 pb-10 md:pb-0">
                     <div class="content-menus">
@@ -48,15 +55,15 @@
                 </div>
             </div>
 
-            <div class="w-full md:flex justify-between items-end pt-3 md:pt-10 pb-3">
+            <div class="w-full md:flex flex-row-reverse justify-between items-end pt-3 md:pt-10 pb-3">
                 <div class="footer-menus">
                     <slot name="navigation" />
                 </div>
-                <div class="flex items-center sm:justify-center md:justify-end">
-                    <h3 class="text-white text-xl font-bold font-display mr-10">
-                        Follow us on
-                    </h3>
-                    <socialMediaIcon></socialMediaIcon>
+                <div class="designby font-display small"
+                    >Website designed and developed by 
+                    <a href="http://indietechsolutions.com/" class="font-bold" target="_blank"
+                        >IndieTech Solutions</a
+                    >
                 </div>
             </div>
         </div>
@@ -137,6 +144,9 @@ export default {
 
         a {
             @apply text-white opacity-80 text-base font-normal block font-display mb-1;
+            &:hover {
+                @apply text-primary;
+            }
         }
     }
     .footer-menus .nav >li {

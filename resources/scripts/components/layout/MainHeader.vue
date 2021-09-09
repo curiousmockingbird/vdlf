@@ -26,7 +26,7 @@
                         <slot />
                         <span
                             ref="underlineThingy"
-                            class="h-1 w-0 z-50 absolute bottom-7 left-0"
+                            class="h-1 w-0 absolute bottom-7 left-0"
                             :class="bgPrimary ? 'bg-white' : 'bg-themeMagenta'"
                         ></span>
                     </nav>
@@ -238,6 +238,7 @@ export default {
             }
         }
         li {
+            &:hover>a,
             &.current_page_item a {
                 @apply text-themeMagenta;
             }
@@ -263,7 +264,7 @@ nav {
     li {
         @apply relative;
         //max-width: 175px;
-
+        &:hover>a,
         &.current_page_item a {
             @apply text-white;
         }
@@ -274,12 +275,13 @@ nav {
             height: 14px;
             width: 14px;
             right: -5px;
-            top: 7px;
+            top: 35%;
             filter: invert(1);
+            transform: translateY(-50%);
         }
     }
     a {
-        @apply font-body text-base text-black font-semibold transition-colors leading-tight py-8 lg:whitespace-nowrap;
+        @apply relative z-50 font-body text-base text-black font-semibold transition-colors leading-tight py-8 lg:whitespace-nowrap;
 
         &:active,
         &:hover {
