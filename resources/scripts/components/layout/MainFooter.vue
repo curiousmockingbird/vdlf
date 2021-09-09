@@ -2,7 +2,7 @@
     <footer class="main-footer bg-themeBlack relative">
         <img class="absolute p-10 w-full h-full left-0 top-0 z-10 object-contain object-center" :src="$images+'/bg-footer.png'" />
         <div class="container relative z-20">
-            <div class="w-full md:flex items-center justify-between mb-5">
+            <div class="w-full md:flex items-center justify-between mb-10">
                 <img :src="$images+'/logo-footer.png'" class="icon max-w-full h-auto"
                     alt="VDLF"
                     width="282px"
@@ -18,7 +18,7 @@
                     <h3 class="text-title">
                         Contact Us
                     </h3>
-                    <p class="opacity-80 text-lg font-display mb-4">
+                    <p class="opacity-80 text-base font-display mb-4">
                         1027 S. 5th Street, 
                         <br>Milwaukee, WI 53204
                         <br>Tel. 414-643-1620  
@@ -30,7 +30,7 @@
                         Subscribe to our newsletter
                     </h3>
                     <form class="flex w-full h-16 relative">
-                        <input type="text" name="s" class="w-full p-5 h-full pr-20 rounded-md bg-themeGray placeholder-gray-200 focus:outline-none" :value="email" placeholder="Email address..." />
+                        <input type="text" name="s" class="w-full p-5 h-full pr-20 font-display rounded-md bg-themeGray placeholder-gray-200 focus:outline-none" :value="email" placeholder="Email address..." />
                         <button type="submit" class="bg-primary w-16 h-full top-0 right-0 flex items-center justify-center absolute rounded-md">
                             <ChevronRightIcon
                                 class="text-white h-5 w-5 cursor-pointer self-center"
@@ -52,7 +52,7 @@
                 <div class="footer-menus">
                     <slot name="navigation" />
                 </div>
-                <div class="flex items-center justify-center md:justify-end">
+                <div class="flex items-center sm:justify-center md:justify-end">
                     <h3 class="text-white text-xl font-bold font-display mr-10">
                         Follow us on
                     </h3>
@@ -120,22 +120,23 @@ export default {
 <style lang="scss">
 .main-footer {
     .content-menus .nav {
-        @apply flex-row flex-wrap -mx-4 w-full justify-between;
+        @apply block -mx-4 w-full;
+        column-count: 1;
+        @screen sm {
+            column-count: 2;
+        }
+        @screen lg {
+            column-count: 3;
+        }
         >li {
             @apply mx-4 mb-5;
-            @screen sm {
-                width: calc(50% - 2rem);
-            }
-            @screen lg {
-                width: calc(33.33% - 2rem);
-            }
         }
         >li>a {
             @apply font-semibold text-xl text-white w-full whitespace-nowrap opacity-100;
         }
 
         a {
-            @apply text-white opacity-80 text-lg font-normal block font-display mb-1;
+            @apply text-white opacity-80 text-base font-normal block font-display mb-1;
         }
     }
     .footer-menus .nav >li {
@@ -145,7 +146,7 @@ export default {
         }
     }
     .text-title {
-        @apply text-white text-xl font-semibold font-display mb-4;
+        @apply text-white text-xl font-semibold font-display mb-1;
     }
     > img {
         mix-blend-mode: luminosity;

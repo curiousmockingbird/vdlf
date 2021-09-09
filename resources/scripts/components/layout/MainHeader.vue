@@ -26,7 +26,8 @@
                         <slot />
                         <span
                             ref="underlineThingy"
-                            class=" bg-themeMagenta h-1 w-0 z-50 absolute bottom-7 left-0"
+                            class="h-1 w-0 z-50 absolute bottom-7 left-0"
+                            :class="bgPrimary ? 'bg-white' : 'bg-themeMagenta'"
                         ></span>
                     </nav>
                 </div>
