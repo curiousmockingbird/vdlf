@@ -14,6 +14,11 @@ main {
   }
 }
 
+.page-title {
+  @apply font-display text-primary text-2xl;
+  letter-spacing: 0.2em;
+}
+
 .list-style-enable {
   img {
     max-width: 100%;

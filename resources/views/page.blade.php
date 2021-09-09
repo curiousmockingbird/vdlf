@@ -6,7 +6,7 @@
     image-url="{{ get_the_post_thumbnail_url(null, 'original') }}" 
   @endif
   >
-    <h2 class="text-black font-display">@php(the_title())</h2>
+    <h1>@php(the_title())</h1>
   </page-header>
   <div class="list-style-enable container py-10">
       @php(the_content())

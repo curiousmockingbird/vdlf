@@ -1,5 +1,7 @@
 <template>
-    <header class="header bg-primary  fixed z-50 w-screen ">
+    <header class="header fixed z-50 w-full  transition-all ease-in-out duration-150  left-0"
+        :class="{ 'bg-white': !bgPrimary, 'bg-primary':bgPrimary }"
+    >
         <div class="mx-auto container pl-10">
             <div class="flex flex-row justify-between">
                 <a :href="$settings.app_url" class="logo self-center font-display font-hairline">
@@ -10,7 +12,7 @@
                 </a>
                 <div class="flex justify-center self-center">
                     <div class="language-switcher xl:block hidden mx-3">
-                        <div class="relative form-select w-28">
+                        <div class="relative form-select w-24">
                             <select class="w-full cursor-pointer" v-model="language" @change="changeLanguage($event)">
                                 <option value="en">ENG</option>
                                 <option value="es">ESP</option>
@@ -22,13 +24,18 @@
                         ref="nav"
                     >
                         <slot />
+                        <span
+                            ref="underlineThingy"
+                            class=" bg-themeMagenta h-1 w-0 z-50 absolute bottom-7 left-0"
+                        ></span>
                     </nav>
                 </div>
-                <div class="hidden sm:flex ml-auto lg:ml-0">
-                    <a href="#" class="py-8 text-white font-bold px-4">Membership</a>
-                    <a href="#" class="py-8 text-white font-bold px-4 underline">Donate</a>
+                <div class="hidden sm:flex membership-menu ml-auto lg:ml-0">
+                    <a href="#" :class="bgPrimary ? 'text-white' : 'text-primary'" class="py-8 font-bold px-4">Membership</a>
+                    <a href="#" :class="bgPrimary ? 'text-white' : 'text-primary'" class="py-8 font-bold px-4 underline">Donate</a>
                     <button
-                        class="text-white py-8 h-full border-0 hidden lg:block border-0 px-4 hover:outline-none active:outline-none fill-current outline-none"
+                        class="py-8 h-full border-0 hidden lg:block border-0 px-4 hover:outline-none active:outline-none fill-current outline-none"
+                        :class="bgPrimary ? 'text-white' : 'text-primary'"
                         @click="openSearchBar()"
                     >
                         <svg-vue
@@ -87,11 +94,11 @@ import { MenuAlt3Icon, XIcon } from "@vue-hero-icons/outline";
 export default {
     props: {
         blogName: String,
-        homepage: String,
+        bgWhite: String,
     },
     data() {
         return {
-            scrollTop: true,
+            bgPrimary: true,
             navOpen: false,
             activeClass: "active",
             language:"en",
@@ -110,10 +117,76 @@ export default {
                 document.body.style.overflow = "unset";
             }
         },
+        underlineAnimation() {
+            const links = this.$refs.nav.querySelectorAll("ul:not(.sub-menu)>li");
+            const self = this;
+            let initialUnderlinePosition = 0;
+            let initialUnderlineWidth = 0;
+
+            for (const link of links) {
+                link.addEventListener("mouseenter", onMouseEnter);
+                link.addEventListener("mouseleave", onMouseLeave);
+
+                if (link.parentNode.classList.contains("current_page_item")) {
+                    let position = link.getBoundingClientRect();
+                    initialUnderlinePosition =
+                        position.x - this.$refs.underlineThingy.offsetLeft + 15;
+
+                    initialUnderlineWidth = link.offsetWidth-40 + "px";
+
+                    const animation = gsap.timeline({});
+
+                    let params = {
+                        x: initialUnderlinePosition,
+                        width: initialUnderlineWidth,
+                        duration: 0.7,
+                        ease: "power4.inOut",
+                    };
+
+                    animation.set(self.$refs.underlineThingy, {
+                        x: initialUnderlinePosition,
+                        width: initialUnderlineWidth,
+                    });
+                    animation.to(self.$refs.underlineThingy, params, 0.3);
+                }
+            }
+
+            function onMouseEnter(e) {
+                const animation = gsap.timeline({});
+                let position = e.target.getBoundingClientRect();
+                let params = {
+                    x: position.x - self.$refs.underlineThingy.offsetLeft + 15,
+                    //y: e.target.offsetTop - self.$refs.underlineThingy.offsetTop,
+                    width: e.target.offsetWidth-40,
+                    duration: 0.7,
+                    ease: "power4.inOut",
+                };
+                animation.to(self.$refs.underlineThingy, params, 0);
+            }
+
+            function onMouseLeave(e) {
+                const animation = gsap.timeline({});
+
+                let params = {
+                    x: initialUnderlinePosition,
+                    width: initialUnderlineWidth,
+                    duration: 0.7,
+                    ease: "power4.inOut",
+                };
+
+                animation.to(self.$refs.underlineThingy, params, 0);
+            }
+        },
+    },
+    created() {
+        if (this.bgWhite) {
+            this.bgPrimary = true;
+        } else {
+            this.bgPrimary = false;
+        }
     },
     mounted() {
         document.querySelectorAll(".mobile-nav .menu-item-has-children").forEach((value, index) => {
-            //value.querySelectorAll("a")[0].href = "#";
             value.querySelectorAll("span")[0].addEventListener("click", (e) => {
                 e.preventDefault();
                 if (document.body.offsetWidth <= 1024) {
@@ -121,6 +194,7 @@ export default {
                 }
             });
         });
+        setTimeout(this.underlineAnimation, 200);
     },
 };
 </script>
@@ -141,6 +215,31 @@ export default {
             appearance: none;
             @apply py-2 px-3 mx-6 -left-6 relative z-30 uppercase tracking-wide w-full font-semibold;
             background-color: transparent;
+        }
+    }
+}
+
+.bg-white {
+    .language-switcher {
+        .form-select {
+            @apply text-black border-black;
+            &:before {
+                filter:brightness(0);
+            }
+        }
+    }
+
+    nav {
+        a {
+            &:active,
+            &:hover {
+                @apply text-themeMagenta;
+            }
+        }
+        li {
+            &.current_page_item a {
+                @apply text-themeMagenta;
+            }
         }
     }
 }
