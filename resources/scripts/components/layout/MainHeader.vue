@@ -20,14 +20,14 @@
                         </div>
                     </div>
                     <nav
-                        class="desktop-nav mx-3 hidden justify-self-center place-self-center hidden lg:block w-full "
+                        class="desktop-nav hidden justify-self-center place-self-center hidden lg:block w-full "
                         ref="nav"
                     >
                         <slot />
                         <span
                             ref="underlineThingy"
                             class="h-1 w-0 absolute bottom-7 left-0"
-                            :class="bgPrimary ? 'bg-white' : 'bg-themeMagenta'"
+                            :class="bgPrimary ? 'bg-white' : 'bg-themeRed'"
                         ></span>
                     </nav>
                 </div>
@@ -234,13 +234,13 @@ export default {
         a {
             &:active,
             &:hover {
-                @apply text-themeMagenta;
+                @apply text-themeRed;
             }
         }
         li {
             &:hover>a,
             &.current_page_item a {
-                @apply text-themeMagenta;
+                @apply text-themeRed;
             }
         }
     }

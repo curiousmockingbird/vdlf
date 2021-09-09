@@ -31,6 +31,6 @@ export default {
 }
 
 .content-title h1 {
-    @apply text-white font-black font-display text-4xl;
+    @apply text-white font-bold font-display text-4xl;
 }
 </style>
