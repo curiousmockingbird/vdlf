@@ -1,89 +1,86 @@
 <template>
-    <header class="header fixed z-50 w-full  transition-all ease-in-out duration-150  left-0"
-        :class="{ 'bg-white': !bgPrimary, 'bg-primary':bgPrimary }"
+    <header class="header bg-white fixed z-50 w-full  transition-all ease-in-out duration-150  left-0"
     >
-        <div class="mx-auto container pl-10">
-            <div class="flex flex-row justify-between">
-                <a :href="$settings.app_url" class="logo self-center font-display font-hairline">
-                    <img :src="$images+'/logo.png'" class="icon max-w-full h-auto"
-                    alt="VDLF"
-                    width="137px"
-                    height="57px" />
-                </a>
-                <div class="flex justify-center self-center">
-                    <div class="language-switcher xl:block hidden mx-3">
-                        <div class="relative form-select w-24">
-                            <select class="w-full cursor-pointer" v-model="language" @change="changeLanguage($event)">
-                                <option value="en">ENG</option>
-                                <option value="es">ESP</option>
-                            </select>
-                        </div>
+        <div class="flex flex-row container justify-between" :class="{ 'bg-white': !bgPrimary, 'bg-primary':bgPrimary }">
+            <a :href="$settings.app_url" class="logo self-center font-display font-hairline">
+                <img :src="$images+'/logo.png'" class="icon max-w-full h-auto"
+                alt="VDLF"
+                width="137px"
+                height="57px" />
+            </a>
+            <div class="flex justify-center self-center">
+                <div class="language-switcher xl:block hidden mx-3">
+                    <div class="relative form-select w-24">
+                        <select class="w-full cursor-pointer" v-model="language" @change="changeLanguage($event)">
+                            <option value="en">ENG</option>
+                            <option value="es">ESP</option>
+                        </select>
                     </div>
-                    <nav
-                        class="desktop-nav hidden justify-self-center place-self-center hidden lg:block w-full "
-                        ref="nav"
-                    >
-                        <slot />
-                        <span
-                            ref="underlineThingy"
-                            class="h-1 w-0 absolute bottom-7 left-0"
-                            :class="bgPrimary ? 'bg-white' : 'bg-themeRed'"
-                        ></span>
-                    </nav>
                 </div>
-                <div class="hidden sm:flex membership-menu ml-auto lg:ml-0">
-                    <a href="#" :class="bgPrimary ? 'text-white' : 'text-primary'" class="py-8 font-bold px-4">{{ $settings.label.membership }}</a>
-                    <a href="#" :class="bgPrimary ? 'text-white' : 'text-primary'" class="py-8 font-bold px-4 underline">{{ $settings.label.donate }}</a>
-                    <button
-                        class="py-8 h-full border-0 hidden lg:block border-0 px-4 hover:outline-none active:outline-none fill-current outline-none"
-                        :class="bgPrimary ? 'text-white' : 'text-primary'"
-                        @click="openSearchBar()"
-                    >
-                        <svg-vue
-                            icon="search"
-                            height="19px"
-                            width="19px"
-                            style="fill: none; "
-                        ></svg-vue>
-                    </button>
-                </div>
-                <button
-                    class="block ml-5 lg:hidden text-white border-0 focus:outline-none"
-                    @click="toggleMenu"
-                >
-                    <MenuAlt3Icon
-                        v-if="!navOpen"
-                        class="block h-8 w-8 self-center"
-                        aria-hidden="true"
-                    />
-                    <XIcon v-else class="block h-8 w-8 self-center text-white" aria-hidden="true" />
-                </button>
                 <nav
-                    class="mobile-nav transition-transform transform-gpu duration-700 shadow-lg"
-                    :class="{ '-translate-x-full': !navOpen, 'translate-x-0': navOpen }"
+                    class="desktop-nav hidden justify-self-center place-self-center hidden lg:block w-full "
+                    ref="nav"
                 >
-                    <div class="container">
-                        <div class="flex flex-row lg:flex-col justify-between">
-                            <a :href="$settings.app_url" class="logo self-center font-display font-hairline">
-                                <img :src="$images+'/logo-footer.png'" class="icon max-w-full h-auto"
-                                alt="VDLF"
-                                width="137px"
-                                height="57px" />
-                            </a>
-                            <button
-                                class="text-white border-0 block sm:hidden focus:outline-none"
-                                @click="toggleMenu"
-                            >
-                                <XIcon
-                                    class="block h-8 w-8 self-center text-white"
-                                    aria-hidden="true"
-                                />
-                            </button>
-                        </div>
-                    </div>
-                    <slot name="mobile" />
+                    <slot />
+                    <span
+                        ref="underlineThingy"
+                        class="h-1 w-0 absolute bottom-7 left-0"
+                        :class="bgPrimary ? 'bg-white' : 'bg-themeRed'"
+                    ></span>
                 </nav>
             </div>
+            <div class="hidden sm:flex membership-menu ml-auto lg:ml-0">
+                <a href="#" :class="bgPrimary ? 'text-white' : 'text-primary'" class="py-8 font-bold px-4">{{ $settings.label.membership }}</a>
+                <a href="/donate" class="text-white bg-gradient-to-r from-primary to-secondary py-8 font-bold px-4 underline">{{ $settings.label.donate }}</a>
+                <button
+                    class="py-8 h-full border-0 hidden bg-secondary lg:block border-0 px-4 hover:outline-none active:outline-none fill-current outline-none"
+                    :class="bgPrimary ? 'text-white' : 'text-primary'"
+                    @click="openSearchBar()"
+                >
+                    <svg-vue
+                        icon="search"
+                        height="19px"
+                        width="19px"
+                        style="fill: none; "
+                    ></svg-vue>
+                </button>
+            </div>
+            <button
+                class="block ml-5 lg:hidden text-white border-0 focus:outline-none"
+                @click="toggleMenu"
+            >
+                <MenuAlt3Icon
+                    v-if="!navOpen"
+                    class="block h-8 w-8 self-center"
+                    aria-hidden="true"
+                />
+                <XIcon v-else class="block h-8 w-8 self-center text-white" aria-hidden="true" />
+            </button>
+            <nav
+                class="mobile-nav transition-transform transform-gpu duration-700 shadow-lg"
+                :class="{ '-translate-x-full': !navOpen, 'translate-x-0': navOpen }"
+            >
+                <div class="container">
+                    <div class="flex flex-row lg:flex-col justify-between">
+                        <a :href="$settings.app_url" class="logo self-center font-display font-hairline">
+                            <img :src="$images+'/logo-footer.png'" class="icon max-w-full h-auto"
+                            alt="VDLF"
+                            width="137px"
+                            height="57px" />
+                        </a>
+                        <button
+                            class="text-white border-0 block sm:hidden focus:outline-none"
+                            @click="toggleMenu"
+                        >
+                            <XIcon
+                                class="block h-8 w-8 self-center text-white"
+                                aria-hidden="true"
+                            />
+                        </button>
+                    </div>
+                </div>
+                <slot name="mobile" />
+            </nav>
         </div>
         <SearchBar></SearchBar>
     </header>
