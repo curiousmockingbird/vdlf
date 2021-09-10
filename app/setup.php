@@ -33,9 +33,6 @@ function get_default_settings()
         'tw_url'            => get_field("twitter_url", "option") ?? "#",
         'ig_url'            => get_field("instagram_url", "option") ?? "#",
         'yt_url'            => get_field("youtube_url", "option") ?? "#",
-        'wa_url'            => get_field("whatsapp_url", "option") ?? "#",
-        'tl_url'            => get_field("telegram_url", "option") ?? "#",
-        'in_url'            => get_field("linkedin_url", "option") ?? "#",
         'label'             => get_setting_translations(),
         'language'          => $language,
         'logo'              => get_field("logo", "option") && get_field("logo", "option") != "" ? get_field("logo", "option"): null,
@@ -265,3 +262,14 @@ add_action('wp_head', function () {
     echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
     echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
 });
+
+
+if (function_exists('acf_add_options_page')) {
+    $parent = acf_add_options_page(array(
+        'page_title' => 'Theme General Settings',
+        'menu_title' => 'Theme Settings',
+        'menu_slug' => 'theme-general-settings',
+        'capability' => 'edit_posts',
+        'redirect' => false,
+    ));
+}

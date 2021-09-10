@@ -29,9 +29,25 @@
                     <h3 class="text-title mt-6 pb-3">
                         {{ $settings.label.subscribe_heading }}
                     </h3>
-                    <form class="flex w-auto h-12 relative md:mr-10 lg:mr-16">
-                        <input type="text" name="s" class="w-full p-3 h-full pr-20 font-display text-base rounded-md bg-themeGray placeholder-gray-200 focus:outline-none" :value="email" :placeholder="$settings.label.form.email_address" />
-                        <button type="submit" class="bg-primary w-12 h-full top-0 right-0 flex items-center justify-center absolute rounded-md">
+                    <h5
+                        class="p-2 text-white border-2 border-themeRed bg-themeRed my-3 rounded-lg"
+                        v-if="warningMessage"
+                    >
+                        {{ warningMessage }}
+                    </h5>
+                    <div
+                        class="p-2 text-white border-2 border-themeGreen bg-themeGreen my-3 rounded-lg"
+                        v-if="statusMessage"
+                        v-html="statusMessage"
+                    ></div>
+                    <form v-else
+                        @submit.prevent="submitForm"
+                        class="flex w-auto h-12 relative md:mr-10 lg:mr-16">
+                        <input type="email" required name="s" v-model="email" class="w-full p-3 h-full pr-20 font-display text-base rounded-md bg-themeGray placeholder-gray-200 focus:outline-none" :placeholder="$settings.label.form.email_address" />
+                        <button type="submit" 
+                            :disabled="statusMessage != null"
+                            :class="{ 'disabled:opacity-50': statusMessage != null }"
+                            class="bg-primary w-12 h-full top-0 right-0 flex items-center justify-center absolute rounded-md">
                             <ChevronRightIcon
                                 class="text-white h-5 w-5 cursor-pointer self-center"
                                 aria-hidden="true"
@@ -81,9 +97,7 @@ export default {
         return {
             statusMessage: null,
             warningMessage: null,
-            name: null,
             email: null,
-            reason: null,
             isLoading: false,
             fullPage: false,
         };
@@ -94,16 +108,19 @@ export default {
     },
     methods: {
         submitForm: function() {
-            if (!this.email || !this.name) {
-                this.warningMessage = "Name and Email Required";
+            if (this.statusMessage != null) {
+                console.log(this.statusMessage+" exists");
+                return false;
+            }
+
+            if (!this.email) {
+                this.warningMessage = "Email Required";
                 return false;
             }
             this.isLoading = true;
             var values = {
                 input_values: {
-                    input_1: this.name,
-                    input_2: this.email,
-                    input_3: this.reason,
+                    input_1: this.email,
                 },
                 form_id: this.$settings.subscribe_form_id,
             };
