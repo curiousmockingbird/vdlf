@@ -1,4 +1,5 @@
 module.exports = {
+  important: true,
   purge: {
     content: [
       './app/**/*.php',
@@ -9,7 +10,8 @@ module.exports = {
   theme: {
     container: {
       padding: {
-        DEFAULT: '2rem',
+        DEFAULT: '1rem',
+        md: '1.5rem',
         lg: '3rem',
         xl: '4rem'
       },
