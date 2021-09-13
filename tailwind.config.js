@@ -21,7 +21,7 @@ module.exports = {
         md: "100%",
         lg: "100%",
         xl: "100%",
-        '2xl': "1536px"
+        '2xl': "1280px"
       }
     },
     extend: {
@@ -69,6 +69,7 @@ module.exports = {
         themeBlack: '#1C1C1C',
         themeOrange: '#F0A241',
         themeGray: '#636363',
+        themeBlue: '#397894'
       },
     },
   },

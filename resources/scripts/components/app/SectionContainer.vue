@@ -1,9 +1,10 @@
 <template>
-    <section class="section bg-primary relative" :class="[sectionClasses]">
+    <section class="section relative" :class="[sectionClasses]">
         <slot name="beforeContainer" />
         <div class="container mx-auto z-10 relative" :class="containerClasses">
             <slot />
         </div>
+        <slot name="afterContainer" />
 
         <div
             v-if="backgroundOverlay !== 0"

@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader
@@ -29,6 +30,13 @@ require $composer;
 */
 
 require_once __DIR__ . '/bootstrap/app.php';
+
+function wpcc_allowed_block_types() {
+	return array(
+		'core/paragraph'
+	);
+}
+add_filter( 'allowed_block_types', 'wpcc_allowed_block_types' );
 
 $editor = get_role('editor');
 // add $cap capability to this role object
@@ -108,4 +116,6 @@ if (!current_user_can('manage_options') && function_exists('PLL')) {
         }
 
     }
+
+    
 }
