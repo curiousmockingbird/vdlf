@@ -5,12 +5,12 @@
             <a :href="$settings.app_url" class="logo md:pl-3 lg:pl-5 self-center font-display font-hairline">
                 <img :src="$images+'/logo.png'" class="icon max-w-full h-auto"
                 alt="VDLF"
-                width="150px"
-                height="63x" />
+                width="192px"
+                height="81px" />
             </a>
             <div class="flex justify-center self-center">
-                <div class="language-switcher xl:block hidden mx-3">
-                    <div class="relative form-select w-20">
+                <div class="language-switcher xl:block hidden ml-3 mr-6">
+                    <div class="relative text-base form-select w-20">
                         <select class="w-full cursor-pointer" v-model="language" @change="changeLanguage($event)">
                             <option value="en">ENG</option>
                             <option value="es">ESP</option>
@@ -29,9 +29,9 @@
                     ></span>
                 </nav>
             </div>
-            <div class="hidden sm:flex membership-menu ml-auto lg:ml-0">
+            <div class="hidden sm:flex membership-menu text-lg ml-auto lg:ml-0">
                 <a href="#" :class="bgPrimary ? 'text-white' : 'text-primary'" class="py-8 font-bold px-4">{{ $settings.label.membership }}</a>
-                <a href="/donate" class="text-white bg-gradient-to-r from-primary to-secondary py-8 font-bold px-4">{{ $settings.label.donate }}</a>
+                <a href="/donate" class="text-white bg-gradient-to-r from-primary to-secondary py-8 font-bold pl-8 pr-4">{{ $settings.label.donate }}</a>
                 <button
                     class="py-8 h-full border-0 hidden bg-secondary lg:block border-0 px-4 hover:outline-none active:outline-none fill-current outline-none"
                     :class="bgPrimary ? 'text-white' : 'text-primary'"
@@ -208,10 +208,14 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-
+@screen md {
+    header.header {
+        background: linear-gradient(90deg, #FFFFFF 0%, #FFFFFF 50%, #C22D28 50%, #C22D28 100%);
+    }
+}
 .language-switcher {
     .form-select {
-        @apply p-0 rounded-md relative border-2 text-white border-white;
+        @apply p-0 rounded-md relative border-2 text-base text-white border-white;
         &:before {
             content:"";
             background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkiIGhlaWdodD0iMTEiIHZpZXdCb3g9IjAgMCAxOSAxMSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEgMS40MjUyOUw5LjQ4NTI4IDkuOTEwNTdMMTcuOTcwNiAxLjQyNTI5IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K");
@@ -222,7 +226,7 @@ export default {
         }
         select {
             appearance: none;
-            @apply py-2 px-3 mx-6 -left-6 relative z-30 uppercase tracking-wide w-full font-semibold;
+            @apply py-1 px-2 mx-6 -left-6 relative z-30 uppercase tracking-wide w-full font-semibold;
             background-color: transparent;
         }
     }
