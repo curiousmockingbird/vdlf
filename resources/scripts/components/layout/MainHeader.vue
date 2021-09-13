@@ -1,16 +1,16 @@
 <template>
     <header class="header bg-white fixed z-50 w-full  transition-all ease-in-out duration-150  left-0"
     >
-        <div class="flex flex-row container justify-between" :class="{ 'bg-white': !bgPrimary, 'bg-primary':bgPrimary }">
-            <a :href="$settings.app_url" class="logo self-center font-display font-hairline">
+        <div class="flex flex-row container lg:px-0 justify-between" :class="{ 'bg-white': !bgPrimary, 'bg-primary':bgPrimary }">
+            <a :href="$settings.app_url" class="logo md:pl-3 lg:pl-5 self-center font-display font-hairline">
                 <img :src="$images+'/logo.png'" class="icon max-w-full h-auto"
                 alt="VDLF"
-                width="137px"
-                height="57px" />
+                width="150px"
+                height="63x" />
             </a>
             <div class="flex justify-center self-center">
                 <div class="language-switcher xl:block hidden mx-3">
-                    <div class="relative form-select w-24">
+                    <div class="relative form-select w-20">
                         <select class="w-full cursor-pointer" v-model="language" @change="changeLanguage($event)">
                             <option value="en">ENG</option>
                             <option value="es">ESP</option>
@@ -31,7 +31,7 @@
             </div>
             <div class="hidden sm:flex membership-menu ml-auto lg:ml-0">
                 <a href="#" :class="bgPrimary ? 'text-white' : 'text-primary'" class="py-8 font-bold px-4">{{ $settings.label.membership }}</a>
-                <a href="/donate" class="text-white bg-gradient-to-r from-primary to-secondary py-8 font-bold px-4 underline">{{ $settings.label.donate }}</a>
+                <a href="/donate" class="text-white bg-gradient-to-r from-primary to-secondary py-8 font-bold px-4">{{ $settings.label.donate }}</a>
                 <button
                     class="py-8 h-full border-0 hidden bg-secondary lg:block border-0 px-4 hover:outline-none active:outline-none fill-current outline-none"
                     :class="bgPrimary ? 'text-white' : 'text-primary'"
@@ -46,7 +46,7 @@
                 </button>
             </div>
             <button
-                class="block ml-5 lg:hidden text-white border-0 focus:outline-none"
+                class="block ml-5 lg:hidden text-primary border-0 focus:outline-none"
                 @click="toggleMenu"
             >
                 <MenuAlt3Icon
@@ -54,7 +54,7 @@
                     class="block h-8 w-8 self-center"
                     aria-hidden="true"
                 />
-                <XIcon v-else class="block h-8 w-8 self-center text-white" aria-hidden="true" />
+                <XIcon v-else class="block h-8 w-8 self-center text-primary" aria-hidden="true" />
             </button>
             <nav
                 class="mobile-nav transition-transform transform-gpu duration-700 shadow-lg"
@@ -215,7 +215,7 @@ export default {
         &:before {
             content:"";
             background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkiIGhlaWdodD0iMTEiIHZpZXdCb3g9IjAgMCAxOSAxMSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEgMS40MjUyOUw5LjQ4NTI4IDkuOTEwNTdMMTcuOTcwNiAxLjQyNTI5IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K");
-            @apply absolute block right-4 inset-y-1/2 origin-center bg-no-repeat bg-contain;
+            @apply absolute block right-2 inset-y-1/2 origin-center bg-no-repeat bg-contain;
             width: 14px;
             height: 7px;
             transform:translateY(-50%);
@@ -277,19 +277,19 @@ nav {
             @apply text-white;
         }
 
-        &.menu-item-has-children:after {
-            position: absolute;
-            content: url('data:image/svg+xml;charset=UTF-8, <svg width="9" height="6" viewBox="0 0 9 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.666992 0.666748L4.33366 4.66675L8.00033 0.666748" stroke="white"/></svg>');
-            height: 14px;
-            width: 14px;
-            right: -5px;
-            top: 35%;
-            filter: invert(1);
-            transform: translateY(-50%);
-        }
+        // &.menu-item-has-children:after {
+        //     position: absolute;
+        //     content: url('data:image/svg+xml;charset=UTF-8, <svg width="9" height="6" viewBox="0 0 9 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.666992 0.666748L4.33366 4.66675L8.00033 0.666748" stroke="white"/></svg>');
+        //     height: 14px;
+        //     width: 14px;
+        //     right: -5px;
+        //     top: 35%;
+        //     filter: invert(1);
+        //     transform: translateY(-50%);
+        // }
     }
     a {
-        @apply relative z-50 font-body text-base text-black font-semibold transition-colors leading-tight py-8 lg:whitespace-nowrap;
+        @apply relative z-50 font-body text-lg text-black font-semibold transition-colors leading-tight py-8 lg:whitespace-nowrap;
 
         &:active,
         &:hover {
@@ -329,7 +329,7 @@ nav {
                 display: flex;
                 margin: 0;
                 a {
-                    @apply text-black font-semibold py-4 pl-4 pr-14 w-full border-b border-primary border-opacity-10;
+                    @apply text-black text-base font-semibold py-4 pl-4 pr-14 w-full border-b border-primary border-opacity-10;
                 }
                 a:hover {
                     background: rgba(0, 0, 0, 0.034);
