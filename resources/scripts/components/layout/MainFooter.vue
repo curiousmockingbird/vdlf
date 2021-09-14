@@ -71,7 +71,7 @@
                 </div>
             </div>
 
-            <div class="w-full md:flex flex-row-reverse justify-between items-end pt-3 md:pt-10 pb-3">
+            <div class="w-full copyright md:flex flex-row-reverse justify-between items-end pt-3 md:pt-10 pb-3">
                 <div class="footer-menus">
                     <slot name="navigation" />
                 </div>
@@ -142,6 +142,9 @@ export default {
 };
 </script>
 <style lang="scss">
+.copyright a {
+    @apply text-white;
+}
 .main-footer {
     .content-menus .nav {
         @apply block -mx-4 w-full;

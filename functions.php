@@ -1,5 +1,5 @@
 <?php
-
+require_once 'elementor/custom-elementor.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -118,4 +118,13 @@ if (!current_user_can('manage_options') && function_exists('PLL')) {
     }
 
     
+}
+add_filter( 'excerpt_length', 'mytheme_custom_excerpt_length', 999 );
+function mytheme_custom_excerpt_length( $length ) {
+    return 30;
+}
+
+add_filter('excerpt_more', 'custom_excerpt_more');
+function custom_excerpt_more() {
+    return "...";
 }

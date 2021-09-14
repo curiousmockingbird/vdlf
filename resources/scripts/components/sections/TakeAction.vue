@@ -1,15 +1,27 @@
 <template>
     <SectionContainer containerClasses="min-h-screen flex flex-col justify-center">
-        <h3 class="text-2xl tracking-widest font-black text-white">Take Action</h3>
+        <h3 class="text-2xl tracking-widest font-black text-white">{{ title }}</h3>
         <div class="grid grid-cols-3 gap-8 mt-10">
-            <ActionCard></ActionCard>
-            <ActionCard></ActionCard>
-            <ActionCard></ActionCard>
+            <ActionCard 
+                v-for="(item, i) in ActionsData"
+                :key="i"
+                :title="item.title"
+                :description="item.excerpt"
+                :email="item.email"
+                :body="item.content"
+            ></ActionCard>
         </div>
     </SectionContainer>
 </template>
 <script>
 export default {
     name: "TakeAction",
+    props: {
+        "ActionsData":Array,
+        "title":{
+            type:String,
+            default:"Take Action",
+        }
+    },
 };
 </script>

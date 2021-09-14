@@ -4,20 +4,22 @@ function mapping_posts($post)
     $image = get_the_post_thumbnail_url($post->ID) ? get_the_post_thumbnail_url($post->ID, 'original') : null;
     $thumbnail = get_the_post_thumbnail_url($post->ID) ? get_the_post_thumbnail_url($post->ID, 'thumbnail') : null;
     $data = [
-        "post_id" => $post->ID,
-        "link" => get_permalink($post->ID),
-        "thumbnail" => $thumbnail,
-        "image" => $image,
-        "title" => $post->post_title,
-        "slug" => $post->post_name,
-        "date" => get_the_date(null, $post->ID),
-        "content" => apply_filters("the_content", get_the_content("", false, $post->ID)),
-        "excerpt" => get_the_excerpt($post->ID) ?? substr(strip_tags($post->post_content), 0, 120),
+        "post_id"     => $post->ID,
+        "link"        => get_permalink($post->ID),
+        "thumbnail"   => $thumbnail,
+        "image"       => $image,
+        "title"       => $post->post_title,
+        "slug"        => $post->post_name,
+        "date"        => get_the_date(null, $post->ID),
+        "content"     => apply_filters("the_content", get_the_content("", false, $post->ID)),
+        "excerpt"     => get_the_excerpt($post->ID) ?? substr(strip_tags($post->post_content), 0, 120),
         "author_name" => get_the_author_meta('display_name', $post->post_author),
-        "categories" => wp_get_post_terms($post->ID, 'story_category'),
-        "type" => get_post_type($post->ID),
-        "human_time" => timeago($post->post_date),
+        "categories"  => wp_get_post_terms($post->ID, 'category'),
+        "type"        => get_post_type($post->ID),
     ];
+    if (get_post_type($post->ID) == "take_actions") {
+        $data["email"] = get_field("email",$post->ID);
+    }
     return $data;
 }
 
@@ -33,6 +35,7 @@ function get_cpt_data($params, $type = array("post"))
     $types = $params["post_type"] ?? $type;
     $keywords = $params["keywords"] ?? null;
     $exclude = $params["exclude"] ?? null;
+    $language = $params["language"] ?? null;
 
     $args = array(
         'post_type' => $types,
@@ -45,6 +48,10 @@ function get_cpt_data($params, $type = array("post"))
         $args["post__not_in"] = explode(",", $exclude);
     }
 
+    if ($language) {
+        $args['lang'] = $language;
+    }
+    
     if ($sortby == "latest") {
         $args['orderby'] = $orderby;
         $args['order'] = "desc";
@@ -59,7 +66,6 @@ function get_cpt_data($params, $type = array("post"))
     if ($is_featured || $sortby == "featured") {
         $args["meta_query"] = array("featured" => array('key' => 'featured', 'value' => true));
     }
-
     $tax_query = array();
 
     if ($categories && $categories != "all") {
@@ -83,9 +89,9 @@ function get_cpt_data($params, $type = array("post"))
     wp_reset_postdata();
     $datas = array_map("mapping_posts", get_posts($args));
     return [
-        "posts" => $datas,
-        "reload" => $params["redraw"] ?? false,
-        "nextPage" => $max_num_pages > $paged,
+        "posts"     => $datas,
+        "reload"    => $params["reload"] ?? false,
+        "nextPage"  => $max_num_pages > $paged,
         "totalpage" => $max_num_pages,
     ];
 }
@@ -108,10 +114,28 @@ function update_categories_taxonomy() {
     echo "Categories updates";
 }
 
+function get_actions($request) {
+    return get_cpt_data($request->get_params(),array("take_actions"));
+}
+
+function get_updates($request) {
+    return get_cpt_data($request->get_params(),array("post"));
+}
+
 add_action('rest_api_init', function () {
     register_rest_route('categories', 'mapping', array(
         'methods' => 'GET',
         'callback' => 'update_categories_taxonomy',
+        'permission_callback' => '__return_true',
+    ));
+    register_rest_route('action', 'all', array(
+        'methods' => 'POST',
+        'callback' => 'get_actions',
+        'permission_callback' => '__return_true',
+    ));
+    register_rest_route('updates', 'all', array(
+        'methods' => 'POST',
+        'callback' => 'get_updates',
         'permission_callback' => '__return_true',
     ));
 });

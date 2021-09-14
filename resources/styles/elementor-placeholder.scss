@@ -1,0 +1,12 @@
+.elementor-section-preview {
+    @apply py-10 bg-gray-100 flex flex-col justify-center items-center text-center h-96;
+
+    h1 {
+        @apply text-center text-3xl font-bold text-primary;
+    }
+
+    label {
+        @apply text-center font-semibold;
+        color: red;
+    }
+}

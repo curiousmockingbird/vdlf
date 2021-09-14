@@ -2,14 +2,14 @@
     <header class="header bg-white fixed z-50 w-full  transition-all ease-in-out duration-150  left-0"
     >
         <div class="flex flex-row container lg:px-0 justify-between" :class="{ 'bg-white': !bgPrimary, 'bg-primary':bgPrimary }">
-            <a :href="$settings.app_url" class="logo md:pl-3 lg:pl-5 self-center font-display font-hairline">
+            <a :href="$settings.app_url" class="logo self-center font-display font-hairline">
                 <img :src="$images+'/logo.png'" class="icon max-w-full h-auto"
                 alt="VDLF"
                 width="192px"
                 height="81px" />
             </a>
             <div class="flex justify-center self-center">
-                <div class="language-switcher xl:block hidden ml-3 mr-6">
+                <div class="language-switcher xl:block hidden mx-3">
                     <div class="relative text-base form-select w-20">
                         <select class="w-full cursor-pointer" v-model="language" @change="changeLanguage($event)">
                             <option value="en">ENG</option>
@@ -24,14 +24,14 @@
                     <slot />
                     <span
                         ref="underlineThingy"
-                        class="h-1 w-0 absolute bottom-7 left-0"
+                        class="h-1 absolute bottom-7"
                         :class="bgPrimary ? 'bg-white' : 'bg-themeRed'"
                     ></span>
                 </nav>
             </div>
             <div class="hidden sm:flex membership-menu text-lg ml-auto lg:ml-0">
                 <a href="#" :class="bgPrimary ? 'text-white' : 'text-primary'" class="py-8 font-bold px-4">{{ $settings.label.membership }}</a>
-                <a href="/donate" class="text-white bg-gradient-to-r from-primary to-secondary py-8 font-bold pl-8 pr-4">{{ $settings.label.donate }}</a>
+                <a href="/donate" class="text-white bg-gradient-to-r from-primary to-secondary py-8 font-bold pl-6 pr-4">{{ $settings.label.donate }}</a>
                 <button
                     class="py-8 h-full border-0 hidden bg-secondary lg:block border-0 px-4 hover:outline-none active:outline-none fill-current outline-none"
                     :class="bgPrimary ? 'text-white' : 'text-primary'"
@@ -307,7 +307,7 @@ nav {
     }
     ul > li {
         a {
-            @apply px-3 xl:px-4;
+            @apply px-1 xl:px-2;
         }
         ul.sub-menu {
             background: rgba(255, 255, 255, 0.959);

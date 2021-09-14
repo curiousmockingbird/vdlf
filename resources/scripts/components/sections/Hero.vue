@@ -1,29 +1,53 @@
 <template>
     <div class="background-gradient">
-        <SectionContainer containerClasses="min-h-screen relative">
+        <SectionContainer containerClasses="min-h-screen">
             <img :src="$images + '/hero-circle.png'" class=" bg-circle z-0" />
-
-            <div class=" content-text relative ">
-                <h1 class="font-black text-2xl md:text-4xl leading-10" style="max-width: 700px;">
-                    Email your Representative to Win Citizenship for All
-                </h1>
-                <a href="#" class="block mt-10 text-2xl text-white font-black underline"
-                    >Let's Go!</a
-                >
+            <div class="h-screen relative">
+                <div class=" content-text relative ">
+                    <h1 class="font-black text-2xl md:text-4xl leading-10" style="max-width: 700px;">
+                        Email your Representative to Win Citizenship for All
+                    </h1>
+                    <a href="#" class="block mt-10 text-2xl text-white font-black underline"
+                        >Let's Go!</a
+                    >
+                </div>
             </div>
 
             <template slot="afterContainer">
                 <img :src="$images + '/hero-img.png'" class="hero-image z-20" alt="" />
             </template>
         </SectionContainer>
-        <TakeAction></TakeAction>
+        <TakeAction :actions-data="actions" title="Take Action"></TakeAction>
     </div>
 </template>
 <script>
-import TakeAction from "./TakeAction.vue";
 export default {
-    components: {
-        TakeAction: TakeAction,
+    props: ["settings"],
+    data() {
+        return {
+            actions: [],
+            page: 1,
+            perpage: 3,
+        };
+    },
+    methods: {
+        getData() {
+            let formData = {
+                page: this.page,
+                perpage: this.perpage,
+                sortby: "latest",
+                language:this.$settings.language,
+            };
+            this.$api.Posts.getAction(formData).then(({ data }) => {
+                this.actions.push(...data.posts);
+            });
+        },
+    },
+    created() {
+        this.getData();
+        if (this.settings) {
+            this.sectionSettings = JSON.parse(this.settings);
+        }
     },
 };
 </script>

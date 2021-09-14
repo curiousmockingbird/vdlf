@@ -1,18 +1,22 @@
 <template>
     <div class="card">
-        <h5 class=" font-black text-themeBlue leading-tight  tracking-wider text-xl p-0 mb-5">
-            Most Recent Attack on DACA Underscores Urgent Need to Pass Permanent Pathway to
-            Citizenship for Millions of Dreamers and Essential Workers
-        </h5>
-        <span class="text-gray-500 mt-5">12th July, 2021</span>
-        <p class="mb-5 text-lg">
-            Immigration Reform, News, Noticias, Press Releases
-        </p>
-        <a href="#" class="text-black  font-bold underline text-xl block my-5">Continue Reading</a>
+        <a :href="link">
+            <h5 class=" font-black text-themeBlue leading-tight  tracking-wider text-xl p-0 mb-5">{{ title }}</h5>
+        </a>
+        <span class="text-gray-500 mt-5">{{date}}</span>
+        <div v-html="description" class="mt-2 mb-5 text-lg"></div>
+        <a :href="link" class="text-black  font-bold underline text-xl block my-5">Continue Reading</a>
     </div>
 </template>
 <script>
-export default {};
+export default {
+    props: {
+        title: String,
+        description: String,
+        date: String,
+        link: String
+    },
+};
 </script>
 <style lang="scss" scoped>
 .card {
