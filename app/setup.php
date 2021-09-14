@@ -33,6 +33,7 @@ function get_default_settings()
         'tw_url'            => get_field("twitter_url", "option") ?? "#",
         'ig_url'            => get_field("instagram_url", "option") ?? "#",
         'yt_url'            => get_field("youtube_url", "option") ?? "#",
+        'fk_url'            => get_field("flickr_url", "option") ?? "#",
         'label'             => get_setting_translations(),
         'language'          => $language,
         'logo'              => get_field("logo", "option") && get_field("logo", "option") != "" ? get_field("logo", "option"): null,

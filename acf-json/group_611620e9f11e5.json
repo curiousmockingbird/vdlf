@@ -168,6 +168,25 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
+        },
+        {
+            "key": "field_6140bb59ffca4",
+            "label": "Flickr URL",
+            "name": "flickr_url",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         }
     ],
     "location": [
@@ -187,5 +206,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1631259062
+    "modified": 1631632246
 }
