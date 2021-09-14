@@ -34,13 +34,35 @@
                 ></svg-vue>
             </a>
         </li>
+        <li v-if="$settings.yt_url != ''" class="mx-2">
+            <a :href="$settings.yt_url" target="_blank">
+                <svg-vue
+                    icon="social.youtube-icon"
+                    alt="youtube"
+                    class="icon"
+                    width="22px"
+                    height="22px"
+                ></svg-vue>
+            </a>
+        </li>
+        <li v-if="$settings.fk_url != ''" class="mx-2">
+            <a :href="$settings.fk_url" target="_blank">
+                <svg-vue
+                    icon="social.flickr"
+                    alt="Flickr"
+                    class="icon"
+                    width="22px"
+                    height="22px"
+                ></svg-vue>
+            </a>
+        </li>
     </ul>
 </template>
 
 <style lang="scss">
-    a:hover {
-        svg path {
-            fill:#F0A341;
-        }
+a:hover {
+    svg path {
+        fill: #f0a341;
     }
+}
 </style>

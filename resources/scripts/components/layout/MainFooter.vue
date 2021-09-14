@@ -1,16 +1,26 @@
 <template>
     <footer class="main-footer bg-themeBlack relative">
-        <img class="absolute p-10 w-full h-full left-0 top-0 z-10 object-contain object-center" :src="$images+'/bg-footer.png'" />
+        <img
+            class="absolute p-10 w-full h-full left-0 top-0 z-10 object-contain object-center"
+            :src="$images + '/bg-footer.png'"
+        />
         <div class="container relative z-20">
             <div class="w-full md:flex items-center justify-between mb-10">
-                <img :src="$images+'/logo-footer.png'" class="icon max-w-full h-auto"
+                <img
+                    :src="$images + '/logo-footer.png'"
+                    class="icon max-w-full h-auto"
                     alt="VDLF"
                     width="282px"
-                    height="120px" />
+                    height="120px"
+                />
 
                 <div class="button-actions my-3 md:my-0 -mx-5">
-                    <a href="#" class="text-2xl font-bold font-arial-black p-5 text-primary">{{ $settings.label.membership }}</a>
-                    <a href="#" class="text-2xl font-bold font-arial p-5 text-primary">{{ $settings.label.donate }}</a>
+                    <a href="#" class="text-2xl font-bold font-arial-black p-5 text-primary">{{
+                        $settings.label.membership
+                    }}</a>
+                    <a href="#" class="text-2xl font-bold font-arial p-5 text-primary">{{
+                        $settings.label.donate
+                    }}</a>
                 </div>
             </div>
             <div class="flex flex-col md:flex-row">
@@ -19,11 +29,9 @@
                         {{ $settings.label.contact_us }}
                     </h3>
                     <p class="opacity-80 text-base font-display mb-4">
-                        1027 S. 5th Street, 
-                        <br>Milwaukee, WI 53204
-                        <br>Tel. 414-643-1620  
-                        <br>Fax. 414-643-1621 
-                        <br>Email: email@email.com
+                        1027 S. 5th Street,
+                        <br />Milwaukee, WI 53204 <br />Tel. 414-643-1620 <br />Fax. 414-643-1621
+                        <br />Email: vdlf@vdlf.org
                     </p>
 
                     <h3 class="text-title mt-6 pb-3">
@@ -40,14 +48,25 @@
                         v-if="statusMessage"
                         v-html="statusMessage"
                     ></div>
-                    <form v-else
+                    <form
+                        v-else
                         @submit.prevent="submitForm"
-                        class="flex w-auto h-12 relative md:mr-10 lg:mr-16">
-                        <input type="email" required name="s" v-model="email" class="w-full p-3 h-full pr-20 font-display text-base rounded-md bg-themeGray placeholder-gray-200 focus:outline-none" :placeholder="$settings.label.form.email_address" />
-                        <button type="submit" 
+                        class="flex w-auto h-12 relative md:mr-10 lg:mr-16"
+                    >
+                        <input
+                            type="email"
+                            required
+                            name="s"
+                            v-model="email"
+                            class="w-full p-3 h-full pr-20 font-display text-base rounded-md bg-themeGray placeholder-gray-200 focus:outline-none"
+                            :placeholder="$settings.label.form.email_address"
+                        />
+                        <button
+                            type="submit"
                             :disabled="statusMessage != null"
                             :class="{ 'disabled:opacity-50': statusMessage != null }"
-                            class="bg-primary w-12 h-full top-0 right-0 flex items-center justify-center absolute rounded-md">
+                            class="bg-primary w-12 h-full top-0 right-0 flex items-center justify-center absolute rounded-md"
+                        >
                             <ChevronRightIcon
                                 class="text-white h-5 w-5 cursor-pointer self-center"
                                 aria-hidden="true"
@@ -61,7 +80,7 @@
                         <h3 class="text-white text-xl font-semibold font-display mr-5">
                             {{ $settings.label.follow_us }}
                         </h3>
-                        <socialMediaIcon></socialMediaIcon>
+                        <socialMediaIcons></socialMediaIcons>
                     </div>
                 </div>
                 <div class="w-full md:w-2/3 pb-10 md:pb-0">
@@ -71,13 +90,18 @@
                 </div>
             </div>
 
-            <div class="w-full copyright md:flex flex-row-reverse justify-between items-end pt-3 md:pt-10 pb-3">
+            <div
+                class="w-full copyright md:flex flex-row-reverse justify-between items-end pt-3 md:pt-10 pb-3"
+            >
                 <div class="footer-menus">
                     <slot name="navigation" />
                 </div>
-                <div class="designby font-display small"
-                    >{{ $settings.label.developed_by }}
-                    <a href="http://indietechsolutions.com/" class="font-semibold hover:text-primary" target="_blank"
+                <div class="designby font-display small">
+                    {{ $settings.label.developed_by }}
+                    <a
+                        href="http://indietechsolutions.com/"
+                        class="font-semibold hover:text-primary"
+                        target="_blank"
                         >IndieTech Solutions</a
                     >
                 </div>
@@ -104,12 +128,12 @@ export default {
     },
     components: {
         Loading,
-        ChevronRightIcon
+        ChevronRightIcon,
     },
     methods: {
         submitForm: function() {
             if (this.statusMessage != null) {
-                console.log(this.statusMessage+" exists");
+                console.log(this.statusMessage + " exists");
                 return false;
             }
 
@@ -155,12 +179,12 @@ export default {
         @screen lg {
             column-count: 3;
         }
-        >li {
+        > li {
             @apply mx-4 mb-5;
         }
-        >li>a {
+        > li > a {
             @apply font-semibold text-xl text-white w-full whitespace-nowrap opacity-100;
-            &:hover{
+            &:hover {
                 @apply text-white;
             }
         }
@@ -172,7 +196,7 @@ export default {
             }
         }
     }
-    .footer-menus .nav >li {
+    .footer-menus .nav > li {
         @apply mb-0;
         a {
             @apply font-display;
@@ -196,9 +220,9 @@ export default {
 
     .footer-menus .nav {
         @apply flex-row -mx-3 my-3 md:my-0 justify-center md:justify-end;
-        
+
         > li > a {
-           @apply px-3;    
+            @apply px-3;
         }
     }
 }

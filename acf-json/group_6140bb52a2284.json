@@ -1,9 +1,9 @@
 {
-    "key": "group_611620e9f11e5",
-    "title": "Theme Settings",
+    "key": "group_6140bb52a2284",
+    "title": "Theme Settings (copy)",
     "fields": [
         {
-            "key": "field_611637dcfb0c8",
+            "key": "field_6140bb52a64d1",
             "label": "General Settings",
             "name": "",
             "type": "tab",
@@ -19,7 +19,7 @@
             "endpoint": 0
         },
         {
-            "key": "field_61162138d077e",
+            "key": "field_6140bb52a650d",
             "label": "Gravity Public Key",
             "name": "gravity_public_key",
             "type": "text",
@@ -38,7 +38,7 @@
             "maxlength": ""
         },
         {
-            "key": "field_6116214dd077f",
+            "key": "field_6140bb52a6547",
             "label": "Gravity Private Key",
             "name": "gravity_private_key",
             "type": "text",
@@ -57,7 +57,7 @@
             "maxlength": ""
         },
         {
-            "key": "field_61162158d0780",
+            "key": "field_6140bb52a657d",
             "label": "Subscribe Form ID",
             "name": "subscribe_form_id",
             "type": "number",
@@ -78,7 +78,7 @@
             "step": ""
         },
         {
-            "key": "field_611637eafb0c9",
+            "key": "field_6140bb52a65b4",
             "label": "Social Media",
             "name": "",
             "type": "tab",
@@ -94,7 +94,7 @@
             "endpoint": 0
         },
         {
-            "key": "field_611637f4fb0ca",
+            "key": "field_6140bb52a65eb",
             "label": "Facebook URL",
             "name": "facebook_url",
             "type": "text",
@@ -113,7 +113,7 @@
             "maxlength": ""
         },
         {
-            "key": "field_61163805fb0cb",
+            "key": "field_6140bb52a6623",
             "label": "Twitter URL",
             "name": "twitter_url",
             "type": "text",
@@ -132,7 +132,7 @@
             "maxlength": ""
         },
         {
-            "key": "field_6116381afb0cc",
+            "key": "field_6140bb52a6659",
             "label": "Instagram URL",
             "name": "instagram_url",
             "type": "text",
@@ -151,28 +151,9 @@
             "maxlength": ""
         },
         {
-            "key": "field_61163823fb0cd",
+            "key": "field_6140bb52a6690",
             "label": "Youtube URL",
             "name": "youtube_url",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
-            "key": "field_6140bb59ffca4",
-            "label": "Flickr URL",
-            "name": "flickr_url",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -206,5 +187,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1631632246
+    "modified": 1631632210
 }
