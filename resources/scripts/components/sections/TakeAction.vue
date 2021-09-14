@@ -8,6 +8,8 @@
                 :title="item.title"
                 :description="item.excerpt"
                 :email="item.email"
+                :label="label"
+                :buttonLabel="buttonLabel"
                 :body="item.content"
             ></ActionCard>
         </div>
@@ -21,6 +23,14 @@ export default {
         "title":{
             type:String,
             default:"Take Action",
+        },
+        "label":{
+            type:String,
+            default:"Action",
+        },
+        "buttonLabel":{
+            type:String,
+            default:"Email Now",
         }
     },
 };

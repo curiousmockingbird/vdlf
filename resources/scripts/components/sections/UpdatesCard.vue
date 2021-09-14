@@ -5,7 +5,7 @@
         </a>
         <span class="text-gray-500 mt-5">{{date}}</span>
         <div v-html="description" class="mt-2 mb-5 text-lg"></div>
-        <a :href="link" class="text-black  font-bold underline text-xl block my-5">Continue Reading</a>
+        <a :href="link" class="text-black  font-bold underline text-xl block my-5">{{ moreLabel }}</a>
     </div>
 </template>
 <script>
@@ -14,7 +14,8 @@ export default {
         title: String,
         description: String,
         date: String,
-        link: String
+        link: String,
+        moreLabel:String
     },
 };
 </script>

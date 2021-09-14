@@ -5,36 +5,49 @@
             <div class="h-screen relative">
                 <div class=" content-text relative ">
                     <h1 class="font-black text-2xl md:text-4xl leading-10" style="max-width: 700px;">
-                        Email your Representative to Win Citizenship for All
+                        {{ content.title }}
                     </h1>
-                    <a href="#" class="block mt-10 text-2xl text-white font-black underline"
-                        >Let's Go!</a
+                    <a :href="content.button_link.url" class="block mt-10 text-2xl text-white font-black underline"
+                        >{{ content.button_text}}</a
                     >
                 </div>
             </div>
 
             <template slot="afterContainer">
-                <img :src="$images + '/hero-img.png'" class="hero-image z-20" alt="" />
+                <img :src="content.images.url?content.images.url:$images + '/hero-img.png'" class="hero-image z-20" alt="" />
             </template>
         </SectionContainer>
-        <TakeAction :actions-data="actions" title="Take Action"></TakeAction>
+        <TakeAction :actions-data="actions" :button-label="content.button_email_text" :label="content.take_action_label" :title="content.take_action_title"></TakeAction>
     </div>
 </template>
 <script>
 export default {
-    props: ["settings"],
+    props: ["jsonContent"],
     data() {
         return {
             actions: [],
             page: 1,
-            perpage: 3,
+            content: {
+                title:"Email your Representative to Win Citizenship for All",
+                button_text:"Let's Go!",
+                button_link: {
+                    url:"#",
+                },
+                take_action_title:"Take Action",
+                take_action_label:"Action",
+                button_email_text:"Email Now",
+                images: {
+                    url:"",
+                },
+                perpage:3,
+            }
         };
     },
     methods: {
         getData() {
             let formData = {
                 page: this.page,
-                perpage: this.perpage,
+                perpage: this.content.perpage,
                 sortby: "latest",
                 language:this.$settings.language,
             };
@@ -45,8 +58,8 @@ export default {
     },
     created() {
         this.getData();
-        if (this.settings) {
-            this.sectionSettings = JSON.parse(this.settings);
+        if (this.jsonContent) {
+            this.content = JSON.parse(this.jsonContent);
         }
     },
 };

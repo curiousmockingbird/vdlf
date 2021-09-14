@@ -4,7 +4,7 @@
             <p
                 class="inline-block tracking-widest rounded-md uppercase border border-black font-bold text-xs py-1 px-3 "
             >
-                Action
+                {{ label }}
             </p>
             <h4 class="font-bold text-xl mb-5 mt-10">{{title}}</h4>
 
@@ -13,7 +13,7 @@
             </p>
         </div>
         <a :href="mailtoEmail()" class="card-btn ">
-            Email Now
+            {{ buttonLabel }}
         </a>
     </article>
 </template>
@@ -33,6 +33,8 @@ export default {
         description: String,
         email: String,
         body: String,
+        label: String,
+        buttonLabel: String
     },
     methods: {
         mailtoEmail:function() {

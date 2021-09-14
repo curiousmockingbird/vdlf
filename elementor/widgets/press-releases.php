@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) {
 }
 // Exit if accessed directly
 
-class HeroWidget extends Widget_Base
+class PressReleases extends Widget_Base
 {
 
     /**
@@ -30,12 +30,12 @@ class HeroWidget extends Widget_Base
      */
     public function get_name()
     {
-        return 'Hero Action';
+        return 'Press Releases';
     }
 
     public function get_title()
     {
-        return 'Hero Action';
+        return 'Press Releases';
     }
 
     /**
@@ -49,7 +49,7 @@ class HeroWidget extends Widget_Base
      * @return string Widget icon.
      */
     public function get_icon(){
-        return 'eicon-image';
+        return 'eicon-post-list';
     }
 
     /**
@@ -79,9 +79,9 @@ class HeroWidget extends Widget_Base
     {
 
         $this->start_controls_section(
-            'content_section',
+            'setting_section',
             [
-                'label' => __('Hero Content', 'sage'),
+                'label' => __('Section Settings', 'sage'),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -90,7 +90,7 @@ class HeroWidget extends Widget_Base
         $this->add_control(
 			'images',
 			[
-				'label' => __( 'Choose Image', 'sage' ),
+				'label' => __( 'Background', 'sage' ),
 				'type' => \Elementor\Controls_Manager::MEDIA,
 				'default' => [
 					'url' => \Elementor\Utils::get_placeholder_image_src(),
@@ -102,16 +102,16 @@ class HeroWidget extends Widget_Base
             'title', [
                 'label' => __('Title', 'sage'),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __('Email your Representative to Win Citizenship for All', 'sage'),
+                'default' => __('Press Releases and Updates', 'sage'),
                 'label_block' => true,
             ]
         );
 
         $this->add_control(
             'button_text', [
-                'label' => __('Button Text', 'sage'),
+                'label' => __('Label All Press Releases', 'sage'),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __('Let\'s Go!', 'sage'),
+                'default' => __('View all Press Releases', 'sage'),
                 'label_block' => true,
             ]
         );
@@ -119,7 +119,7 @@ class HeroWidget extends Widget_Base
         $this->add_control(
             'button_link',
             [
-                'label' => __('Link to bio', 'sage'),
+                'label' => __('Link All Press Releases', 'sage'),
                 'type' => \Elementor\Controls_Manager::URL,
                 'placeholder' => __('https://your-link.com', 'sage'),
                 'show_external' => true,
@@ -128,16 +128,6 @@ class HeroWidget extends Widget_Base
                     'is_external' => true,
                     'nofollow' => true,
                 ],
-            ]
-        );
-
-		$this->end_controls_section();
-
-        $this->start_controls_section(
-            'action_section',
-            [
-                'label' => __('Take Action', 'sage'),
-                'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
 
@@ -154,36 +144,18 @@ class HeroWidget extends Widget_Base
         $this->add_control(
 			'important_note',
 			[
-				'label' => __( 'Take Action', 'sage' ),
+				'label' => __( 'Press Releases', 'sage' ),
 				'type' => \Elementor\Controls_Manager::RAW_HTML,
-				'raw' => __( '<br><a  href="/wp-admin/edit.php?post_type=take_actions" target="_blank" class="elementor-button elementor-button-default  elementor-go-pro elementor-control-type-tab">Add, edit or remove content in this section</a>', 'sage' ),
+				'raw' => __( '<br><a  href="/wp-admin/edit.php?post_type=presss" target="_blank" class="elementor-button elementor-button-default  elementor-go-pro elementor-control-type-tab">Add, edit or remove content in this section</a>', 'sage' ),
 				'content_classes' => 'your-class',
 			]
 		);
 
         $this->add_control(
-            'take_action_title', [
-                'label' => __('Title', 'sage'),
+            'button_more_text', [
+                'label' => __('Button More Text', 'sage'),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __('Take Action', 'sage'),
-                'label_block' => true,
-            ]
-        );
-
-        $this->add_control(
-            'take_action_label', [
-                'label' => __('Label', 'sage'),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __('Action', 'sage'),
-                'label_block' => true,
-            ]
-        );
-
-        $this->add_control(
-            'button_email_text', [
-                'label' => __('Button Text', 'sage'),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __('Email Now', 'sage'),
+                'default' => __('Continue Reading', 'sage'),
                 'label_block' => true,
             ]
         );
@@ -205,14 +177,12 @@ class HeroWidget extends Widget_Base
     {
         $settings = $this->get_settings_for_display();
         $props = [
-            "title"             => $settings["title"] ?? "Email your Representative to Win Citizenship for All",
-            "button_text"       => $settings["button_text"] ?? "Let's Go!",
+            "title"             => $settings["title"] ?? "Press Releases and Updates",
+            "button_text"       => $settings["button_text"] ?? "View all Press Releases",
             "button_link"       => $settings["button_link"] ?? "#",
             "perpage"           => $settings["perpage"] ?? 3,
             "images"            => $settings["images"] ?? null,
-            "take_action_title" => $settings["take_action_title"] ?? "Take Action",
-            "take_action_label" => $settings["take_action_label"] ?? "Action",
-            "button_email_text" => $settings["button_email_text"] ?? "Email Now",
+            "button_more_text"  => $settings["button_more_text"] ?? "Continue Reading",
 		];
         
         $jsonContent = htmlspecialchars(json_encode($props), ENT_QUOTES, 'UTF-8');
@@ -230,7 +200,7 @@ class HeroWidget extends Widget_Base
 
 		</div>
         <?php } ?>		
-		<hero json-content='<?php echo $jsonContent; ?>'></hero>
+		<updates json-content='<?php echo $jsonContent; ?>'></updates>
 	<?php  
     }
 
