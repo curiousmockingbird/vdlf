@@ -13,7 +13,7 @@
                 :description="item.excerpt"
                 :date="item.date"
                 :link="item.link"
-                :moreLabel="button_more_text"
+                :moreLabel="content.button_more_text"
             ></UpdatesCard>
         </div>
         <a :href="content.button_link.url" class="text-white font-display font-bold underline text-3xl block my-10">{{ content.button_text }}</a>
