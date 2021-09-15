@@ -4,8 +4,23 @@
     "fields": [
         {
             "key": "field_614066005d88e",
-            "label": "Email",
-            "name": "email",
+            "label": "Link",
+            "name": "link",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url"
+        },
+        {
+            "key": "field_6141cabbd330c",
+            "label": "Label",
+            "name": "label",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -15,7 +30,7 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
+            "default_value": "More Information",
             "placeholder": "",
             "prepend": "",
             "append": "",
@@ -39,5 +54,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1631610756
+    "modified": 1631701744
 }

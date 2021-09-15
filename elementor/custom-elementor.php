@@ -19,6 +19,7 @@ class Widget_Loader
         require_once __DIR__ . '/widgets/hero-widget.php';
         require_once __DIR__ . '/widgets/panel-box.php';
         require_once __DIR__ . '/widgets/press-releases.php';
+        require_once __DIR__ . '/widgets/take-action.php';
     }
 
     public function register_widgets()
@@ -28,6 +29,7 @@ class Widget_Loader
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type(new Widgets\HeroWidget());
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type(new Widgets\PanelBox());
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type(new Widgets\PressReleases());
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type(new Widgets\TakeActionWidget());
     }
 
     public function __construct()

@@ -3,7 +3,7 @@
         <template slot="beforeContainer">
             <img class="section-bg" :src="content.images.url?content.images.url:$images + '/updates-bg.png'" alt="" />
         </template>
-        <h4 class="font-black text-2xl md:text-4xl text-white tracking-wider">{{ content.title }}</h4>
+        <h4 class="font-bold text-xl md:text-4xl text-white tracking-wider">{{ content.title }}</h4>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-14">
             <UpdatesCard
@@ -28,7 +28,7 @@
 <script>
 export default {
     props: {
-        jsonContent:Object,
+        jsonContent:String,
         title:{
             type:String,
             default:"Press Releases and Updates"

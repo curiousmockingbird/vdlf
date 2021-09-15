@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) {
 }
 // Exit if accessed directly
 
-class HeroWidget extends Widget_Base
+class TakeActionWidget extends Widget_Base
 {
 
     /**
@@ -30,12 +30,12 @@ class HeroWidget extends Widget_Base
      */
     public function get_name()
     {
-        return 'Hero Action';
+        return 'Take Action';
     }
 
     public function get_title()
     {
-        return 'Hero Action';
+        return 'Take Action';
     }
 
     /**
@@ -49,7 +49,7 @@ class HeroWidget extends Widget_Base
      * @return string Widget icon.
      */
     public function get_icon(){
-        return 'eicon-image';
+        return 'eicon-post-list';
     }
 
     /**
@@ -81,7 +81,7 @@ class HeroWidget extends Widget_Base
             'orderby'    => 'count',
         ];
         $categories = get_terms('action_name', $args);
-        $options= array('none' => __( 'None', 'sage' ));
+        $options= array('none' => __( 'None', 'plugin-domain' ));
         foreach ($categories as $cat) {
             $options[$cat->slug] = $cat->name;
         }
@@ -90,62 +90,6 @@ class HeroWidget extends Widget_Base
 
     protected function register_controls()
     {
-
-        $this->start_controls_section(
-            'content_section',
-            [
-                'label' => __('Hero Content', 'sage'),
-                'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
-            ]
-        );
-
-
-        $this->add_control(
-			'images',
-			[
-				'label' => __( 'Choose Image', 'sage' ),
-				'type' => \Elementor\Controls_Manager::MEDIA,
-				'default' => [
-					'url' => \Elementor\Utils::get_placeholder_image_src(),
-				]
-			]
-		);
-
-        $this->add_control(
-            'title', [
-                'label' => __('Title', 'sage'),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __('Email your Representative to Win Citizenship for All', 'sage'),
-                'label_block' => true,
-            ]
-        );
-
-        $this->add_control(
-            'button_text', [
-                'label' => __('Button Text', 'sage'),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __('Let\'s Go!', 'sage'),
-                'label_block' => true,
-            ]
-        );
-
-        $this->add_control(
-            'button_link',
-            [
-                'label' => __('Link to bio', 'sage'),
-                'type' => \Elementor\Controls_Manager::URL,
-                'placeholder' => __('https://your-link.com', 'sage'),
-                'show_external' => true,
-                'default' => [
-                    'url' => '',
-                    'is_external' => true,
-                    'nofollow' => true,
-                ],
-            ]
-        );
-
-		$this->end_controls_section();
-
         $this->start_controls_section(
             'action_section',
             [
@@ -185,7 +129,7 @@ class HeroWidget extends Widget_Base
 
         $this->add_control(
             'take_action_tax', [
-                'label' => __( 'Action Name', 'sage' ),
+                'label' => __( 'Action Name', 'plugin-domain' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'solid',
 				'options' => $this->ActionName()
@@ -217,20 +161,11 @@ class HeroWidget extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-        $props = [
-            "title"             => $settings["title"] ?? "Email your Representative to Win Citizenship for All",
-            "button_text"       => $settings["button_text"] ?? "Let's Go!",
-            "button_link"       => $settings["button_link"] ?? "#",
-            "perpage"           => $settings["perpage"] ?? 3,
-            "images"            => $settings["images"] ?? null,
-            "take_action_title" => $settings["take_action_title"] ?? "Take Action",
-            "take_action_label" => $settings["take_action_label"] ?? "Action",
-            "take_action_tax"   => $settings["take_action_tax"] ?? "Action",
-		];
-        
-        $jsonContent = htmlspecialchars(json_encode($props), ENT_QUOTES, 'UTF-8');
+        $perpage           = $settings["perpage"] ?? 3;
+        $take_action_title = $settings["take_action_title"] ?? "Take Action";
+        $take_action_label = $settings["take_action_label"] ?? "Action";
+        $take_action_tax   = $settings["take_action_tax"] ?? "None";
 
-        
         if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
         ?>
 
@@ -243,7 +178,12 @@ class HeroWidget extends Widget_Base
 
 		</div>
         <?php } ?>		
-		<hero json-content='<?php echo $jsonContent; ?>'></hero>
+		<take-action
+            actions-name="<?php echo $take_action_tax; ?>"
+            label="<?php echo $take_action_label; ?>"
+            title="<?php echo $take_action_title; ?>"
+            perpage="<?php echo (int)($perpage); ?>"
+        ></take-action>
 	<?php  
     }
 

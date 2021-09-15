@@ -1,5 +1,5 @@
 <template>
-    <article class="card">
+    <article class="card mx-2">
         <div class="card-body py-6 px-7 ">
             <p
                 class="inline-block tracking-widest rounded-md uppercase border border-black font-bold text-xs py-1 px-3 "
@@ -12,7 +12,7 @@
                 {{ description }}
             </p>
         </div>
-        <a :href="mailtoEmail()" class="card-btn ">
+        <a :href="link" class="card-btn " v-if="buttonLabel">
             {{ buttonLabel }}
         </a>
     </article>
@@ -23,7 +23,7 @@
 }
 
 .card-btn {
-    @apply mt-20 py-8 px-7 text-black hover:text-white hover:bg-green-700 rounded-lg text-xl underline font-black transition-all;
+    @apply mt-auto py-8 px-7 text-black hover:text-white hover:bg-green-700 rounded-lg text-xl underline font-bold transition-all;
 }
 </style>
 <script>
@@ -31,14 +31,15 @@ export default {
     props: {
         title: String,
         description: String,
-        email: String,
         body: String,
         label: String,
-        buttonLabel: String
-    },
-    methods: {
-        mailtoEmail:function() {
-            return `mailto:${this.email}?subject=${this.title}&body=${this.body}`;
+        buttonLabel: {
+            type:String,
+            default:"Read More"
+        },
+        link:{
+            type:String,
+            default:"#",
         }
     },
 };

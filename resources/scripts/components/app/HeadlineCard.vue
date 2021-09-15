@@ -1,5 +1,5 @@
 <template>
-    <article class="headline-card ">
+    <article class="headline-card">
         <h3 v-html="title" class="font-body font-semibold text-3xl leading-9"></h3>
         <p v-html="description" class="leading-tight"></p>
         <div

@@ -1,11 +1,13 @@
 <template>
     <div class="card">
-        <a :href="link">
-            <h5 class=" font-black text-themeBlue leading-tight  tracking-wider text-xl p-0 mb-5">{{ title }}</h5>
-        </a>
-        <span class="text-gray-500 mt-5">{{date}}</span>
-        <div v-html="description" class="mt-2 mb-5 text-lg"></div>
-        <a :href="link" class="text-black  font-bold underline text-xl block my-5">{{ moreLabel }}</a>
+        <div class="py-5 px-6">
+            <a :href="link">
+                <h5 class=" font-bold text-themeBlue leading-tight  tracking-wider text-xl p-0 mb-5">{{ title }}</h5>
+            </a>
+            <span class="text-gray-500 mt-2">{{date}}</span>
+            <div v-html="description" class="my-3 text-lg"></div>
+        </div>
+        <a :href="link" class="text-black py-8 px-7 rounded-md transition-all hover:bg-themeBrown hover:text-white mt-auto font-bold underline text-xl block">{{ moreLabel }}</a>
     </div>
 </template>
 <script>
@@ -21,6 +23,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 .card {
-    @apply flex flex-col py-5 px-6 rounded-md  bg-white;
+    @apply flex flex-col rounded-md  bg-white;
 }
 </style>

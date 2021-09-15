@@ -1,15 +1,15 @@
 <template>
     <header class="header bg-white fixed z-50 w-full  transition-all ease-in-out duration-150  left-0"
     >
-        <div class="flex flex-row container lg:px-0 justify-between" :class="{ 'bg-white': !bgPrimary, 'bg-primary':bgPrimary }">
+        <div class="flex flex-row pl-2 lg:pl-3 xl:pl-5 justify-between" :class="{ 'bg-white': !bgPrimary, 'bg-primary':bgPrimary }">
             <a :href="$settings.app_url" class="logo self-center font-display font-hairline">
                 <img :src="$images+'/logo.png'" class="icon max-w-full h-auto"
                 alt="VDLF"
                 width="192px"
                 height="81px" />
             </a>
-            <div class="flex justify-center self-center">
-                <div class="language-switcher xl:block hidden mx-3">
+            <div class="flex justify-center self-center items-center">
+                <div class="language-switcher mx-5">
                     <div class="relative text-base form-select w-20">
                         <select class="w-full cursor-pointer" v-model="language" @change="changeLanguage($event)">
                             <option value="en">ENG</option>
@@ -18,7 +18,7 @@
                     </div>
                 </div>
                 <nav
-                    class="desktop-nav hidden justify-self-center place-self-center hidden lg:block w-full "
+                    class="desktop-nav hidden justify-self-center place-self-center hidden xl:block w-full "
                     ref="nav"
                 >
                     <slot />
@@ -29,7 +29,18 @@
                     ></span>
                 </nav>
             </div>
-            <div class="hidden sm:flex membership-menu text-lg ml-auto lg:ml-0">
+            <button
+                class="block ml-auto mr-5 sm:mr-auto sm:mx-auto xl:hidden text-primary border-0 focus:outline-none"
+                @click="toggleMenu"
+            >
+                <ViewGridIcon
+                    v-if="!navOpen"
+                    class="block h-8 w-8 self-center"
+                    aria-hidden="true"
+                />
+                <XIcon v-else class="block h-8 w-8 self-center text-primary" aria-hidden="true" />
+            </button>
+            <div class="hidden sm:flex membership-menu text-lg ml-auto lg:ml-0 relative -right-1">
                 <a href="#" :class="bgPrimary ? 'text-white' : 'text-primary'" class="py-8 font-bold px-4">{{ $settings.label.membership }}</a>
                 <a href="/donate" class="text-white bg-gradient-to-r from-primary to-secondary py-8 font-bold pl-6 pr-4">{{ $settings.label.donate }}</a>
                 <button
@@ -45,17 +56,6 @@
                     ></svg-vue>
                 </button>
             </div>
-            <button
-                class="block ml-5 lg:hidden text-primary border-0 focus:outline-none"
-                @click="toggleMenu"
-            >
-                <MenuAlt3Icon
-                    v-if="!navOpen"
-                    class="block h-8 w-8 self-center"
-                    aria-hidden="true"
-                />
-                <XIcon v-else class="block h-8 w-8 self-center text-primary" aria-hidden="true" />
-            </button>
             <nav
                 class="mobile-nav transition-transform transform-gpu duration-700 shadow-lg"
                 :class="{ '-translate-x-full': !navOpen, 'translate-x-0': navOpen }"
@@ -87,7 +87,7 @@
 </template>
 <script>
 import { gsap } from "gsap";
-import { MenuAlt3Icon, XIcon } from "@vue-hero-icons/outline";
+import { ViewGridIcon, XIcon } from "@vue-hero-icons/outline";
 
 export default {
     props: {
@@ -103,7 +103,7 @@ export default {
         };
     },
     components: {
-        MenuAlt3Icon,
+        ViewGridIcon,
         XIcon,
     },
     methods: {
@@ -351,7 +351,7 @@ nav {
 }
 
 .mobile-nav {
-    @apply fixed top-0 left-0 bg-themeBlack text-white w-full h-screen md:w-96 overflow-y-auto;
+    @apply fixed z-50 top-0 left-0 bg-themeBlack text-white w-full h-screen md:w-96 overflow-y-auto;
     .nav {
         //margin-top: 10px;
         li {

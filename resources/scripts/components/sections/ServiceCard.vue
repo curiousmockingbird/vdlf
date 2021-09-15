@@ -1,12 +1,12 @@
 <template>
     <div class="card" :style="`background: ${background}; color:${color};`">
-        <h5 class="text-white font-black tracking-wider text-lg md:text-2xl p-0 m-0">
+        <h5 class="text-white font-bold tracking-wider text-lg md:text-2xl p-0 m-0">
             {{ title }}
         </h5>
         <p class="my-9 text-white text-xs md:text-lg">
             {{ content }}
         </p>
-        <a href="#" class="text-white mt-auto font-bold underline  text-xl">{{ buttonText }}</a>
+        <a :href="link" class="text-white mt-auto font-semibold underline  text-xl">{{ buttonText }}</a>
     </div>
 </template>
 <script>

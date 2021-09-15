@@ -1,7 +1,7 @@
 <template>
     <section class="page-header-section w-full bg-gradient-to-b from-primary to-secondary relative overflow-hidden flex items-center py-20" ref="section">
         <img ref="image" :src="imageUrl?imageUrl:$images+'/header.png'" class="img" alt="" />
-        <div class="content-title" ref="contentTitle">
+        <div class="container content-title" ref="contentTitle">
             <slot />
         </div>
     </section>

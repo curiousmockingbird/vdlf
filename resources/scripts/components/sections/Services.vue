@@ -3,7 +3,7 @@
         <template slot="beforeContainer">
             <img :src="$images + '/services-circles.png'" class="bg-circle z-0" />
         </template>
-        <h4 class="font-black text-xl md:text-4xl text-black tracking-wider">{{ options.title }}</h4>
+        <h4 class="font-bold text-xl md:text-4xl text-black tracking-wider">{{ options.title }}</h4>
 
         <div class="grid gap-4 mt-14"
             :class="

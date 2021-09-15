@@ -75,6 +75,18 @@ function custom_post_init()
         "has_archive"        => false,
         "publicly_queryable" => false,
     ], false);
+
+    $labels = label_args("Action Name", false);
+    $args = array(
+        "rewrite"   => ['slug' => 'action-category', 'with_front' => true],
+        "hierarchical" => true,
+        "labels" => $labels,
+        "show_ui" => true,
+        "show_admin_column" => true,
+        "query_var" => true,
+    );
+
+    register_taxonomy("action_name", array("take_actions"), $args);
 }
 
 add_action('init', 'custom_post_init', 0);

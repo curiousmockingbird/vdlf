@@ -163,6 +163,13 @@ export default {
             });
         },
     },
+    mounted() {
+        for (let item of document.querySelectorAll(".content-menus>div>ul>li>a")) {
+            if(item.getAttribute("href") == "#") {
+                item.removeAttribute("href");
+            }
+        }
+    },
 };
 </script>
 <style lang="scss">
@@ -183,7 +190,7 @@ export default {
             @apply mx-4 mb-5;
         }
         > li > a {
-            @apply font-semibold text-xl text-white w-full whitespace-nowrap opacity-100;
+            @apply font-semibold text-xl text-white w-full whitespace-nowrap opacity-100 md:cursor-text;
             &:hover {
                 @apply text-white;
             }

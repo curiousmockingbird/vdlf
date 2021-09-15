@@ -18,7 +18,8 @@ function mapping_posts($post)
         "type"        => get_post_type($post->ID),
     ];
     if (get_post_type($post->ID) == "take_actions") {
-        $data["email"] = get_field("email",$post->ID);
+        $data["link"] = get_field("link",$post->ID);
+        $data["label"] = get_field("label",$post->ID);
     }
     return $data;
 }

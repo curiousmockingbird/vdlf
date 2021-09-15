@@ -5,14 +5,14 @@
             <div class="md:h-screen relative">
                 <div class=" content-text relative ">
                     <h1
-                        class="font-black text-3xl md:text-4xl leading-10"
+                        class="font-bold text-3xl md:text-4xl leading-10"
                         style="max-width: 700px;"
                     >
                         {{ content.title }}
                     </h1>
                     <a
                         :href="content.button_link.url"
-                        class="block mt-10 text-xl text-white font-black underline"
+                        class="block mt-10 text-xl text-white font-bold underline"
                         >{{ content.button_text }}</a
                     >
                 </div>
@@ -29,10 +29,10 @@
             </template>
         </SectionContainer>
         <TakeAction
-            :actions-data="actions"
-            :button-label="content.button_email_text"
+            :actions-name="content.take_action_tax"
             :label="content.take_action_label"
             :title="content.take_action_title"
+            :perpage="content.perpage"
         ></TakeAction>
     </div>
 </template>
@@ -42,7 +42,6 @@ export default {
     data() {
         return {
             actions: [],
-            page: 1,
             content: {
                 title: "Email your Representative to Win Citizenship for All",
                 button_text: "Let's Go!",
@@ -51,7 +50,6 @@ export default {
                 },
                 take_action_title: "Take Action",
                 take_action_label: "Action",
-                button_email_text: "Email Now",
                 images: {
                     url: "",
                 },
@@ -59,21 +57,7 @@ export default {
             },
         };
     },
-    methods: {
-        getData() {
-            let formData = {
-                page: this.page,
-                perpage: this.content.perpage,
-                sortby: "latest",
-                language: this.$settings.language,
-            };
-            this.$api.Posts.getAction(formData).then(({ data }) => {
-                this.actions.push(...data.posts);
-            });
-        },
-    },
     created() {
-        this.getData();
         if (this.jsonContent) {
             this.content = JSON.parse(this.jsonContent);
         }
