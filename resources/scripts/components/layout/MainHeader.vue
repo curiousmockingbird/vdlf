@@ -44,7 +44,7 @@
                 <a href="#" :class="bgPrimary ? 'text-white' : 'text-primary'" class="py-8 font-bold px-4">{{ $settings.label.membership }}</a>
                 <a href="/donate" class="text-white bg-gradient-to-r from-primary to-secondary py-8 font-bold pl-6 pr-4">{{ $settings.label.donate }}</a>
                 <button
-                    class="py-8 h-full border-0 hidden bg-secondary lg:block border-0 px-4 hover:outline-none active:outline-none fill-current outline-none"
+                    class="py-8 h-full border-0 bg-secondary border-0 px-4 hover:outline-none active:outline-none fill-current outline-none"
                     :class="bgPrimary ? 'text-white' : 'text-primary'"
                     @click="openSearchBar()"
                 >
