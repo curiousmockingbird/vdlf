@@ -4,15 +4,20 @@
             <img :src="$images + '/hero-circle.png'" class=" bg-circle z-0" />
             <div class="md:h-screen relative">
                 <div class=" content-text relative ">
-                    <h1
-                        class="font-bold text-3xl md:text-4xl leading-10"
-                        style="max-width: 700px;"
-                    >
+                    <h1 class="font-bold text-3xl md:text-4xl leading-10" style="max-width: 700px;">
                         {{ content.title }}
                     </h1>
                     <a
                         :href="content.button_link.url"
-                        class="block mt-10 text-xl text-white font-bold underline"
+                        class="block mt-10 text-2xl text-white font-bold underline"
+                    >
+                        <svg-vue
+                            :icon="`${content.button_icon}-icon`"
+                            height="48px"
+                            width="48px"
+                            class="inline-block mr-5"
+                            style="fill: none; "
+                        ></svg-vue
                         >{{ content.button_text }}</a
                     >
                 </div>

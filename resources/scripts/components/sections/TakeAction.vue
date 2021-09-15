@@ -8,18 +8,17 @@
                     class="slideshow mt-5 mb-8 -mx-2"
                     v-if="ActionsData && ActionsData.length > 0"
                 >
-                <div 
-                    v-for="(item, i) in ActionsData" 
-                    :key="i">
-                    <ActionCard
-                        :title="item.title"
-                        :description="item.excerpt"
-                        :link="item.link"
-                        :label="label"
-                        :buttonLabel="item.label"
-                        :body="item.content"
-                    ></ActionCard>
-                </div>
+                    <div v-for="(item, i) in ActionsData" :key="i">
+                        <ActionCard
+                            :title="item.title"
+                            :description="item.excerpt"
+                            :link="item.link"
+                            :label="label"
+                            :buttonLabel="item.label"
+                            :icon="item.icon"
+                            :body="item.content"
+                        ></ActionCard>
+                    </div>
                 </VueSlickCarousel>
             </div>
         </div>
@@ -35,7 +34,7 @@ export default {
     components: { VueSlickCarousel },
     data() {
         return {
-            ActionsData:[],
+            ActionsData: [],
             sliderSettings: {
                 dots: false,
                 infinite: true,
@@ -46,33 +45,33 @@ export default {
                 autoplaySpeed: 6000,
                 swipeToSlide: true,
                 swipe: true,
-                centerPadding:'20px',
-                "responsive": [
+                centerPadding: "20px",
+                responsive: [
                     {
-                    "breakpoint": 1024,
-                        "settings": {
-                            "slidesToShow": 3,
-                            "slidesToScroll": 3,
-                            "infinite": true,
-                            "dots": true
-                        }
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 3,
+                            infinite: true,
+                            dots: true,
+                        },
                     },
                     {
-                    "breakpoint": 768,
-                        "settings": {
-                            "slidesToShow": 2,
-                            "slidesToScroll": 2,
-                            "initialSlide": 2
-                        }
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 2,
+                            initialSlide: 2,
+                        },
                     },
                     {
-                    "breakpoint": 480,
-                        "settings": {
-                            "slidesToShow": 1,
-                            "slidesToScroll": 1
-                        }
-                    }
-                ]
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+                        },
+                    },
+                ],
             },
         };
     },
@@ -88,8 +87,8 @@ export default {
         },
         perpage: {
             type: String,
-            default:3,
-        }
+            default: 3,
+        },
     },
     methods: {
         getData() {
@@ -98,7 +97,7 @@ export default {
                 sortby: "latest",
                 language: this.$settings.language,
             };
-            if (this.ActionsName && this.ActionsName!="None") {
+            if (this.ActionsName && this.ActionsName != "None") {
                 formData.taxonomy = "action_name";
                 formData.categories = this.ActionsName;
             }
@@ -114,16 +113,15 @@ export default {
 </script>
 
 <style lang="scss">
-    .slick-track
-    {
-        display: flex !important;
-    }
+.slick-track {
+    display: flex !important;
+}
 
-    .slick-slide
-    {
-        height: inherit !important;
-        div,article {
-            @apply h-full;
-        }
+.slick-slide {
+    height: inherit !important;
+    div,
+    article {
+        @apply h-full;
     }
+}
 </style>

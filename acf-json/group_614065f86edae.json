@@ -35,6 +35,33 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
+        },
+        {
+            "key": "field_61423d9aca94c",
+            "label": "Icon",
+            "name": "icon",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "email": "Email",
+                "phone": "Phone",
+                "postcard": "Postcard",
+                "noicon": "No Icon"
+            },
+            "default_value": "noicon",
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": ""
         }
     ],
     "location": [
@@ -54,5 +81,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1631701744
+    "modified": 1631731196
 }

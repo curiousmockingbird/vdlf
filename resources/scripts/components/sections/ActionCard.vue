@@ -6,14 +6,21 @@
             >
                 {{ label }}
             </p>
-            <h4 class="font-bold text-xl mb-5 mt-10">{{title}}</h4>
+            <h4 class="font-bold text-xl mb-5 mt-10">{{ title }}</h4>
 
             <p>
                 {{ description }}
             </p>
         </div>
         <a :href="link" class="card-btn " v-if="buttonLabel">
-            {{ buttonLabel }}
+            <svg-vue
+                :icon="`${this.icon}-icon`"
+                height="48px"
+                width="48px"
+                class="inline-block mr-5"
+                style="fill: none; "
+            ></svg-vue
+            >{{ buttonLabel }}
         </a>
     </article>
 </template>
@@ -34,13 +41,14 @@ export default {
         body: String,
         label: String,
         buttonLabel: {
-            type:String,
-            default:"Read More"
+            type: String,
+            default: "Read More",
         },
-        link:{
-            type:String,
-            default:"#",
-        }
+        link: {
+            type: String,
+            default: "#",
+        },
+        icon: String,
     },
 };
 </script>

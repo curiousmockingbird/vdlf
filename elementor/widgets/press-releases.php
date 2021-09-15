@@ -176,6 +176,7 @@ class PressReleases extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
+        
         $props = [
             "title"             => $settings["title"] ?? "Press Releases and Updates",
             "button_text"       => $settings["button_text"] ?? "View all Press Releases",

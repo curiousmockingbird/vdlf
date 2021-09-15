@@ -144,6 +144,25 @@ class HeroWidget extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'button_icon',
+            [
+				'label' => __( 'Icon', 'plugin-domain' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => 'none',
+				'options' => [
+					'phone'  => __( 'Phone', 'plugin-domain' ),
+					'email' => __( 'Email', 'plugin-domain' ),
+					'postcard' => __( 'Postcard', 'plugin-domain' ),
+					'none' => __( 'None', 'plugin-domain' ),
+				],
+			]
+        );
+
+        
+
+
+
 		$this->end_controls_section();
 
         $this->start_controls_section(
@@ -226,6 +245,7 @@ class HeroWidget extends Widget_Base
             "take_action_title" => $settings["take_action_title"] ?? "Take Action",
             "take_action_label" => $settings["take_action_label"] ?? "Action",
             "take_action_tax"   => $settings["take_action_tax"] ?? "Action",
+            "button_icon"   => $settings["button_icon"] ?? "",
 		];
         
         $jsonContent = htmlspecialchars(json_encode($props), ENT_QUOTES, 'UTF-8');

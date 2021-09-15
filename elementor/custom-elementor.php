@@ -17,9 +17,9 @@ class Widget_Loader
     private function include_widgets_files()
     {
         require_once __DIR__ . '/widgets/hero-widget.php';
-        require_once __DIR__ . '/widgets/panel-box.php';
         require_once __DIR__ . '/widgets/press-releases.php';
         require_once __DIR__ . '/widgets/take-action.php';
+        require_once __DIR__ . '/widgets/panel-box.php';
     }
 
     public function register_widgets()
