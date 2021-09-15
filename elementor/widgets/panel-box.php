@@ -20,12 +20,12 @@ class PanelBox extends Widget_Base
 
     public function get_name()
     {
-        return 'Panel Box Color';
+        return 'Panel Box';
     }
 
     public function get_title()
     {
-        return 'Panel Box Color';
+        return 'Panel Box';
     }
 
     public function get_icon()
@@ -42,7 +42,7 @@ class PanelBox extends Widget_Base
     {
 
         $this->start_controls_section(
-            'setting_section',
+            'panel_settings',
             [
                 'label' => __('Settings', 'sage'),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
@@ -100,7 +100,7 @@ class PanelBox extends Widget_Base
         $this->end_controls_section();
 
         $this->start_controls_section(
-            'content_section',
+            'panel_body',
             [
                 'label' => __('Content', 'sage'),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
@@ -156,7 +156,7 @@ class PanelBox extends Widget_Base
         );
 
         $this->add_control(
-            'list',
+            'panel_list',
             [
                 'label' => __('Panel Box', 'sage'),
                 'type' => \Elementor\Controls_Manager::REPEATER,
@@ -181,7 +181,7 @@ class PanelBox extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-        $jsonContent = htmlspecialchars(json_encode($settings['list']), ENT_QUOTES, 'UTF-8');
+        $jsonContent = htmlspecialchars(json_encode($settings['panel_list']), ENT_QUOTES, 'UTF-8');
         $options = [
             "column"      => $settings["column"] ?? "3",
             "md_column"   => $settings["md_column"] ?? "3",
@@ -192,7 +192,7 @@ class PanelBox extends Widget_Base
 
         $jsonOptions = htmlspecialchars(json_encode($options), ENT_QUOTES, 'UTF-8');
 
-        if ($settings['list']) {
+        if ($settings['panel_list']) {
             if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
             ?>
             <div class="elementor-section-preview">
