@@ -31,7 +31,7 @@
                     <p class="opacity-80 text-base font-display mb-4">
                         1027 S. 5th Street,
                         <br />Milwaukee, WI 53204 <br />Tel. 414-643-1620 <br />Fax. 414-643-1621
-                        <br />Email: vdlf@vdlf.org
+                        <br />Email: <a href="mailto:vdlf@vdlf.org">vdlf@vdlf.org</a>
                     </p>
 
                     <h3 class="text-title mt-6 pb-3">
