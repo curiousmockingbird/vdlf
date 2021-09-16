@@ -6,7 +6,7 @@
             >
                 {{ label }}
             </p> -->
-            <h4 class="font-bold text-xl mb-5 mt-10">{{ title }}</h4>
+            <h4 class="font-bold text-xl my-5">{{ title }}</h4>
 
             <p>
                 {{ description }}
