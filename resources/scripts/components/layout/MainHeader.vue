@@ -267,7 +267,7 @@ nav {
                 display: flex;
                 margin: 0;
                 a {
-                    @apply text-black text-base 2xl:text-lg font-semibold py-4 pl-4 pr-14 w-full border-b border-primary border-opacity-10;
+                    @apply text-black text-lg 2xl:text-xl font-semibold py-4 pl-4 pr-14 w-full border-b border-primary border-opacity-10;
                 }
                 a:hover {
                     background: rgba(0, 0, 0, 0.034);
