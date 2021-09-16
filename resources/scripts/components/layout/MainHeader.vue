@@ -1,17 +1,29 @@
 <template>
-    <header class="header bg-white fixed z-50 w-full  transition-all ease-in-out duration-150  left-0"
+    <header
+        class="header bg-white fixed z-50 w-full  transition-all ease-in-out duration-150  left-0"
     >
-        <div class="flex flex-row pl-2 lg:pl-3 xl:pl-5 justify-between" :class="{ 'bg-white': !bgPrimary, 'bg-primary':bgPrimary }">
-            <div class="flex flex-wrap justify-center self-center items-center">
+        <div
+            class="flex flex-row pl-2 lg:pl-3 xl:pl-5 justify-between"
+            :class="{ 'bg-white': !bgPrimary, 'bg-primary': bgPrimary }"
+        >
+            <div class="flex  justify-center self-center items-center">
                 <a :href="$settings.app_url" class="logo self-center font-display font-hairline">
-                    <img :src="$images+'/logo.png'" class="icon max-w-full h-auto"
-                    alt="VDLF"
-                    width="192px"
-                    height="81px" />
+                    <img
+                        :src="$images + '/logo.png'"
+                        class="icon max-w-full h-auto"
+                        alt="VDLF"
+                        width="192px"
+                        height="81px"
+                        style="min-width: 143px;"
+                    />
                 </a>
                 <div class="language-switcher mx-5">
-                    <div class="relative text-base form-select w-20">
-                        <select class="w-full cursor-pointer" v-model="language" @change="changeLanguage($event)">
+                    <div class="relative text-tiny xl:text-base form-select w-20">
+                        <select
+                            class="w-full cursor-pointer"
+                            v-model="language"
+                            @change="changeLanguage($event)"
+                        >
                             <option value="en">ENG</option>
                             <option value="es">ESP</option>
                         </select>
@@ -19,13 +31,13 @@
                 </div>
             </div>
             <nav
-                class="desktop-nav relative hidden justify-self-center place-self-center hidden xl:flex w-auto justify-center"
+                class="desktop-nav relative hidden justify-self-center place-self-center  lg:flex w-auto justify-center"
                 ref="nav"
             >
                 <slot />
             </nav>
             <button
-                class="block ml-auto mr-5 sm:mr-auto sm:mx-auto xl:hidden text-primary border-0 focus:outline-none"
+                class="block ml-auto mr-5 sm:mr-auto sm:mx-auto lg:hidden text-primary border-0 focus:outline-none"
                 @click="toggleMenu"
             >
                 <ViewGridIcon
@@ -35,9 +47,20 @@
                 />
                 <XIcon v-else class="block h-8 w-8 self-center text-primary" aria-hidden="true" />
             </button>
-            <div class="hidden sm:flex membership-menu text-lg ml-auto lg:ml-0 relative -right-1">
-                <a href="#" :class="bgPrimary ? 'text-white' : 'text-primary'" class="py-8 font-bold px-4">{{ $settings.label.membership }}</a>
-                <a href="/donate" class="text-white bg-gradient-to-r from-primary to-secondary py-8 font-bold pl-6 pr-4">{{ $settings.label.donate }}</a>
+            <div
+                class="hidden sm:flex membership-menu text-sm xl:text-lg ml-auto lg:ml-0 flex items-center -right-1"
+            >
+                <a
+                    href="#"
+                    :class="bgPrimary ? 'text-white' : 'text-primary'"
+                    class="py-8 font-bold px-4 text-base xl:text-lg "
+                    >{{ $settings.label.membership }}</a
+                >
+                <a
+                    href="/donate"
+                    class="text-white bg-gradient-to-r from-primary text-base xl:text-lg  to-secondary py-8 font-bold pl-6 pr-4"
+                    >{{ $settings.label.donate }}</a
+                >
                 <button
                     class="py-8 h-full border-0 bg-secondary border-0 px-4 hover:outline-none active:outline-none fill-current outline-none"
                     :class="bgPrimary ? 'text-white' : 'text-primary'"
@@ -57,11 +80,17 @@
             >
                 <div class="container">
                     <div class="flex flex-row lg:flex-col justify-between">
-                        <a :href="$settings.app_url" class="logo self-center font-display font-hairline">
-                            <img :src="$images+'/logo-footer.png'" class="icon max-w-full h-auto"
-                            alt="VDLF"
-                            width="137px"
-                            height="57px" />
+                        <a
+                            :href="$settings.app_url"
+                            class="logo self-center font-display font-hairline"
+                        >
+                            <img
+                                :src="$images + '/logo-footer.png'"
+                                class="icon max-w-full h-auto"
+                                alt="VDLF"
+                                width="137px"
+                                height="57px"
+                            />
                         </a>
                         <button
                             class="text-white border-0 block sm:hidden focus:outline-none"
@@ -94,7 +123,7 @@ export default {
             bgPrimary: true,
             navOpen: false,
             activeClass: "active",
-            language:null,
+            language: null,
         };
     },
     components: {
@@ -104,11 +133,11 @@ export default {
     methods: {
         changeLanguage(event) {
             const langWrapper = document.getElementById("language-switcher");
-            let esLink =  langWrapper.querySelector("[lang='es-ES']").getAttribute("href");
+            let esLink = langWrapper.querySelector("[lang='es-ES']").getAttribute("href");
             let enLink = langWrapper.querySelector("[lang='en-US']").getAttribute("href");
             if (event.target.value == "en") {
                 window.location.replace(enLink);
-            }else{
+            } else {
                 window.location.replace(esLink);
             }
         },
@@ -119,7 +148,7 @@ export default {
             } else {
                 document.body.style.overflow = "unset";
             }
-        }
+        },
     },
     created() {
         if (this.bgWhite) {
@@ -144,19 +173,19 @@ export default {
 <style lang="scss" scoped>
 @screen md {
     header.header {
-        background: linear-gradient(90deg, #FFFFFF 0%, #FFFFFF 50%, #C22D28 50%, #C22D28 100%);
+        background: linear-gradient(90deg, #ffffff 0%, #ffffff 50%, #c22d28 50%, #c22d28 100%);
     }
 }
 .language-switcher {
     .form-select {
         @apply p-0 rounded-md relative border-2 text-base text-white border-white;
         &:before {
-            content:"";
+            content: "";
             background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkiIGhlaWdodD0iMTEiIHZpZXdCb3g9IjAgMCAxOSAxMSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEgMS40MjUyOUw5LjQ4NTI4IDkuOTEwNTdMMTcuOTcwNiAxLjQyNTI5IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K");
             @apply absolute block right-2 inset-y-1/2 origin-center bg-no-repeat bg-contain;
             width: 14px;
             height: 7px;
-            transform:translateY(-50%);
+            transform: translateY(-50%);
         }
         select {
             appearance: none;
@@ -171,7 +200,7 @@ export default {
         .form-select {
             @apply text-black border-black;
             &:before {
-                filter:brightness(0);
+                filter: brightness(0);
             }
         }
     }
@@ -184,7 +213,7 @@ export default {
             }
         }
         li {
-            &:hover>a,
+            &:hover > a,
             &.current_page_item a {
                 @apply text-themeRed;
             }
@@ -210,7 +239,7 @@ nav {
     li {
         @apply relative;
         //max-width: 175px;
-        &:hover>a,
+        &:hover > a,
         &.current_page_item a {
             @apply text-white;
         }
@@ -227,7 +256,7 @@ nav {
         // }
     }
     a {
-        @apply relative z-50 font-body text-lg 2xl:text-xl text-black font-semibold transition-colors leading-tight py-8 lg:whitespace-nowrap;
+        @apply relative z-50 font-body text-lg lg:text-base xl:text-xl text-black font-semibold transition-colors leading-tight py-8 lg:whitespace-nowrap;
 
         &:active,
         &:hover {
@@ -241,7 +270,7 @@ nav {
     }
     ul > li {
         a {
-            @apply px-1 xl:px-2 2xl:px-4;
+            @apply px-1 lg:px-1 xl:px-2 2xl:px-4;
         }
         ul.sub-menu {
             background: rgba(255, 255, 255, 0.959);

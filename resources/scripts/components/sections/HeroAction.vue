@@ -10,7 +10,8 @@
                     :href="link"
                     class="block mt-6 text-2xl md:text-3xl text-white font-bold underline"
                 >
-                    <svg-vue v-if="button_icon && button_icon != 'null' && button_icon != 'none'"
+                    <svg-vue
+                        v-if="button_icon && button_icon != 'null' && button_icon != 'none'"
                         :icon="`${button_icon}-icon`"
                         height="48px"
                         width="48px"
@@ -36,31 +37,31 @@
 
 <script>
 export default {
-    props:{
-        background:{
-            default:"transparent"
+    props: {
+        background: {
+            default: "transparent",
         },
-        title:{
-            type:String,
-            default:"Email your Representative to Win Citizenship for All"
+        title: {
+            type: String,
+            default: "Email your Representative to Win Citizenship for All",
         },
-        link:{
-            type:String,
-            default:"#"
+        link: {
+            type: String,
+            default: "#",
         },
-        button_icon:{
-            type:String,
-            default:"email"
+        button_icon: {
+            type: String,
+            default: "email",
         },
-        button_text:{
-            type:String,
-            default:"Join Now"
+        button_text: {
+            type: String,
+            default: "Join Now",
         },
-        images:{
-            type:String,
-        }
-    }
-}
+        images: {
+            type: String,
+        },
+    },
+};
 </script>
 <style lang="scss" scoped>
 .background-gradient {
