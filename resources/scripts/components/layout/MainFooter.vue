@@ -1,5 +1,5 @@
 <template>
-    <footer class="main-footer bg-themeBlack relative">
+    <footer class="main-footer bg-themeBlack relative overflow-hidden">
         <img
             class="absolute p-10 w-full h-full left-0 top-0 z-10 object-contain object-center"
             :src="$images + '/bg-footer.png'"
@@ -165,7 +165,7 @@ export default {
     },
     mounted() {
         for (let item of document.querySelectorAll(".content-menus>div>ul>li>a")) {
-            if(item.getAttribute("href") == "#") {
+            if (item.getAttribute("href") == "#") {
                 item.removeAttribute("href");
             }
         }

@@ -1,5 +1,8 @@
 <template>
-    <SectionContainer containerClasses="md:min-h-screen flex flex-col justify-center py-20 lg:py-0" :style="`background-color:${background}`">
+    <SectionContainer
+        containerClasses="md:min-h-screen flex flex-col justify-center py-20 lg:py-0"
+        :style="`background-color:${background}`"
+    >
         <h3 class="text-xl md:text-4xl tracking-widest font-bold text-white mb-5">{{ title }}</h3>
         <div class="content-fellows w-full overflow-hidden">
             <div id="fellow-slides" class="relative">
@@ -15,7 +18,7 @@
                             :link="item.link"
                             :label="label"
                             :buttonLabel="item.label"
-                            :icon="item.icon?item.icon:null"
+                            :icon="item.icon ? item.icon : null"
                             :body="item.content"
                         ></ActionCard>
                     </div>
@@ -76,18 +79,18 @@ export default {
         };
     },
     props: {
-        background:{
-            default:"transparent"
+        background: {
+            default: "transparent",
         },
         ActionsName: String,
         title: {
             type: String,
             default: "Take Action",
         },
-        // label: {
-        //     type: String,
-        //     default: "Action",
-        // },
+        label: {
+            type: String,
+            default: "Action",
+        },
         perpage: {
             type: String,
             default: 3,

@@ -100,8 +100,16 @@ class HeroWidget extends Widget_Base
         );
 
 
-        $this->add_control(
-			'images',
+       
+
+      
+    
+     
+
+        $repeater = new \Elementor\Repeater();
+
+        $repeater->add_control(
+			'image',
 			[
 				'label' => __( 'Choose Image', 'sage' ),
 				'type' => \Elementor\Controls_Manager::MEDIA,
@@ -111,7 +119,7 @@ class HeroWidget extends Widget_Base
 			]
 		);
 
-        $this->add_control(
+        $repeater->add_control(
             'title', [
                 'label' => __('Title', 'sage'),
                 'type' => \Elementor\Controls_Manager::TEXT,
@@ -120,32 +128,27 @@ class HeroWidget extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'button_text', [
+        $repeater->add_control(
+            'btn_text', [
                 'label' => __('Button Text', 'sage'),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __('Let\'s Go!', 'sage'),
+                'default' => __('Email now', 'sage'),
                 'label_block' => true,
             ]
         );
 
-        $this->add_control(
-            'button_link',
+        $repeater->add_control(
+            'btn_link',
             [
-                'label' => __('Link to bio', 'sage'),
-                'type' => \Elementor\Controls_Manager::URL,
-                'placeholder' => __('https://your-link.com', 'sage'),
-                'show_external' => true,
-                'default' => [
-                    'url' => '',
-                    'is_external' => true,
-                    'nofollow' => true,
-                ],
+                'label' => __('Button Link', 'sage'),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => '#',
+                'label_block' => true,
             ]
         );
 
-        $this->add_control(
-            'button_icon',
+        $repeater->add_control(
+            'btn_icon',
             [
 				'label' => __( 'Icon', 'plugin-domain' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
@@ -159,11 +162,31 @@ class HeroWidget extends Widget_Base
 			]
         );
 
-        
+
+     
 
 
+        $this->add_control(
+            'slideshow_items',
+            [
+                'label' => __('Slides', 'sage'),
+                'type' => \Elementor\Controls_Manager::REPEATER,
+                'fields' => $repeater->get_controls(),
+                'default' => [
+                    [
+                        'title'      => __('Email your Representative to Win Citizenship for All', 'sage'),
+                        'btn_text'       => __('Emial now', 'sage'),
+                        'btn_link'    => __('#', 'sage'),
+                        'image'    => __('#', 'sage'),
+                        'btn_icon'    => __('noicon', 'sage'),
+                    ],
+                ],
+            ]
+        );
 
-		$this->end_controls_section();
+        $this->end_controls_section();
+
+
 
         $this->start_controls_section(
             'action_section',
@@ -236,16 +259,15 @@ class HeroWidget extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
+        
+        
         $props = [
-            "title"             => $settings["title"] ?? "Email your Representative to Win Citizenship for All",
-            "button_text"       => $settings["button_text"] ?? "Let's Go!",
-            "button_link"       => $settings["button_link"] ?? "#",
             "perpage"           => $settings["perpage"] ?? 3,
             "images"            => $settings["images"] ?? null,
             "take_action_title" => $settings["take_action_title"] ?? "Take Action",
             #"take_action_label" => $settings["take_action_label"] ?? "Action",
             "take_action_tax"   => $settings["take_action_tax"] ?? "Action",
-            "button_icon"       => $settings["button_icon"] ?? "",
+            "slideshow" => $settings['slideshow_items']
 		];
         
         $jsonContent = htmlspecialchars(json_encode($props), ENT_QUOTES, 'UTF-8');
