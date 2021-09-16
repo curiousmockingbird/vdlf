@@ -1,5 +1,5 @@
 <template>
-    <ul class="flex -mx-3">
+    <ul class="flex -mx-3 social-media">
         <li v-if="$settings.fb_url != ''" class="mx-2">
             <a :href="$settings.fb_url" target="_blank">
                 <svg-vue
@@ -60,9 +60,11 @@
 </template>
 
 <style lang="scss">
-a:hover {
-    svg path {
-        fill: #f0a341;
+.social-media {
+    a:hover {
+        svg path {
+            fill: #f0a341;
+        }
     }
 }
 </style>

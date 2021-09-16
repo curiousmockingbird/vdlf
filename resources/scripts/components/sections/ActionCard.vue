@@ -1,11 +1,11 @@
 <template>
     <article class="card mx-2">
         <div class="card-body py-6 px-7 ">
-            <p
-                class="inline-block tracking-widest rounded-md uppercase border border-black font-bold text-xs py-1 px-3 "
+            <!-- <p
+                class="inline-block tracking-widest rounded-md uppercase border border-black font-bold text-xs mt-3 py-1 px-3 "
             >
                 {{ label }}
-            </p>
+            </p> -->
             <h4 class="font-bold text-xl mb-5 mt-10">{{ title }}</h4>
 
             <p>
@@ -14,7 +14,8 @@
         </div>
         <a :href="link" class="card-btn " v-if="buttonLabel">
             <svg-vue
-                :icon="`${this.icon}-icon`"
+                v-if="icon && icon !='null'"
+                :icon="`${icon}-icon`"
                 height="48px"
                 width="48px"
                 class="inline-block mr-5"
@@ -30,7 +31,7 @@
 }
 
 .card-btn {
-    @apply mt-auto py-8 px-7 text-black hover:text-white hover:bg-green-700 rounded-lg text-xl underline font-bold transition-all;
+    @apply mt-auto py-8 px-7 w-full block text-black hover:text-white hover:bg-green-700 rounded-b-lg text-xl underline font-bold transition-all;
 }
 </style>
 <script>
@@ -48,7 +49,10 @@ export default {
             type: String,
             default: "#",
         },
-        icon: String,
+        icon: {
+            type: String,
+            default:"email"
+        }
     },
 };
 </script>

@@ -2,13 +2,13 @@
     <header class="header bg-white fixed z-50 w-full  transition-all ease-in-out duration-150  left-0"
     >
         <div class="flex flex-row pl-2 lg:pl-3 xl:pl-5 justify-between" :class="{ 'bg-white': !bgPrimary, 'bg-primary':bgPrimary }">
-            <a :href="$settings.app_url" class="logo self-center font-display font-hairline">
-                <img :src="$images+'/logo.png'" class="icon max-w-full h-auto"
-                alt="VDLF"
-                width="192px"
-                height="81px" />
-            </a>
-            <div class="flex justify-center self-center items-center">
+            <div class="flex flex-wrap justify-center self-center items-center">
+                <a :href="$settings.app_url" class="logo self-center font-display font-hairline">
+                    <img :src="$images+'/logo.png'" class="icon max-w-full h-auto"
+                    alt="VDLF"
+                    width="192px"
+                    height="81px" />
+                </a>
                 <div class="language-switcher mx-5">
                     <div class="relative text-base form-select w-20">
                         <select class="w-full cursor-pointer" v-model="language" @change="changeLanguage($event)">
@@ -17,18 +17,13 @@
                         </select>
                     </div>
                 </div>
-                <nav
-                    class="desktop-nav hidden justify-self-center place-self-center hidden xl:block w-full "
-                    ref="nav"
-                >
-                    <slot />
-                    <span
-                        ref="underlineThingy"
-                        class="h-1 absolute bottom-7"
-                        :class="bgPrimary ? 'bg-white' : 'bg-themeRed'"
-                    ></span>
-                </nav>
             </div>
+            <nav
+                class="desktop-nav relative hidden justify-self-center place-self-center hidden xl:flex w-auto justify-center"
+                ref="nav"
+            >
+                <slot />
+            </nav>
             <button
                 class="block ml-auto mr-5 sm:mr-auto sm:mx-auto xl:hidden text-primary border-0 focus:outline-none"
                 @click="toggleMenu"
@@ -124,67 +119,7 @@ export default {
             } else {
                 document.body.style.overflow = "unset";
             }
-        },
-        underlineAnimation() {
-            const links = this.$refs.nav.querySelectorAll("ul:not(.sub-menu)>li");
-            const self = this;
-            let initialUnderlinePosition = 0;
-            let initialUnderlineWidth = 0;
-
-            for (const link of links) {
-                link.addEventListener("mouseenter", onMouseEnter);
-                link.addEventListener("mouseleave", onMouseLeave);
-
-                if (link.parentNode.classList.contains("current_page_item")) {
-                    let position = link.getBoundingClientRect();
-                    initialUnderlinePosition =
-                        position.x - this.$refs.underlineThingy.offsetLeft + 15;
-
-                    initialUnderlineWidth = link.offsetWidth-40 + "px";
-
-                    const animation = gsap.timeline({});
-
-                    let params = {
-                        x: initialUnderlinePosition,
-                        width: initialUnderlineWidth,
-                        duration: 0.7,
-                        ease: "power4.inOut",
-                    };
-
-                    animation.set(self.$refs.underlineThingy, {
-                        x: initialUnderlinePosition,
-                        width: initialUnderlineWidth,
-                    });
-                    animation.to(self.$refs.underlineThingy, params, 0.3);
-                }
-            }
-
-            function onMouseEnter(e) {
-                const animation = gsap.timeline({});
-                let position = e.target.getBoundingClientRect();
-                let params = {
-                    x: position.x - self.$refs.underlineThingy.offsetLeft + 15,
-                    //y: e.target.offsetTop - self.$refs.underlineThingy.offsetTop,
-                    width: e.target.offsetWidth-40,
-                    duration: 0.7,
-                    ease: "power4.inOut",
-                };
-                animation.to(self.$refs.underlineThingy, params, 0);
-            }
-
-            function onMouseLeave(e) {
-                const animation = gsap.timeline({});
-
-                let params = {
-                    x: initialUnderlinePosition,
-                    width: initialUnderlineWidth,
-                    duration: 0.7,
-                    ease: "power4.inOut",
-                };
-
-                animation.to(self.$refs.underlineThingy, params, 0);
-            }
-        },
+        }
     },
     created() {
         if (this.bgWhite) {
@@ -203,7 +138,6 @@ export default {
                 }
             });
         });
-        setTimeout(this.underlineAnimation, 200);
     },
 };
 </script>
@@ -293,7 +227,7 @@ nav {
         // }
     }
     a {
-        @apply relative z-50 font-body text-lg text-black font-semibold transition-colors leading-tight py-8 lg:whitespace-nowrap;
+        @apply relative z-50 font-body text-lg 2xl:text-xl text-black font-semibold transition-colors leading-tight py-8 lg:whitespace-nowrap;
 
         &:active,
         &:hover {
@@ -307,7 +241,7 @@ nav {
     }
     ul > li {
         a {
-            @apply px-1 xl:px-2;
+            @apply px-1 xl:px-2 2xl:px-4;
         }
         ul.sub-menu {
             background: rgba(255, 255, 255, 0.959);
@@ -333,7 +267,7 @@ nav {
                 display: flex;
                 margin: 0;
                 a {
-                    @apply text-black text-base font-semibold py-4 pl-4 pr-14 w-full border-b border-primary border-opacity-10;
+                    @apply text-black text-base 2xl:text-lg font-semibold py-4 pl-4 pr-14 w-full border-b border-primary border-opacity-10;
                 }
                 a:hover {
                     background: rgba(0, 0, 0, 0.034);

@@ -5,7 +5,7 @@
         </template>
         <h4 class="font-bold text-xl md:text-4xl text-black tracking-wider">{{ options.title }}</h4>
 
-        <div class="grid gap-4 mt-14"
+        <div class="grid gap-4 mt-10"
             :class="
             'grid-cols-' +
             options.column +

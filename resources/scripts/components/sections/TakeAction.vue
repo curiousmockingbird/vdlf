@@ -1,5 +1,5 @@
 <template>
-    <SectionContainer containerClasses="md:min-h-screen flex flex-col justify-center py-20 lg:py-0">
+    <SectionContainer containerClasses="md:min-h-screen flex flex-col justify-center py-20 lg:py-0" :style="`background-color:${background}`">
         <h3 class="text-xl md:text-4xl tracking-widest font-bold text-white mb-5">{{ title }}</h3>
         <div class="content-fellows w-full overflow-hidden">
             <div id="fellow-slides" class="relative">
@@ -15,7 +15,7 @@
                             :link="item.link"
                             :label="label"
                             :buttonLabel="item.label"
-                            :icon="item.icon"
+                            :icon="item.icon?item.icon:null"
                             :body="item.content"
                         ></ActionCard>
                     </div>
@@ -76,15 +76,18 @@ export default {
         };
     },
     props: {
+        background:{
+            default:"transparent"
+        },
         ActionsName: String,
         title: {
             type: String,
             default: "Take Action",
         },
-        label: {
-            type: String,
-            default: "Action",
-        },
+        // label: {
+        //     type: String,
+        //     default: "Action",
+        // },
         perpage: {
             type: String,
             default: 3,
@@ -97,7 +100,7 @@ export default {
                 sortby: "latest",
                 language: this.$settings.language,
             };
-            if (this.ActionsName && this.ActionsName != "None") {
+            if (this.ActionsName && this.ActionsName != "none") {
                 formData.taxonomy = "action_name";
                 formData.categories = this.ActionsName;
             }

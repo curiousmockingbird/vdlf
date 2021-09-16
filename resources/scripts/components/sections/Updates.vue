@@ -24,7 +24,7 @@
         </div>
         <a
             :href="content.button_link.url"
-            class="text-white font-display font-bold underline text-3xl block my-10"
+            class="text-white font-display font-bold underline text-xl md:text-2xl block my-10"
             >{{ content.button_text }}</a
         >
     </SectionContainer>

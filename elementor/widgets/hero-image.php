@@ -3,6 +3,7 @@ namespace WPC\Widgets;
 
 use Elementor\Controls_Manager;
 use Elementor\Widget_Base;
+
 /**
  * Elementor oEmbed Widget.
  *
@@ -15,7 +16,7 @@ if (!defined('ABSPATH')) {
 }
 // Exit if accessed directly
 
-class PressReleases extends Widget_Base
+class HeroImage extends Widget_Base
 {
 
     /**
@@ -30,12 +31,12 @@ class PressReleases extends Widget_Base
      */
     public function get_name()
     {
-        return 'Press Releases';
+        return 'Hero Image';
     }
 
     public function get_title()
     {
-        return 'Press Releases';
+        return 'Hero Image';
     }
 
     /**
@@ -48,8 +49,9 @@ class PressReleases extends Widget_Base
      *
      * @return string Widget icon.
      */
-    public function get_icon(){
-        return 'eicon-post-list';
+    public function get_icon()
+    {
+        return 'eicon-image';
     }
 
     /**
@@ -75,43 +77,65 @@ class PressReleases extends Widget_Base
      * @since 1.0.0
      * @access protected
      */
+    private function ActionName()
+    {
+        $args = [
+            'hide_empty' => true,
+            'orderby' => 'count',
+        ];
+        $categories = get_terms('action_name', $args);
+        $options = array('none' => __('None', 'sage'));
+        foreach ($categories as $cat) {
+            $options[$cat->slug] = $cat->name;
+        }
+        return $options;
+    }
+
     protected function register_controls()
     {
 
         $this->start_controls_section(
-            'setting_section',
+            'content_section',
             [
-                'label' => __('Section Settings', 'sage'),
+                'label' => __('Hero Content', 'sage'),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
 
+        $this->add_control(
+            'background',
+            [
+                'label' => __('Background Color', 'sage'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#F0A341',
+            ]
+        );
 
         $this->add_control(
-			'images',
-			[
-				'label' => __( 'Background', 'sage' ),
-				'type' => \Elementor\Controls_Manager::MEDIA,
-				'default' => [
-					'url' => \Elementor\Utils::get_placeholder_image_src(),
-				]
-			]
-		);
+            'images',
+            [
+                'label' => __('Choose Image', 'sage'),
+                'type' => \Elementor\Controls_Manager::MEDIA,
+                'default' => [
+                    'url' => \Elementor\Utils::get_placeholder_image_src(),
+                ],
+            ]
+        );
 
         $this->add_control(
             'title', [
                 'label' => __('Title', 'sage'),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __('Press Releases and Updates', 'sage'),
+                'default' => __('Email your Representative to Win Citizenship for All', 'sage'),
                 'label_block' => true,
             ]
         );
 
         $this->add_control(
             'button_text', [
-                'label' => __('Label All Press Releases', 'sage'),
+                'label' => __('Button Text', 'sage'),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __('View all Press Releases', 'sage'),
+                'default' => __('Let\'s Go!', 'sage'),
                 'label_block' => true,
             ]
         );
@@ -119,7 +143,7 @@ class PressReleases extends Widget_Base
         $this->add_control(
             'button_link',
             [
-                'label' => __('Link All Press Releases', 'sage'),
+                'label' => __('Link to bio', 'sage'),
                 'type' => \Elementor\Controls_Manager::URL,
                 'placeholder' => __('https://your-link.com', 'sage'),
                 'show_external' => true,
@@ -132,31 +156,17 @@ class PressReleases extends Widget_Base
         );
 
         $this->add_control(
-            'perpage',
+            'button_icon',
             [
-                'label' => __('Show Perpage', 'sage'),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'placeholder' => __('Item to shows', 'sage'),
-                'default' => '3',
-            ]
-        );
-
-        $this->add_control(
-			'important_note',
-			[
-				'label' => __( 'Press Releases', 'sage' ),
-				'type' => \Elementor\Controls_Manager::RAW_HTML,
-				'raw' => __( '<br><a  href="/wp-admin/edit.php?category_name=press-release" target="_blank" class="elementor-button elementor-button-default  elementor-go-pro elementor-control-type-tab">Add, edit or remove content in this section</a>', 'sage' ),
-				'content_classes' => 'your-class',
-			]
-		);
-
-        $this->add_control(
-            'button_more_text', [
-                'label' => __('Button More Text', 'sage'),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __('Continue Reading', 'sage'),
-                'label_block' => true,
+                'label' => __('Icon', 'plugin-domain'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'none',
+                'options' => [
+                    'phone' => __('Phone', 'sage'),
+                    'email' => __('Email', 'sage'),
+                    'postcard' => __('Postcard', 'sage'),
+                    'none' => __('None', 'sage'),
+                ],
             ]
         );
 
@@ -176,21 +186,15 @@ class PressReleases extends Widget_Base
     protected function render()
     {
         $settings = $this->get_settings_for_display();
-        
-        $props = [
-            "title"             => $settings["title"] ?? "Press Releases and Updates",
-            "button_text"       => $settings["button_text"] ?? "View all Press Releases",
-            "button_link"       => $settings["button_link"] ?? "#",
-            "perpage"           => $settings["perpage"] ?? 3,
-            "images"            => $settings["images"] ?? null,
-            "button_more_text"  => $settings["button_more_text"] ?? "Continue Reading",
-		];
-        
-        $jsonContent = htmlspecialchars(json_encode($props), ENT_QUOTES, 'UTF-8');
+        $title = $settings["title"] ?? "Email your Representative to Win Citizenship for All";
+        $button_text = $settings["button_text"] ?? "Let's Go!";
+        $button_icon = $settings["button_icon"] && $settings["button_icon"] !="none" ? $settings["button_icon"] : "email";
+        $button_link = $settings["button_link"] ? $settings["button_link"]["url"] : "#";
+        $images = $settings["images"] ? $settings["images"]["url"] : null;
+        $background = $settings["background"] ?? "transparent";
 
-        
         if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
-        ?>
+            ?>
 
 		<div class="elementor-section-preview">
 
@@ -200,9 +204,16 @@ class PressReleases extends Widget_Base
 				<p class="mt-2">To view this section click on 'Preview Changes'</p>
 
 		</div>
-        <?php } ?>		
-		<updates json-content='<?php echo $jsonContent; ?>'></updates>
-	<?php  
-    }
+        <?php }?>
+		<hero-action 
+            background="<?php echo $background;?>"
+            title="<?php echo $title; ?>"
+            link="<?php echo $button_link; ?>"
+            button_icon="<?php echo $button_icon; ?>"
+            button_text="<?php echo $button_text; ?>"
+            images="<?php echo $images; ?>">
+        </hero-action>
+	<?php
+}
 
 }

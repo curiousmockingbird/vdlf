@@ -206,19 +206,19 @@ class HeroWidget extends Widget_Base
             'take_action_tax', [
                 'label' => __( 'Action Name', 'sage' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
-				'default' => 'solid',
+				'default' => 'none',
 				'options' => $this->ActionName()
             ]
         );
 
-        $this->add_control(
-            'take_action_label', [
-                'label' => __('Label', 'sage'),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __('Action', 'sage'),
-                'label_block' => true,
-            ]
-        );
+        // $this->add_control(
+        //     'take_action_label', [
+        //         'label' => __('Label', 'sage'),
+        //         'type' => \Elementor\Controls_Manager::TEXT,
+        //         'default' => __('Action', 'sage'),
+        //         'label_block' => true,
+        //     ]
+        // );
 
         $this->end_controls_section();
 
@@ -243,9 +243,9 @@ class HeroWidget extends Widget_Base
             "perpage"           => $settings["perpage"] ?? 3,
             "images"            => $settings["images"] ?? null,
             "take_action_title" => $settings["take_action_title"] ?? "Take Action",
-            "take_action_label" => $settings["take_action_label"] ?? "Action",
+            #"take_action_label" => $settings["take_action_label"] ?? "Action",
             "take_action_tax"   => $settings["take_action_tax"] ?? "Action",
-            "button_icon"   => $settings["button_icon"] ?? "",
+            "button_icon"       => $settings["button_icon"] ?? "",
 		];
         
         $jsonContent = htmlspecialchars(json_encode($props), ENT_QUOTES, 'UTF-8');

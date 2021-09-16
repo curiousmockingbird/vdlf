@@ -73,7 +73,7 @@ function get_cpt_data($params, $type = array("post"))
     if ($categories && $categories != "all") {
         $categories = explode(",", $categories);
         foreach ($categories as $category) {
-            if ($language != "en") {
+            if ($taxonomy == "category" && $language != "en") {
                 $category = $category."-".$language;
             }
             $tax_query[] = array('taxonomy' => $taxonomy, 'field' => 'slug', 'terms' => array($category));

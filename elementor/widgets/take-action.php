@@ -99,6 +99,15 @@ class TakeActionWidget extends Widget_Base
         );
 
         $this->add_control(
+            'background',
+            [
+                'label' => __('Background Color', 'sage'),
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'default' => '#F0A341',
+            ]
+        );
+
+        $this->add_control(
             'perpage',
             [
                 'label' => __('Show Perpage', 'sage'),
@@ -131,19 +140,19 @@ class TakeActionWidget extends Widget_Base
             'take_action_tax', [
                 'label' => __( 'Action Name', 'plugin-domain' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
-				'default' => 'solid',
+				'default' => 'none',
 				'options' => $this->ActionName()
             ]
         );
 
-        $this->add_control(
-            'take_action_label', [
-                'label' => __('Label', 'sage'),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => __('Action', 'sage'),
-                'label_block' => true,
-            ]
-        );
+        // $this->add_control(
+        //     'take_action_label', [
+        //         'label' => __('Label', 'sage'),
+        //         'type' => \Elementor\Controls_Manager::TEXT,
+        //         'default' => __('Action', 'sage'),
+        //         'label_block' => true,
+        //     ]
+        // );
 
         $this->end_controls_section();
 
@@ -163,8 +172,9 @@ class TakeActionWidget extends Widget_Base
         $settings = $this->get_settings_for_display();
         $perpage           = $settings["perpage"] ?? 3;
         $take_action_title = $settings["take_action_title"] ?? "Take Action";
-        $take_action_label = $settings["take_action_label"] ?? "Action";
+        #$take_action_label = $settings["take_action_label"] ?? "Action";
         $take_action_tax   = $settings["take_action_tax"] ?? "None";
+        $background        = $settings["background"] ?? "transparent";
 
         if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
         ?>
@@ -179,8 +189,8 @@ class TakeActionWidget extends Widget_Base
 		</div>
         <?php } ?>		
 		<take-action
+            background="<?php echo $background;?>"
             actions-name="<?php echo $take_action_tax; ?>"
-            label="<?php echo $take_action_label; ?>"
             title="<?php echo $take_action_title; ?>"
             perpage="<?php echo (int)($perpage); ?>"
         ></take-action>

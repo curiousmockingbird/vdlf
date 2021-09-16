@@ -7,7 +7,7 @@
             <span class="text-gray-500 mt-2">{{date}}</span>
             <div v-html="description" class="my-3 text-lg"></div>
         </div>
-        <a :href="link" class="text-black py-8 px-7 rounded-md transition-all hover:bg-themeBrown hover:text-white mt-auto font-bold underline text-xl block">{{ moreLabel }}</a>
+        <a :href="link" class="text-black py-8 px-7 rounded-b-md transition-all hover:bg-themeBrown hover:text-white mt-auto font-bold underline text-xl block">{{ moreLabel }}</a>
     </div>
 </template>
 <script>

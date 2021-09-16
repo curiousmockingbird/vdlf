@@ -1,41 +1,14 @@
 <template>
     <div class="background-gradient">
-        <SectionContainer containerClasses="md:min-h-screen">
-            <img :src="$images + '/hero-circle.png'" class=" bg-circle z-0" />
-            <div class="md:h-screen relative">
-                <div class=" content-text relative ">
-                    <h1 class="font-bold text-3xl md:text-4xl leading-10" style="max-width: 700px;">
-                        {{ content.title }}
-                    </h1>
-                    <a
-                        :href="content.button_link.url"
-                        class="block mt-10 text-2xl text-white font-bold underline"
-                    >
-                        <svg-vue
-                            :icon="`${content.button_icon}-icon`"
-                            height="48px"
-                            width="48px"
-                            class="inline-block mr-5"
-                            style="fill: none; "
-                        ></svg-vue
-                        >{{ content.button_text }}</a
-                    >
-                </div>
-            </div>
-
-            <template slot="afterContainer">
-                <div class="img-container">
-                    <img
-                        :src="content.images.url ? content.images.url : $images + '/hero-img.png'"
-                        class="hero-image z-20"
-                        alt=""
-                    />
-                </div>
-            </template>
-        </SectionContainer>
+        <HeroAction
+            :title="content.title"
+            :link="content.button_link.url"
+            :button_icon="content.button_icon"
+            :button_text="content.button_text"
+            :images="content.images.url"
+        ></HeroAction>
         <TakeAction
             :actions-name="content.take_action_tax"
-            :label="content.take_action_label"
             :title="content.take_action_title"
             :perpage="content.perpage"
         ></TakeAction>
@@ -69,73 +42,9 @@ export default {
     },
 };
 </script>
+
 <style lang="scss" scoped>
-.hero-image {
-    position: absolute;
-    height: 100%;
-    object-fit: cover;
-}
-
-.img-container {
-    padding-bottom: 90%;
-    position: relative;
-    overflow: hidden;
-    margin: 15px;
-}
-@screen md {
-    .img-container {
-        padding-bottom: 0;
-        overflow: none;
-        margin: 0;
-        position: absolute;
-        width: 50%;
-        height: 100vh;
-        right: 0;
-        top: 0;
-        padding: 0px;
+    .background-gradient {
+        background: linear-gradient(180deg, #f0a341 0%, #c22d28 100%);
     }
-
-    .hero-image {
-        object-fit: cover;
-    }
-}
-
-.bg-circle {
-    position: absolute;
-    left: -234px;
-    top: -185px;
-    min-width: 670px;
-}
-@screen md {
-    .bg-circle {
-        left: -400px;
-        top: 48%;
-        transform: translateY(-50%);
-        min-width: auto;
-    }
-}
-
-.content-text {
-    position: absolute;
-    left: 0;
-    max-width: 351px;
-    top: 0;
-    padding-top: 65px;
-    transform: none;
-    padding-bottom: 40px;
-}
-
-@screen md {
-    .content-text {
-        padding: 0;
-        left: 100px;
-        max-width: 351px;
-        top: 48%;
-        transform: translateY(-50%);
-    }
-}
-
-.background-gradient {
-    background: linear-gradient(180deg, #f0a341 0%, #c22d28 100%);
-}
 </style>
