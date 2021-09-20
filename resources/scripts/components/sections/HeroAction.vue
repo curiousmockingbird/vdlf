@@ -14,19 +14,13 @@
                                 :href="slide.btn_link"
                                 class="block mt-6 text-2xl md:text-3xl text-white font-bold underline"
                             >
-                                <svg-vue
-                                    v-if="
-                                        slide.btn_icon &&
-                                            slide.btn_icon != 'null' &&
-                                            slide.btn_icon != 'none'
-                                    "
-                                    :icon="`${slide.btn_icon}-icon`"
+                                <img
+                                    v-if="slide.image_icon.id != ''"
+                                    :src="slide.image_icon.url"
                                     height="48px"
                                     width="48px"
-                                    class="inline-block mr-5"
-                                    style="fill: none; "
-                                ></svg-vue
-                                >{{ slide.btn_text }}</a
+                                    class="inline-block mr-5 svg"
+                                />{{ slide.btn_text }}</a
                             >
                         </div>
                     </div>
@@ -35,7 +29,6 @@
                         <img
                             :src="slide.image.url ? slide.image.url : $images + '/hero-img.png'"
                             class="hero-image z-20 "
-                            alt=""
                         />
                     </div>
                 </div>
@@ -66,8 +59,7 @@ export default {
                 speed: 800,
                 slidesToShow: 1,
                 slidesToScroll: 1,
-                arrows: false,
-                height: 60,
+                arrows: true,
                 autoplay: true,
             },
         };
@@ -123,7 +115,7 @@ export default {
 }
 
 .slide {
-    @apply h-screen;
+    @apply h-screen z-10;
 }
 
 .content-text {

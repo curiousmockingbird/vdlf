@@ -13,15 +13,14 @@
             </p>
         </div>
         <a :href="link" class="card-btn " v-if="buttonLabel">
-            <svg-vue
-                v-if="icon && icon !='null'"
-                :icon="`${icon}-icon`"
+            <img
+                v-if="icon"
+                :src="icon"
                 height="48px"
                 width="48px"
                 class="inline-block mr-5"
-                style="fill: none; "
-            ></svg-vue
-            >{{ buttonLabel }}
+                alt=""
+            />{{ buttonLabel }}
         </a>
     </article>
 </template>
@@ -51,8 +50,8 @@ export default {
         },
         icon: {
             type: String,
-            default:"email"
-        }
+            default: "email",
+        },
     },
 };
 </script>

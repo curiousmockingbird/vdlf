@@ -147,20 +147,31 @@ class HeroWidget extends Widget_Base
             ]
         );
 
+        // $repeater->add_control(
+        //     'btn_icon',
+        //     [
+		// 		'label' => __( 'Icon', 'plugin-domain' ),
+		// 		'type' => \Elementor\Controls_Manager::SELECT,
+		// 		'default' => 'none',
+		// 		'options' => [
+		// 			'phone'  => __( 'Phone', 'plugin-domain' ),
+		// 			'email' => __( 'Email', 'plugin-domain' ),
+		// 			'postcard' => __( 'Postcard', 'plugin-domain' ),
+		// 			'none' => __( 'None', 'plugin-domain' ),
+		// 		],
+		// 	]
+        // );
+
         $repeater->add_control(
-            'btn_icon',
-            [
-				'label' => __( 'Icon', 'plugin-domain' ),
-				'type' => \Elementor\Controls_Manager::SELECT,
-				'default' => 'none',
-				'options' => [
-					'phone'  => __( 'Phone', 'plugin-domain' ),
-					'email' => __( 'Email', 'plugin-domain' ),
-					'postcard' => __( 'Postcard', 'plugin-domain' ),
-					'none' => __( 'None', 'plugin-domain' ),
-				],
+			'image_icon',
+			[
+				'label' => __( 'Choose Icon Image', 'sage' ),
+				'type' => \Elementor\Controls_Manager::MEDIA,
+				'default' => [
+					'url' => \Elementor\Utils::get_placeholder_image_src(),
+				]
 			]
-        );
+		);
 
 
      
@@ -178,7 +189,7 @@ class HeroWidget extends Widget_Base
                         'btn_text'       => __('Emial now', 'sage'),
                         'btn_link'    => __('#', 'sage'),
                         'image'    => __('#', 'sage'),
-                        'btn_icon'    => __('noicon', 'sage'),
+                        'image_icon'    => __('#', 'sage'),
                     ],
                 ],
             ]
