@@ -4,7 +4,7 @@
 
         <VueSlickCarousel v-bind="settings" class=" slideshow ">
             <div class="slide" v-for="(slide, i) in slideshow" :key="i">
-                <div class="flex justify-center">
+                <div class="flex flex-col lg:flex-row justify-center ">
                     <div class="content-text">
                         <div class="heading">
                             <h1 class="font-bold text-3xl md:text-5xl leading-tight">
@@ -75,8 +75,10 @@ export default {
         }, 400);
         window.addEventListener("resize", () => alignCircles());
         function alignCircles() {
-            let headingPosX = heading.getBoundingClientRect().x;
-            circle.style.left = headingPosX + offset + "px";
+            if (window.screen.width > 768) {
+                let headingPosX = heading.getBoundingClientRect().x;
+                circle.style.left = headingPosX + offset + "px";
+            }
         }
     },
 };
@@ -94,9 +96,9 @@ export default {
 
 .bg-circle {
     position: absolute;
-    left: -234px;
-    top: -185px;
-    min-width: 670px;
+    left: -250px;
+    top: -170px;
+    min-width: 690px;
 }
 
 @screen md {
@@ -119,10 +121,12 @@ export default {
 }
 
 .content-text {
-    position: absolute;
+    position: relative;
 
-    padding-top: 65px;
+    padding-top: 85px;
     padding-bottom: 40px;
+
+    margin: 0 15px;
 
     .heading {
     }
@@ -133,7 +137,7 @@ export default {
         position: relative;
         @apply w-1/2 flex justify-center;
         padding: 0;
-
+        margin: 0;
         .heading {
             @apply flex flex-col justify-center;
             max-width: 430px;
