@@ -7,18 +7,18 @@
                 <div class="flex flex-col lg:flex-row justify-center ">
                     <div class="content-text">
                         <div class="heading">
-                            <h1 class="font-bold text-3xl md:text-5xl leading-tight">
+                            <h1 class="font-bold text-3xl md:text-4xl leading-tight">
                                 {{ slide.title }}
                             </h1>
                             <a
                                 :href="slide.btn_link"
-                                class="block mt-6 text-2xl md:text-3xl text-white font-bold underline"
+                                class="block mt-6 text-2xl md:text-3xl text-white font-bold"
                             >
                                 <img
                                     v-if="slide.image_icon.id != ''"
                                     :src="slide.image_icon.url"
-                                    height="48px"
-                                    width="48px"
+                                    height="54px"
+                                    width="54px"
                                     class="inline-block mr-5 svg"
                                 />{{ slide.btn_text }}</a
                             >
