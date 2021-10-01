@@ -8,4 +8,7 @@ export default class Stories {
     static getUpdates(formData) {
         return httpClient.post('/updates/all', formData);
     }
+    static getCategories(formData) {
+        return httpClient.post('/categories/all', formData);
+    }
 }

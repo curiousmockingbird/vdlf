@@ -80,6 +80,26 @@ export class ITSHelpers {
   /**
    * This prevents the page from scrolling down to where it was previously.
    */
+  static getParam(url) {
+    const paramUrl = url.split("?");
+    if (paramUrl.length == 1) {
+      return {};
+    }
+    const param = (function (a) {
+      if (a == "") return {};
+      var b = {};
+      for (var i = 0; i < a.length; ++i) {
+        var p = a[i].split('=', 2);
+        if (p.length == 1)
+          b[p[0]] = "";
+        else
+          b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+      }
+      return b;
+    })(paramUrl[1].split('&'));
+    return param;
+  }
+
   static backToTopOnReload() {
     if ("scrollRestoration" in history) {
       history.scrollRestoration = "manual";
@@ -117,6 +137,18 @@ export class ITSHelpers {
       if (a.host !== location.host) {
         a.target = "_blank";
       }
+    }
+  }
+
+  static scrollToElement(hash) {
+    if (document.querySelector(hash)) {
+      gsap.to(window, {
+        duration: .8,
+        scrollTo: {
+          y: hash,
+          offsetY: 100,
+        }
+      });
     }
   }
 

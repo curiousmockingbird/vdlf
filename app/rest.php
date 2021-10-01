@@ -127,6 +127,28 @@ function get_updates($request) {
     return get_cpt_data($request->get_params(),array("post"));
 }
 
+function get_post_categories($request) {
+    $params = $request->get_params();
+    $language = $params["language"] ?? null;
+    $args = [
+        'hide_empty' => true,
+        'orderby'    => 'count',
+    ];
+    if ($language) {
+        $args['lang'] = $language;
+    }
+    $categories = get_terms('category', $args);
+    $result = array();
+    foreach ($categories as $cat) {
+        $result[] = [
+            "label" => $cat->name,
+            "key"   => $cat->slug
+        ];
+    }
+
+    return $result;
+}
+
 add_action('rest_api_init', function () {
     register_rest_route('categories', 'mapping', array(
         'methods' => 'GET',
@@ -141,6 +163,11 @@ add_action('rest_api_init', function () {
     register_rest_route('updates', 'all', array(
         'methods' => 'POST',
         'callback' => 'get_updates',
+        'permission_callback' => '__return_true',
+    ));
+    register_rest_route('categories', 'all', array(
+        'methods' => 'POST',
+        'callback' => 'get_post_categories',
         'permission_callback' => '__return_true',
     ));
 });
