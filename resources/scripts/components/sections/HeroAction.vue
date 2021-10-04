@@ -2,7 +2,7 @@
     <section class="md:min-h-screen relative">
         <img :src="$images + '/hero-circle.png'" class=" bg-circle z-0" />
 
-        <VueSlickCarousel v-bind="settings" class=" slideshow ">
+        <VueSlickCarousel v-bind="settings" class=" slideshow " v-if="slideshow.length >0">
             <div class="slide" v-for="(slide, i) in slideshow" :key="i">
                 <div class="flex flex-col lg:flex-row justify-center ">
                     <div class="content-text">
@@ -66,18 +66,19 @@ export default {
     },
 
     mounted() {
-        console.log(this.slideshow);
         const circle = document.querySelector(".bg-circle");
         const heading = document.querySelector(".heading");
-        const offset = -530;
-        setTimeout(() => {
-            alignCircles();
-        }, 400);
-        window.addEventListener("resize", () => alignCircles());
-        function alignCircles() {
-            if (window.screen.width > 768) {
-                let headingPosX = heading.getBoundingClientRect().x;
-                circle.style.left = headingPosX + offset + "px";
+        if (circle && heading) {
+            const offset = -530;
+            setTimeout(() => {
+                alignCircles();
+            }, 400);
+            window.addEventListener("resize", () => alignCircles());
+            function alignCircles() {
+                if (window.screen.width > 768) {
+                    let headingPosX = heading.getBoundingClientRect().x;
+                    circle.style.left = headingPosX + offset + "px";
+                }
             }
         }
     },

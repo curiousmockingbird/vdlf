@@ -238,22 +238,10 @@ nav {
     }
     li {
         @apply relative;
-        //max-width: 175px;
         &:hover > a,
         &.current_page_item a {
             @apply text-white;
         }
-
-        // &.menu-item-has-children:after {
-        //     position: absolute;
-        //     content: url('data:image/svg+xml;charset=UTF-8, <svg width="9" height="6" viewBox="0 0 9 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.666992 0.666748L4.33366 4.66675L8.00033 0.666748" stroke="white"/></svg>');
-        //     height: 14px;
-        //     width: 14px;
-        //     right: -5px;
-        //     top: 35%;
-        //     filter: invert(1);
-        //     transform: translateY(-50%);
-        // }
     }
     a {
         @apply relative z-50 font-body text-lg lg:text-base xl:text-xl text-black font-semibold transition-colors leading-tight py-8 lg:whitespace-nowrap;
@@ -299,7 +287,7 @@ nav {
                     @apply text-black text-lg 2xl:text-xl font-semibold py-4 pl-4 pr-14 w-full border-b border-primary border-opacity-10;
                 }
                 a:hover {
-                    background: rgba(0, 0, 0, 0.034);
+                    @apply text-primary;
                 }
             }
         }

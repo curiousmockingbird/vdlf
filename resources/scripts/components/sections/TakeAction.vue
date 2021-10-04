@@ -20,6 +20,7 @@
                             :buttonLabel="item.label"
                             :icon="item.icon ? item.icon : null"
                             :body="item.content"
+                            class="mx-4"
                         ></ActionCard>
                     </div>
                 </VueSlickCarousel>
@@ -48,7 +49,7 @@ export default {
                 autoplaySpeed: 6000,
                 swipeToSlide: true,
                 swipe: true,
-                centerPadding: "20px",
+                centerPadding: "60px",
                 responsive: [
                     {
                         breakpoint: 1024,
@@ -92,7 +93,7 @@ export default {
             default: "Action",
         },
         perpage: {
-            type: String,
+            type: Number,
             default: 3,
         },
     },

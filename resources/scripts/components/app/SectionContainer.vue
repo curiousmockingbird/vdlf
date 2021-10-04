@@ -5,7 +5,6 @@
             <slot />
         </div>
         <slot name="afterContainer" />
-
         <div
             v-if="backgroundOverlay !== 0"
             class="background-overlay "

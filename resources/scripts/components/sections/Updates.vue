@@ -11,7 +11,7 @@
             {{ content.title }}
         </h4>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
             <UpdatesCard
                 v-for="(item, i) in updates"
                 :key="i"

@@ -69,7 +69,8 @@ module.exports = {
         themeBlack: '#1C1C1C',
         themeOrange: '#F0A241',
         themeGray: '#636363',
-        themeBlue: '#397894'
+        themeBlue: '#397894',
+        themeBlackAlt: '#3E1A00',
       },
     },
   },

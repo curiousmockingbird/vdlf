@@ -1,7 +1,7 @@
 <div id="app" class="invisible">
   @include('partials.header')
   
-  <main class="main min-h-screen">
+  <main class="main min-h-screen bg-gray-100">
     @yield('content')
   </main>
 

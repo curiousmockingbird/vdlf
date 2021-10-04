@@ -10,7 +10,9 @@ import 'vue-select/dist/vue-select.css';
 Vue.component('v-select', vSelect);
 
 import { ITSHelpers } from './utils/ITSUtilities';
+import VueSocialSharing from 'vue-social-sharing'
 
+Vue.use(VueSocialSharing);
 Vue.prototype.$api = api;
 Vue.prototype.$settings = SETTINGS;
 Vue.prototype.$images = SETTINGS.images;

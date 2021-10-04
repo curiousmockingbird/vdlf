@@ -1,5 +1,5 @@
 <template>
-    <article class="card mx-2">
+    <article class="card">
         <div class="card-body py-6 px-7 ">
             <!-- <p
                 class="inline-block tracking-widest rounded-md uppercase border border-black font-bold text-xs mt-3 py-1 px-3 "
