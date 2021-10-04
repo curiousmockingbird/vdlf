@@ -78,6 +78,21 @@
             "step": ""
         },
         {
+            "key": "field_615aa521e43d5",
+            "label": "Press Page",
+            "name": "press_page",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url"
+        },
+        {
             "key": "field_611637eafb0c9",
             "label": "Social Media",
             "name": "",
@@ -206,5 +221,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1631632246
+    "modified": 1633330546
 }

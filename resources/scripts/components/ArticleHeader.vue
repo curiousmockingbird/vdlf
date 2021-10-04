@@ -35,7 +35,7 @@ export default {
     },
     computed: {
         categoryLink:function() {
-            return this.$settings.storiesPage?this.$settings.storiesPage:'/updates';
+            return this.$settings.pressPage?this.$settings.pressPage:'/updates';
         }
     },
 };

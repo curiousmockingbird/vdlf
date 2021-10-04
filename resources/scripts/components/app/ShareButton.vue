@@ -92,9 +92,10 @@ export default {
     methods: {
         isTop:function() {
             let sidebarShare = document.querySelector(".vertical-share");
-            if (window.scrollY > 350) {
+            let footerTop = document.querySelector("footer").offsetTop;
+            if (window.scrollY > 350 && window.scrollY < (footerTop - 540)) {
                 sidebarShare.classList.add("active");
-            } else {
+            } else{
                 sidebarShare.classList.remove("active");
             }
         }

@@ -27,6 +27,7 @@ function get_default_settings()
         'gf_public'         => get_field("gravity_public_key", "option") ?? null,
         'gf_private'        => get_field("gravity_private_key", "option") ?? null,
         'subscribe_form_id' => get_field("subscribe_form_id", "option") ?? null,
+        'pressPage'         => get_field("press_page", "option") ?? null,
         "images"            => asset('images')->uri(),
         'nonce'             => wp_create_nonce('wp_rest'),
         'fb_url'            => get_field("facebook_url", "option") ?? "#",
