@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="horizontal-share">
+        <div class="horizontal-share lg:hidden">
             <div class="flex items-center justify-content-center">
                 <ShareNetwork
                     network="facebook"
@@ -32,9 +32,9 @@
                     <svg-vue icon="share.linkedin" width="40px" height="40px"></svg-vue>
                 </ShareNetwork>
             </div>
-            <span class="block leading-tight text-2xl text-themeBlackAlt mt-3">Share this article</span>
+            <span class="block text-2xl text-themeBlackAlt mt-3">Share this article</span>
         </div>
-        <div class="vertical-share">
+        <div class="vertical-share hidden lg:flex">
             <ShareNetwork
                 network="facebook"
                 :url="url"
@@ -64,7 +64,7 @@
             >
                 <svg-vue icon="share.linkedin-alt" width="52px" height="52px"></svg-vue>
             </ShareNetwork>
-            <span class="block my-2 leading-tight text-2xl text-darkMagenta mt-3 transform -rotate-90 w-72 relative hidden md:block" style="z-index:-1">Share this article</span>
+            <span class="block my-2 text-2xl text-darkMagenta mt-3 transform -rotate-90 w-54 pr-5 relative hidden md:block" style="z-index:-1">Share</span>
         </div>
     </div>
 </template>
@@ -93,7 +93,7 @@ export default {
         isTop:function() {
             let sidebarShare = document.querySelector(".vertical-share");
             let footerTop = document.querySelector("footer").offsetTop;
-            if (window.scrollY > 350 && window.scrollY < (footerTop - 540)) {
+            if (window.scrollY < (footerTop - 540)) {
                 sidebarShare.classList.add("active");
             } else{
                 sidebarShare.classList.remove("active");
@@ -105,15 +105,17 @@ export default {
         var fragment = document.createDocumentFragment();
         fragment.appendChild(document.querySelector(".vertical-share"));
         newParent.appendChild(fragment);
+        this.isTop();
         window.addEventListener("scroll", this.isTop);
     },
 }
 </script>
 
 <style lang="scss">
-    .horizontal-share {
+    .horizontal-share,
+    .vertical-share {
         svg path {
-            fill:#3E1A00;
+            fill:#AA6C42;
         }
     }
     .vertical-share {

@@ -18,26 +18,31 @@ $categories  = wp_get_post_terms(get_the_ID(), 'category');
 $categorySlug = implode(",",$categorySlug);
 
 @endphp
+<section class="elementor-section elementor-section-boxed">
+  <article class="elementor-container">
+      <article-header 
+        title="{!! $title !!}" 
+        author="{{ get_the_author() }}" 
+        date="{{ get_the_date() }} "
+        description="{{ get_the_excerpt() }}"
+        tags="{{$tagSlug}}"
+        categories="{{ json_encode($categories) }}"
+        class="md:px-2"
+      >    
+      </article-header>
 
-<article @php(post_class())>
-    <article-header 
-      title="{!! $title !!}" 
-      author="{{ get_the_author() }}" 
-      date="{{ get_the_date() }} "
-      description="{{ get_the_excerpt() }}"
-      tags="{{$tagSlug}}"
-      categories="{{ json_encode($categories) }}"
-    >    
-    </article-header>
+      <article-content 
+        tags="{{ get_the_tags() ? json_encode(get_the_tags()) : null }}" 
+        @if ($image) image="{{ $image }}" @endif
+        class="md:px-2"
+        >
+        @php(the_content())
+      </article-content>
 
-    <article-content 
-      tags="{{ get_the_tags() ? json_encode(get_the_tags()) : null }}" 
-      @if ($image) image="{{ $image }}" @endif>
-      @php(the_content())
-    </article-content>
-
-    <recent-post 
-      exclude="{{ get_the_ID() }}" 
-      category-slug="{{ $categorySlug }} ">
-    </recent-post>
-</article>
+      <recent-post 
+        exclude="{{ get_the_ID() }}" 
+        category-slug="{{ $categorySlug }} "
+        class="md:px-2">
+      </recent-post>
+  </article>
+</section>
