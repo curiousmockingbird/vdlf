@@ -1,4 +1,6 @@
 <?php
+use function Roots\asset;
+
 function mapping_posts($post)
 {
     $image = get_the_post_thumbnail_url($post->ID) ? get_the_post_thumbnail_url($post->ID, 'original') : null;
@@ -149,25 +151,74 @@ function get_post_categories($request) {
     return $result;
 }
 
+function get_all_staff($request) {
+    $params = $request->get_params() ?? array();
+    $perpage = $params["perpage"] ?? -1;
+    $paged = $params["page"] ?? 1;
+    $language = $params["language"] ?? "en";
+    $args = array('taxonomy' => "staff_category", 'lang'=>$language, 'orderby' => "name", 'show_count' => 0, 'pad_counts' => 0, 'hierarchical' => 0, 'hide_empty' => 1);
+    $all_categories = get_categories($args);
+    foreach ($all_categories as $categories) {
+        $args = array('post_type' => 'staff', 'posts_per_page' => $perpage, 'paged' => $paged, 'order' => 'DESC');
+        $args["tax_query"] = array(
+            array(
+                'taxonomy' => 'staff_category',
+                'field' => 'slug',
+                'terms' => $categories->slug,
+            ),
+        );
+        $staff = array();
+        $posts = get_posts($args);
+        foreach ($posts as $key => $post) {
+            $post_categories = get_the_terms($post->ID, "staff_category");
+            $post = [
+                "profession"     => get_field("profession", $post->ID),
+                "avatar"         => get_field("avatar", $post->ID) && get_field("avatar", $post->ID) != "" ? get_field("avatar", $post->ID): asset("images/logo.png")->uri(),
+                "image_position" => get_field("image_position", $post->ID) ?? "center",
+                "email"          => get_field("email", $post->ID),
+                "phone"          => get_field("phone", $post->ID),
+                "year"           => get_field("year", $post->ID),     
+                "title"          => $post->post_title,
+                "content"        => apply_filters("the_content", get_the_content("", false, $post->ID)),
+                "categories"     => $post_categories,
+                "permalinks"     => get_permalink($post->ID),
+                "excerpt"        => get_the_excerpt($post->ID),
+                "featured_image" => get_the_post_thumbnail_url($post->ID),
+            ];
+            $staff[] = $post;
+        }
+        $data[] = [
+            "category_name" => $categories->name,
+            "staff" => $staff,
+        ];
+    }
+    return $data;
+}
+
 add_action('rest_api_init', function () {
     register_rest_route('categories', 'mapping', array(
-        'methods' => 'GET',
-        'callback' => 'update_categories_taxonomy',
+        'methods'             => 'GET',
+        'callback'            => 'update_categories_taxonomy',
         'permission_callback' => '__return_true',
     ));
     register_rest_route('action', 'all', array(
-        'methods' => 'POST',
-        'callback' => 'get_actions',
+        'methods'             => 'POST',
+        'callback'            => 'get_actions',
         'permission_callback' => '__return_true',
     ));
     register_rest_route('updates', 'all', array(
-        'methods' => 'POST',
-        'callback' => 'get_updates',
+        'methods'             => 'POST',
+        'callback'            => 'get_updates',
         'permission_callback' => '__return_true',
     ));
     register_rest_route('categories', 'all', array(
-        'methods' => 'POST',
-        'callback' => 'get_post_categories',
+        'methods'             => 'POST',
+        'callback'            => 'get_post_categories',
         'permission_callback' => '__return_true',
+    ));
+    register_rest_route('staff', 'all', array(
+        'methods'             => 'POST',
+        'callback'            => 'get_all_staff',
+        'permission_callback' => '__return_true'
     ));
 });

@@ -11,4 +11,7 @@ export default class Stories {
     static getCategories(formData) {
         return httpClient.post('/categories/all', formData);
     }
+    static getStaff(formData) {
+        return httpClient.post('/staff/all', formData);
+    }
 }

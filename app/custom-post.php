@@ -87,6 +87,25 @@ function custom_post_init()
     );
 
     register_taxonomy("action_name", array("take_actions"), $args);
+
+    generate_CPT("staff", "Staff", [
+        'menu_icon'          => 'dashicons-networking',
+        'supports'           => array( 'title', 'editor','revisions'),
+        "publicly_queryable" => false,
+        "has_archive"        => false,
+        'exclude_from_search'=> true,
+    ],false);
+
+    $labels = label_args("Staff Category", false);
+    $args = array(
+        "rewrite"           => ['slug' => 'staff-category', 'with_front' => true],
+        "hierarchical"      => true,
+        "labels"            => $labels,
+        "show_ui"           => true,
+        "show_admin_column" => true,
+        "query_var"         => true,
+    );
+    register_taxonomy("staff_category", array("staff"), $args);
 }
 
 add_action('init', 'custom_post_init', 0);

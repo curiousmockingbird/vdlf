@@ -187,8 +187,8 @@ export default {
 			this.submitFilter();
 		}
 	},
-	async created() {
-		await this.getCategories().then(()=> {
+	created() {
+		this.getCategories().then(()=> {
 			let param = ITSHelpers.getParam(window.location.href);
 			if (param.hasOwnProperty("keywords") || param.hasOwnProperty("sort") || param.hasOwnProperty("cat")) {
 				this.getDefaultData();

@@ -7,9 +7,9 @@ let httpClient = axios.create({
 });
 
 httpClient.interceptors.request.use(config => {
-    if (config.data instanceof FormData) {
-        Object.assign(config.headers, config.data.getHeaders());
-    }
+    // if (config.data instanceof FormData) {
+    //     Object.assign(config.headers, config.data.getHeaders());
+    // }
     return config;
 });
 
