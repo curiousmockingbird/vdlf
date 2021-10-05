@@ -34,7 +34,7 @@
                 stroke-width="1"
                 size="1.5x"
             />
-            <div class="container mx-auto flex flex-col lg:flex-row p-5 lg:pt-24 lg:pb-20 lg:px-16">
+            <div class="container staff-detail mx-auto flex flex-col lg:flex-row p-5 lg:pt-24 lg:pb-20 lg:px-16">
                 <div class="w-full lg:w-1/4">
                     <img
                         :src="staffData.avatar"
@@ -112,19 +112,15 @@ export default {
 };
 </script>
 <style lang="scss">
-img[src*="logo.png"] {
+.staff-detail img[src*="logo.png"] {
     @apply p-5 bg-white;
     object-fit: contain !important;
 }
+
 .our-staff-section .social-media a {
     @apply text-base font-semibold border-b border-primary relative z-50;
 }
-.staff-item img {
-}
-.staff-item:hover {
-    img {
-    }
-}
+
 svg[stroke-width="1"] {
     path {
         stroke-width: 1;
