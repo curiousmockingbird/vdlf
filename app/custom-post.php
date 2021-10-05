@@ -90,7 +90,7 @@ function custom_post_init()
 
     generate_CPT("staff", "Staff", [
         'menu_icon'          => 'dashicons-networking',
-        'supports'           => array( 'title', 'editor','revisions'),
+        'supports'           => array( 'title','revisions'),
         "publicly_queryable" => false,
         "has_archive"        => false,
         'exclude_from_search'=> true,

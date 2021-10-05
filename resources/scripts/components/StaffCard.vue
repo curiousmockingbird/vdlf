@@ -1,6 +1,6 @@
 <template>
     <div
-        class="cursor-pointer overflow-hidden border-2 bg-transparent rounded-lg border-secondary flex flex-col staff-item"
+        class="overflow-hidden border-2 bg-transparent rounded-lg border-secondary flex flex-col staff-item"
         :class="{'cursor-pointer': clickable}"
         v-on:click="$emit('click', $event)"
     >
@@ -16,8 +16,9 @@
             {{ year }}
         </div>
         <div class="block break-all text-base p-3 m-0 text-black mt-auto" v-if="email">
+            <p><span class="font-semibold border-b inline-block border-primary mr-2">Phone :</span>{{ phone }}</p>
             <a :href="mailto(this.email)" class="break-words relative z-50 cursor-divointer" target="_blank">
-                <span class="font-semibold border-b inline-block border-primary mr-2">Email </span>
+                <span class="font-semibold border-b inline-block border-primary mr-2">Email :</span>
                 <br>{{ email }}
             </a>
         </div>
@@ -40,7 +41,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    img[src*="logo.png"] {
+    .staff-item > img[src*="logo.png"] {
         @apply p-5 bg-white;
         object-fit: contain !important;
     }

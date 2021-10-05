@@ -2,12 +2,11 @@
     <section class="container our-staff-section">
         <div v-for="(cate, idx) in categories" :key="idx" class="pb-20">
             <h1 class="text-2xl uppercase tracking-widest text-primary font-display font-bold py-10 pb-2 mb-7 border-b-2 border-primary">{{ cate.category_name}}</h1>
-            <div class="grid grid-flow-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 gap-x-5 gap-y-6">
+            <div class="grid grid-flow-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-6">
                 <StaffCard
                     v-for="(staffItem, index) in cate.staff"
                     :key="index"
-                    @click="openModal(staffItem)"
-                    :clickable="staffItem.content != ''"
+                    clickable="false"
                     :avatar="staffItem.avatar"
                     :imagePosition="staffItem.image_position"
                     :title="staffItem.title"
