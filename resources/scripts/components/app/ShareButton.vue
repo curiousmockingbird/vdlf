@@ -10,7 +10,7 @@
                     :hashtags="hashtags"
                     class="cursor-pointer"
                 >
-                    <svg-vue icon="share.facebook" width="40px" height="40px"></svg-vue>
+                    <svg-vue icon="share.facebook" width="36px" height="36px"></svg-vue>
                 </ShareNetwork>
 
                 <ShareNetwork
@@ -20,7 +20,7 @@
                     :hashtags="hashtags"
                     class="ml-4 cursor-pointer"
                 >
-                    <svg-vue icon="share.twitter" width="40px" height="40px"></svg-vue>
+                    <svg-vue icon="share.twitter" width="36px" height="36px"></svg-vue>
                 </ShareNetwork>
 
                 <ShareNetwork
@@ -29,10 +29,10 @@
                     :url="url"
                     class="ml-4 cursor-pointer"
                 >
-                    <svg-vue icon="share.linkedin" width="40px" height="40px"></svg-vue>
+                    <svg-vue icon="share.linkedin" width="36px" height="36px"></svg-vue>
                 </ShareNetwork>
             </div>
-            <span class="block text-2xl text-themeBlackAlt mt-3">Share this article</span>
+            <span class="block text-lg text-themeRed mt-1">Share this article</span>
         </div>
         <div class="vertical-share hidden lg:flex">
             <ShareNetwork

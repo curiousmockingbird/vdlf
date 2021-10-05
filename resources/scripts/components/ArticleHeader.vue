@@ -9,8 +9,8 @@
 
         <div class="content-meta md:flex justify-between">
             <div class="flex leading-7 flex-col">
-                <span class="text-themeBlackAlt text-2xl my-1">{{ date }}</span>
-                <span class="text-themeBlackAlt mt-3 md:mt-1 w-full text-2xl font-semibold inline-block" v-if="categories"
+                <span class="text-themeRed text-lg">{{ date }}</span>
+                <span class="text-themeRed mt-1 md:mt-0 w-full text-lg font-bold inline-block" v-if="categories"
                     v-html="category.length
                     ? category.map((el) => `<a href='${categoryLink}?cat=${el.slug}'>${el.name}</a>` ).join(', ')
                     : ''">
