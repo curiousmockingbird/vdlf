@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="horizontal-share lg:hidden">
+        <div class="horizontal-share xl:hidden">
             <div class="flex items-center justify-content-center">
                 <ShareNetwork
                     network="facebook"
@@ -34,7 +34,7 @@
             </div>
             <span class="block text-lg text-themeRed mt-1">Share this article</span>
         </div>
-        <div class="vertical-share hidden lg:flex">
+        <div class="vertical-share hidden xl:flex">
             <ShareNetwork
                 network="facebook"
                 :url="url"
