@@ -68,7 +68,7 @@ export default {
 		return {
 			eventKey:null,
 			keywords:'',
-			category:'',
+			category:'all',
 			nextPage:false,
 			updates:[],
 			isLoaded:false,
@@ -102,7 +102,7 @@ export default {
                 perpage: 6,
                 language: this.$settings.language,
             };
-			if (this.category) {
+			if (this.category && this.category !='all') {
                 formData.categories = this.category.key;
 			}
 			if (this.sort) {
@@ -129,6 +129,7 @@ export default {
 			let formData = {
                 language: this.$settings.language,
             };
+      this.category_options.push({"key":"all","label":"All"});
 			return this.$api.Posts.getCategories(formData).then(({ data }) => {
 				this.category_options.push(...data);
 			});

@@ -93,6 +93,36 @@
             "return_format": "url"
         },
         {
+            "key": "field_6191b6ab266f6",
+            "label": "Donate page",
+            "name": "donate_page",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url"
+        },
+        {
+            "key": "field_6191b6bf266f7",
+            "label": "Membership page",
+            "name": "membership_page",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url"
+        },
+        {
             "key": "field_611637eafb0c9",
             "label": "Social Media",
             "name": "",
@@ -221,5 +251,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1633330546
+    "modified": 1636939468
 }

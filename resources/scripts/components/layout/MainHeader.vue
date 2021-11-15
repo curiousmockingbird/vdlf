@@ -9,7 +9,7 @@
             <div class="flex  justify-center self-center items-center">
                 <a :href="$settings.app_url" class="logo self-center font-display font-hairline">
                     <img
-                        :src="$images + '/logo.png'"
+                        :src="$images + '/VDLF-logo.png'"
                         class="icon max-w-full h-auto"
                         alt="VDLF"
                         width="192px"
@@ -51,13 +51,13 @@
                 class="hidden sm:flex membership-menu text-sm xl:text-lg ml-auto lg:ml-0 flex items-center -right-1"
             >
                 <a
-                    href="#"
-                    :class="bgPrimary ? 'text-white' : 'text-primary'"
+                    :href="$settings.membershipPage"
+                    :class="bgPrimary ? 'text-white' : 'text-secondary'"
                     class="py-8 font-bold px-4 text-base xl:text-lg "
                     >{{ $settings.label.membership }}</a
                 >
                 <a
-                    href="/donate"
+                    :href="$settings.donatePage"
                     class="text-white bg-gradient-to-r from-primary text-base xl:text-lg  to-secondary py-8 font-bold pl-6 pr-4"
                     >{{ $settings.label.donate }}</a
                 >

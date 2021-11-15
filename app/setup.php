@@ -28,6 +28,8 @@ function get_default_settings()
         'gf_private'        => get_field("gravity_private_key", "option") ?? null,
         'subscribe_form_id' => get_field("subscribe_form_id", "option") ?? null,
         'pressPage'         => get_field("press_page", "option") ?? null,
+        'donatePage'        => get_field("donate_page", "option") ?? null,
+        'membershipPage'    => get_field("membership_page", "option") ?? null,
         "images"            => asset('images')->uri(),
         'nonce'             => wp_create_nonce('wp_rest'),
         'fb_url'            => get_field("facebook_url", "option") ?? "#",
