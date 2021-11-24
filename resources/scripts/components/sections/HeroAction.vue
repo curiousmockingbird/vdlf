@@ -1,8 +1,32 @@
 <template>
-    <section class="md:min-h-screen relative">
+    <section class="md:min-h-screen relative px-5 lg:px-0" id="hero-action">
         <img :src="$images + '/hero-circle.png'" class=" bg-circle z-0" />
 
-        <VueSlickCarousel v-bind="settings" class=" slideshow " v-if="slideshow.length >0">
+        <VueSlickCarousel v-bind="sliderSettings" class=" slideshow " v-if="slideshow.length >0">
+            <template #prevArrow>
+                <div class="VueCarousel-navigation-prev">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M15 19l-7-7 7-7"
+                        />
+                    </svg>
+                </div>
+            </template>
+            <template #nextArrow>
+                <div class="VueCarousel-navigation-next">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M9 5l7 7-7 7"
+                        />
+                    </svg>
+                </div>
+            </template>
             <div class="slide" v-for="(slide, i) in slideshow" :key="i">
                 <div class="flex flex-col lg:flex-row justify-center ">
                     <div class="content-text">
@@ -38,10 +62,10 @@
 </template>
 
 <script>
-import VueSlickCarousel from "vue-slick-carousel";
-import "vue-slick-carousel/dist/vue-slick-carousel.css";
+import VueSlickCarousel from 'vue-slick-carousel';
+import 'vue-slick-carousel/dist/vue-slick-carousel.css';
 // optional style for arrows & dots
-import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
+import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css';
 
 export default {
     components: { VueSlickCarousel },
@@ -51,7 +75,7 @@ export default {
     },
     data() {
         return {
-            settings: {
+            sliderSettings: {
                 dots: false,
                 fade: true,
                 infinite: true,
@@ -85,6 +109,21 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+#hero-action {
+    .VueCarousel-navigation-prev,
+    .VueCarousel-navigation-next {
+        @apply bg-white inset-y-1/2 bg-opacity-20 rounded-lg px-1 absolute  z-30;
+        display: inline-table;
+        svg {
+            @apply h-10 w-10 text-white;
+        }
+
+        &:hover {
+            @apply bg-opacity-40;
+        }
+    }
+}
+
 .background-gradient {
     background: linear-gradient(180deg, #f0a341 0%, #c22d28 100%);
 }
@@ -136,7 +175,7 @@ export default {
 @screen md {
     .content-text {
         position: relative;
-        @apply w-1/2 flex justify-center;
+        @apply w-full lg:w-1/2 flex justify-center;
         padding: 0;
         margin: 0;
         .heading {
@@ -155,7 +194,7 @@ export default {
 }
 @screen md {
     .content-img {
-        @apply w-1/2;
+        @apply w-full text-center flex justify-center items-center lg:block lg:w-1/2;
 
         position: relative;
         padding-bottom: 0;

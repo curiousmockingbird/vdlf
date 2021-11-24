@@ -77,10 +77,12 @@ export default {
         },
     },
     created() {
-        this.getData();
         if (this.jsonContent) {
             this.content = JSON.parse(this.jsonContent);
         }
     },
+    mounted() {
+        this.getData();
+    }
 };
 </script>

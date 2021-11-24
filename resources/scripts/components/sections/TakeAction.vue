@@ -11,6 +11,30 @@
                     class="slideshow mt-5 mb-8 -mx-2"
                     v-if="ActionsData && ActionsData.length > 0"
                 >
+                    <template #prevArrow>
+                        <div class="VueCarousel-navigation-prev">
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M15 19l-7-7 7-7"
+                                />
+                            </svg>
+                        </div>
+                    </template>
+                    <template #nextArrow>
+                        <div class="VueCarousel-navigation-next">
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M9 5l7 7-7 7"
+                                />
+                            </svg>
+                        </div>
+                    </template>
                     <div v-for="(item, i) in ActionsData" :key="i">
                         <ActionCard
                             :title="item.title"
@@ -63,9 +87,8 @@ export default {
                     {
                         breakpoint: 768,
                         settings: {
-                            slidesToShow: 2,
-                            slidesToScroll: 2,
-                            initialSlide: 2,
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
                         },
                     },
                     {
@@ -120,6 +143,28 @@ export default {
 </script>
 
 <style lang="scss">
+.slick-prev:before,
+.slick-next:before {
+    display: none !important;
+}
+.VueCarousel-navigation-prev,
+.VueCarousel-navigation-next {
+    @apply bg-themeOrange inset-y-1/2 bg-opacity-10 rounded-lg px-1 absolute  z-30;
+    display: inline-table;
+    svg {
+        @apply h-10 w-10 text-themeOrange;
+    }
+
+    &:hover {
+        @apply bg-opacity-40;
+    }
+}
+.VueCarousel-navigation-prev {
+    left: 5%;
+}
+.VueCarousel-navigation-next {
+    right: 5%;
+}
 .slick-track {
     display: flex !important;
 }

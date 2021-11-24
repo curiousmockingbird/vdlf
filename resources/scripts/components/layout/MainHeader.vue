@@ -58,11 +58,11 @@
                 >
                 <a
                     :href="$settings.donatePage"
-                    class="text-white bg-gradient-to-r from-primary text-base xl:text-lg  to-secondary py-8 font-bold pl-6 pr-4"
+                    class="text-white bg-gradient-to-r from-primary text-base xl:text-lg  to-secondary py-8 font-bold pl-6 pr-4 relative left-1"
                     >{{ $settings.label.donate }}</a
                 >
                 <button
-                    class="py-8 h-full border-0 bg-secondary border-0 px-4 hover:outline-none active:outline-none fill-current outline-none"
+                    class="py-8 h-full border-0 bg-secondary border-0 px-4 hover:outline-none active:outline-none fill-current outline-none relative"
                     :class="bgPrimary ? 'text-white' : 'text-primary'"
                     @click="openSearchBar()"
                 >
@@ -258,7 +258,7 @@ nav {
     }
     ul > li {
         a {
-            @apply px-1 lg:px-1 xl:px-2 2xl:px-4;
+            @apply px-1 lg:px-2 xl:px-2 2xl:px-4;
         }
         ul.sub-menu {
             background: rgba(255, 255, 255, 0.959);

@@ -14,7 +14,7 @@
                     height="120px"
                 />
 
-                <div class="button-actions my-3 md:my-0 -mx-5">
+                <div class="button-actions hidden lg:block my-3 md:my-0 -mx-5">
                     <a href="#" class="text-2xl font-bold font-arial-black p-5 text-primary">{{
                         $settings.label.membership
                     }}</a>
@@ -23,8 +23,8 @@
                     }}</a>
                 </div>
             </div>
-            <div class="flex flex-col md:flex-row">
-                <div class="w-full md:w-1/3 pr-0 md:pr-10 pb-5 md:pb-0 text-sm">
+            <div class="flex flex-col lg:flex-row">
+                <div class="w-full lg:w-1/3 pr-0 md:pr-10 pb-5 md:pb-0 text-sm">
                     <h3 class="text-title">
                         {{ $settings.label.contact_us }}
                     </h3>
@@ -51,7 +51,7 @@
                     <form
                         v-else
                         @submit.prevent="submitForm"
-                        class="flex w-auto h-12 relative md:mr-10 lg:mr-16"
+                        class="flex w-auto h-12 relative md:mr-10 lg:mr-16 max-w-sm"
                     >
                         <input
                             type="email"
@@ -76,14 +76,14 @@
                         </button>
                     </form>
 
-                    <div class="flex items-center mt-10">
-                        <h3 class="text-white text-xl font-semibold font-display mr-5">
+                    <div class="sm:flex items-center mt-10">
+                        <h3 class="text-white mb-5 sm:mb-0 text-xl font-semibold font-display mr-5">
                             {{ $settings.label.follow_us }}
                         </h3>
                         <socialMediaIcons></socialMediaIcons>
                     </div>
                 </div>
-                <div class="w-full md:w-2/3 pb-10 md:pb-0">
+                <div class="w-full mt-5 lg:mt-0 lg:w-2/3 pb-10 md:pb-0">
                     <div class="content-menus">
                         <slot />
                     </div>
@@ -91,11 +91,8 @@
             </div>
 
             <div
-                class="w-full copyright md:flex flex-row-reverse justify-between items-end pt-3 md:pt-10 pb-3"
+                class="w-full copyright lg:flex justify-between items-end pt-3 md:pt-10 pb-3"
             >
-                <div class="footer-menus">
-                    <slot name="navigation" />
-                </div>
                 <div class="designby font-display small">
                     {{ $settings.label.developed_by }}
                     <a
@@ -104,6 +101,9 @@
                         target="_blank"
                         >IndieTech Solutions</a
                     >
+                </div>
+                <div class="footer-menus">
+                    <slot name="navigation" />
                 </div>
             </div>
         </div>
@@ -226,7 +226,7 @@ export default {
     }
 
     .footer-menus .nav {
-        @apply flex-row -mx-3 my-3 md:my-0 justify-center md:justify-end;
+        @apply flex-row -mx-3 my-3 md:my-0 justify-center md:justify-start lg:justify-end;
 
         > li > a {
             @apply px-3;
