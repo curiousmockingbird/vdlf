@@ -4,7 +4,7 @@
         :style="`background-color:${background}`"
     >
         <h3 class="text-xl md:text-4xl tracking-widest font-bold text-white mb-5">{{ title }}</h3>
-        <div class="content-fellows w-full overflow-hidden">
+        <div class="content-fellows w-full">
             <div id="fellow-slides" class="relative">
                 <VueSlickCarousel
                     v-bind="sliderSettings"
@@ -152,18 +152,20 @@ export default {
     @apply bg-themeOrange inset-y-1/2 bg-opacity-10 rounded-lg px-1 absolute  z-30;
     display: inline-table;
     svg {
-        @apply h-10 w-10 text-themeOrange;
+        @apply h-10 w-10 text-black;
     }
 
     &:hover {
         @apply bg-opacity-40;
     }
 }
-.VueCarousel-navigation-prev {
-    left: 5%;
-}
-.VueCarousel-navigation-next {
-    right: 5%;
+@screen lg {
+    .VueCarousel-navigation-prev {
+        left: -50px !important;
+    }
+    .VueCarousel-navigation-next {
+        right: -50px !important;
+    }
 }
 .slick-track {
     display: flex !important;
