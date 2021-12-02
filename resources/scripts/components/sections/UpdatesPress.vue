@@ -33,15 +33,15 @@
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-7 my-10" v-if="updates && updates.length>0">
 				<a :href="item.link" v-for="(item, i) in updates" :key="i">
 					<div class="press-card">
-						<h3 class="font-black text-2xl leading-tight mb-4">{{ item.title }}</h3>
-						<div class="mb-6" v-html="item.excerpt"></div>
+						<span class="mt-1 w-full inline-block font-bold tracking-wider leading-normal text-themeBlue" 
+							v-html="item.categories.length
+							? item.categories.map((el) => el.name).join(', ')
+							: ''">
+						</span>
+						<h3 class="font-black text-2xl leading-tight">{{ item.title }}</h3>
+						<span class="text-gray-400 font-display w-full inline-block mt-1 mb-4">{{ item.date }}</span>
+						<div class="mb-2 font-display" v-html="item.excerpt"></div>
 						<div class="mt-auto">
-							<span class="text-gray-400  w-full inline-block">{{ item.date }}</span>
-							<span class="mt-1 w-full inline-block" 
-								v-html="item.categories.length
-								? item.categories.map((el) => el.name).join(', ')
-								: ''">
-							</span>
 							<a :href="item.link" class="text-themeGreen text-xl font-black underline mt-11 inline-block">Continue Reading</a>
 						</div>
 					</div>
@@ -202,7 +202,13 @@ export default {
 </script>
 <style lang="scss">
 .press-card {
-	@apply flex flex-col h-full border-2 border-themeBlue p-7 rounded-lg border-opacity-0 hover:border-opacity-100 hover:shadow-2xl bg-white transition-shadow
+	@apply flex flex-col h-full p-7 rounded-lg hover:shadow-2xl bg-white transition-shadow;
+	&:hover {
+		@apply bg-gradient-to-b from-primary to-secondary text-white;
+		h3, span, a {
+			color:#FFF !important;
+		}
+	}
 }
 .select-container{
 	&:nth-child(1){
