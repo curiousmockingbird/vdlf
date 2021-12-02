@@ -33,16 +33,23 @@
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-7 my-10" v-if="updates && updates.length>0">
 				<a :href="item.link" v-for="(item, i) in updates" :key="i">
 					<div class="press-card">
-						<span class="mt-1 w-full inline-block font-bold tracking-wider leading-normal text-themeBlue" 
+						<span class="my-2 w-full inline-block font-bold tracking-wider leading-normal" 
 							v-html="item.categories.length
-							? item.categories.map((el) => el.name).join(', ')
+							? item.categories.map((el) => {
+								if (el.name.toLowerCase().includes('news'))
+									return `<label style='color:#A0643D'>${el.name}</label>`;
+								if (el.name.toLowerCase().includes('blog'))
+									return `<label style='color:#397894'>${el.name}</label>`;
+								if (el.name.toLowerCase().includes('press'))
+									return `<label style='color:#871D3D'>${el.name}</label>`;
+							}).join(', ')
 							: ''">
 						</span>
-						<h3 class="font-black text-2xl leading-tight">{{ item.title }}</h3>
+						<h3 class="font-bold text-2xl leading-tight">{{ item.title }}</h3>
 						<span class="text-gray-400 font-display w-full inline-block mt-1 mb-4">{{ item.date }}</span>
 						<div class="mb-2 font-display" v-html="item.excerpt"></div>
 						<div class="mt-auto">
-							<a :href="item.link" class="text-themeGreen text-xl font-black underline mt-11 inline-block">Continue Reading</a>
+							<a :href="item.link" class="text-themeGreen text-xl font-bold underline mt-11 inline-block">Continue Reading</a>
 						</div>
 					</div>
 				</a>
@@ -205,7 +212,7 @@ export default {
 	@apply flex flex-col h-full p-7 rounded-lg hover:shadow-2xl bg-white transition-shadow;
 	&:hover {
 		@apply bg-gradient-to-b from-primary to-secondary text-white;
-		h3, span, a {
+		h3, span, a, label {
 			color:#FFF !important;
 		}
 	}
