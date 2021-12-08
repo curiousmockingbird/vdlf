@@ -109,7 +109,7 @@ function custom_post_init()
 
     generate_CPT("media_mentions", "Media Mentions", [
         "menu_icon"          => "dashicons-format-aside",
-        "supports"           => array("title", "excerpt", "editor", "revisions"),
+        "supports"           => array("title", "excerpt", "revisions"),
         "has_archive"        => false,
         "publicly_queryable" => false,
     ], false);
@@ -125,6 +125,18 @@ function custom_post_init()
     );
 
     register_taxonomy("media_source", array("media_mentions"), $args);
+
+    $labels = label_args("Topic", false);
+    $args = array(
+        "rewrite"   => ['slug' => 'topic', 'with_front' => true],
+        "hierarchical" => true,
+        "labels" => $labels,
+        "show_ui" => true,
+        "show_admin_column" => true,
+        "query_var" => true,
+    );
+
+    register_taxonomy("topic", array("media_mentions"), $args);
 }
 
 add_action('init', 'custom_post_init', 0);

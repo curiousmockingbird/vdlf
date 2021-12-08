@@ -125,6 +125,51 @@ function update_categories_taxonomy() {
     echo "Categories updates";
 }
 
+function import_media_mention() {
+    if ($_GET["token"] != "60195446176DRT65ff6bed6b6d2f") {
+        return "failed token";
+    }
+
+    $posts = json_decode(file_get_contents(get_template_directory_uri() . "/data/media_mentions.json"));
+    
+    foreach($posts as $post) {
+        if ($post->Language == "English") {
+            $lang = "en";
+        }else{
+            $lang = "es";
+        }
+        $postData = array(
+            'post_title' => $post->Title,
+            'post_excerpt' => $post->Excerpt,
+            'post_date' => $post->Date,
+            'post_status' => "publish",
+            'post_type' => "media_mentions",
+            'post_author' => get_current_user_id() ?? 1,
+        );
+        kses_remove_filters();
+        $post_id = wp_insert_post($postData);
+
+        $attrs = array(
+            'title' => $post->Title,
+            'url' => $post->Link,
+            'target' => "_blank",
+        );
+
+        update_field('link', $attrs,  $post_id);
+        update_field("reporter", $post->Reporter_Author,$post_id);
+        update_field("media_market", $post->Media_Market,$post_id);
+        update_field("quoted", $post->Quoted,$post_id);
+        update_field("connected_to_event", $post->Connected_to_event,$post_id);
+        kses_init_filters();
+        wp_set_object_terms($post_id, $post->Topic,"topic", true);
+        wp_set_object_terms($post_id, $post->Source, "media_source", true);
+
+        pll_set_post_language($post_id, $lang);
+    }
+
+    echo "Media content imported";
+}
+
 function get_actions($request) {
     return get_cpt_data($request->get_params(),array("take_actions"));
 }
@@ -204,6 +249,11 @@ function get_all_staff($request) {
 }
 
 add_action('rest_api_init', function () {
+    register_rest_route('medias', 'import', array(
+        'methods'             => 'GET',
+        'callback'            => 'import_media_mention',
+        'permission_callback' => '__return_true',
+    ));
     register_rest_route('categories', 'mapping', array(
         'methods'             => 'GET',
         'callback'            => 'update_categories_taxonomy',
