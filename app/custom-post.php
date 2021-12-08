@@ -106,6 +106,25 @@ function custom_post_init()
         "query_var"         => true,
     );
     register_taxonomy("staff_category", array("staff"), $args);
+
+    generate_CPT("media_mentions", "Media Mentions", [
+        "menu_icon"          => "dashicons-format-aside",
+        "supports"           => array("title", "excerpt", "editor", "revisions"),
+        "has_archive"        => false,
+        "publicly_queryable" => false,
+    ], false);
+
+    $labels = label_args("Media Source", false);
+    $args = array(
+        "rewrite"   => ['slug' => 'source', 'with_front' => true],
+        "hierarchical" => true,
+        "labels" => $labels,
+        "show_ui" => true,
+        "show_admin_column" => true,
+        "query_var" => true,
+    );
+
+    register_taxonomy("media_source", array("media_mentions"), $args);
 }
 
 add_action('init', 'custom_post_init', 0);

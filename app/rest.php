@@ -20,9 +20,13 @@ function mapping_posts($post)
         "type"        => get_post_type($post->ID),
     ];
     if (get_post_type($post->ID) == "take_actions") {
-        $data["link"] = get_field("link",$post->ID);
-        $data["icon"] = get_field("icon",$post->ID);
+        $data["link"]  = get_field("link",$post->ID);
+        $data["icon"]  = get_field("icon",$post->ID);
         $data["label"] = get_field("label",$post->ID);
+    }
+    if (get_post_type($post->ID) == "media_mentions") {
+        $data["link"]       = get_field("link",$post->ID);
+        $data["categories"] = wp_get_post_terms($post->ID, 'media_source');
     }
     return $data;
 }
@@ -129,6 +133,10 @@ function get_updates($request) {
     return get_cpt_data($request->get_params(),array("post"));
 }
 
+function get_mentions($request) {
+    return get_cpt_data($request->get_params(),array("media_mentions"));
+}
+
 function get_post_categories($request) {
     $params = $request->get_params();
     $language = $params["language"] ?? null;
@@ -209,6 +217,11 @@ add_action('rest_api_init', function () {
     register_rest_route('updates', 'all', array(
         'methods'             => 'POST',
         'callback'            => 'get_updates',
+        'permission_callback' => '__return_true',
+    ));
+    register_rest_route('mentions', 'all', array(
+        'methods'             => 'POST',
+        'callback'            => 'get_mentions',
         'permission_callback' => '__return_true',
     ));
     register_rest_route('categories', 'all', array(
