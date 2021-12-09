@@ -13,7 +13,7 @@
     <page-header>
         <div class="container px-3">
 
-            <h1>Media mentions</h1>
+            <h1>@php(the_title())</h1>
         </div>
     </page-header>
 
