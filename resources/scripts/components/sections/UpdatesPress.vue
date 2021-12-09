@@ -31,8 +31,8 @@
 			</div>
 
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-7 my-10" v-if="updates && updates.length>0">
-				<a :href="item.link" v-for="(item, i) in updates" :key="i">
-					<div class="press-card">
+				<a :href="item.link?item.link:'#'" v-for="(item, i) in updates" :key="i" class="press-card">
+					<div class="p-7">
 						<span class="my-2 w-full inline-block font-bold tracking-wider leading-normal" 
 							v-html="item.categories.length
 							? item.categories.map((el) => {
@@ -48,10 +48,11 @@
 						<h3 class="font-bold text-2xl leading-tight">{{ item.title }}</h3>
 						<span class="text-gray-400 font-display w-full inline-block mt-1 mb-4">{{ item.date }}</span>
 						<div class="mb-2 font-display" v-html="item.excerpt"></div>
-						<div class="mt-auto">
-							<a :href="item.link" class="text-themeGreen text-xl font-bold underline mt-11 inline-block">Continue Reading</a>
-						</div>
 					</div>
+					<button 
+						class="text-left text-black py-8 px-7 rounded-b-md text-white mt-auto font-bold underline text-xl block"
+						:style="styleButton(item)"
+					>Continue Reading</button>
 				</a>
 			</div>
 			<div v-else-if="isLoaded">
@@ -102,6 +103,15 @@ export default {
 		};
 	},
 	methods: {
+		styleButton(item) {
+			let Element = item.categories[0].name;
+			if (Element.toLowerCase().includes('news'))
+				return `background-color:#A0643D`;
+			else if (Element.toLowerCase().includes('blog'))
+				return `background-color:#397894`;
+			else (Element.toLowerCase().includes('press'))
+				return `background-color:#871D3D`;
+		},
         getData(page) {
 			this.isLoaded = false;
             let formData = {
@@ -209,11 +219,12 @@ export default {
 </script>
 <style lang="scss">
 .press-card {
-	@apply flex flex-col h-full p-7 rounded-lg hover:shadow-2xl bg-white transition-shadow;
+	@apply cursor-pointer flex flex-col h-full rounded-lg hover:shadow-2xl bg-white;
 	&:hover {
 		@apply bg-gradient-to-b from-primary to-secondary text-white;
-		h3, span, a, label {
+		h3, span, button, label {
 			color:#FFF !important;
+			background-color: transparent !important;
 		}
 	}
 }
