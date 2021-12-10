@@ -137,6 +137,17 @@ function custom_post_init()
     );
 
     register_taxonomy("topic", array("media_mentions"), $args);
+
+    $labels = label_args("Language", false);
+    $args = array(
+        "hierarchical" => true,
+        "labels" => $labels,
+        "show_ui" => true,
+        "show_admin_column" => true,
+        "query_var" => true,
+    );
+
+    register_taxonomy("post_lang", array("post"), $args);
 }
 
 add_action('init', 'custom_post_init', 0);

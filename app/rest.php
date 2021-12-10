@@ -44,6 +44,7 @@ function get_cpt_data($params, $type = array("post"))
     $keywords = $params["keywords"] ?? null;
     $exclude = $params["exclude"] ?? null;
     $language = $params["language"] ?? null;
+    $custom_lang = $params["lang"] ?? null;
 
     $args = array(
         'post_type' => $types,
@@ -86,6 +87,13 @@ function get_cpt_data($params, $type = array("post"))
         }
     }
 
+    if ($custom_lang) {
+        $custom_lang = explode(",", $custom_lang);
+        foreach ($custom_lang as $lang) {
+            $tax_query[] = array('taxonomy' => "post_lang", 'field' => 'slug', 'terms' => array($lang));
+        }
+    }
+
     if ($keywords && $keywords != "") {
         $args['s'] = $keywords;
     }
@@ -123,6 +131,22 @@ function update_categories_taxonomy() {
         }
     }
     echo "Categories updates";
+}
+
+function update_language() {
+    if ($_GET["token"] != "60195446176DRT65ff6bed6b6d2f") {
+        return "failed token";
+    }
+    $posts = json_decode(file_get_contents(get_template_directory_uri() . "/data/posts-lang.json"));
+    foreach($posts as $post) {
+        if ($post->status == "DELETE") {
+            echo $post->ID." Deleted\n";
+            wp_delete_post($post->ID);
+        }else{
+            wp_set_object_terms($post->ID, $post->language,"post_lang", true);
+        }
+    }
+    echo "Language updates";
 }
 
 function import_media_mention() {
@@ -204,6 +228,23 @@ function get_post_categories($request) {
     return $result;
 }
 
+
+function get_custom_language() {
+    $args = [
+        'hide_empty' => true,
+        'orderby'    => 'count',
+    ];
+    $categories = get_terms('post_lang', $args);
+    $result = array();
+    foreach ($categories as $cat) {
+        $result[] = [
+            "label" => $cat->name,
+            "key"   => $cat->slug
+        ];
+    }
+    return $result;
+}
+
 function get_all_staff($request) {
     $params = $request->get_params() ?? array();
     $perpage = $params["perpage"] ?? -1;
@@ -254,6 +295,11 @@ add_action('rest_api_init', function () {
         'callback'            => 'import_media_mention',
         'permission_callback' => '__return_true',
     ));
+    register_rest_route('language', 'update', array(
+        'methods'             => 'GET',
+        'callback'            => 'update_language',
+        'permission_callback' => '__return_true',
+    ));
     register_rest_route('categories', 'mapping', array(
         'methods'             => 'GET',
         'callback'            => 'update_categories_taxonomy',
@@ -277,6 +323,11 @@ add_action('rest_api_init', function () {
     register_rest_route('categories', 'all', array(
         'methods'             => 'POST',
         'callback'            => 'get_post_categories',
+        'permission_callback' => '__return_true',
+    ));
+    register_rest_route('language', 'all', array(
+        'methods'             => 'POST',
+        'callback'            => 'get_custom_language',
         'permission_callback' => '__return_true',
     ));
     register_rest_route('staff', 'all', array(

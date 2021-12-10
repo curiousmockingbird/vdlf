@@ -1,9 +1,9 @@
 <template>
 	<section class=" min-h-screen bg-gray-100 pb-10" id="filter-section">
 		<div class="container">
-			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 py-10">
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 py-10">
 				<div
-					class="select-container border-2 rounded-lg p-3 px-4 inline-flex items-center bg-white">
+					class="select-container border-2 rounded-lg py-3 pl-3 inline-flex items-center bg-white">
 					<label for="sort" class="text-gray-500 text-base font-medium">Sort:</label>
 					<v-select
 						class="select w-full ml-3 font-medium"
@@ -13,17 +13,27 @@
 					></v-select>
 				</div>
 				<div
-					class="select-container border-2 rounded-lg p-3 px-4 inline-flex items-center bg-white">
-					<label for="type" class="text-gray-500 text-base font-medium">Category:</label>
+					class="select-container border-2 rounded-lg py-3 pl-3 inline-flex items-center bg-white">
+					<label for="category" class="text-gray-500 text-base font-medium">Category:</label>
 					<v-select
 						class="select w-full ml-3 font-medium"
-						id="type"
+						id="category"
 						:options="category_options"
 						v-model="category"
 					></v-select>
 				</div>
 				<div
-					class="border-2 rounded-lg p-3 px-4 inline-flex items-center bg-white border-themeBrown"
+					class="select-container border-2 rounded-lg py-3 pl-3 inline-flex items-center bg-white">
+					<label for="language" class="text-gray-500 text-base font-medium">Language:</label>
+					<v-select
+						class="select w-full ml-3 font-medium"
+						id="language"
+						:options="language_options"
+						v-model="language"
+					></v-select>
+				</div>
+				<div
+					class="border-2 rounded-lg py-3 px-3 inline-flex items-center bg-white border-themeBrown"
 				>
 					<input id="search" type="text" placeholder="Type here" v-model="keywords" class="border-0 w-full outline-none font-medium">
 					<svg-vue icon="search-dark" width="18" height="18" class="fill-current text-white"></svg-vue>
@@ -39,7 +49,7 @@
 								if (el.name.toLowerCase().includes('news'))
 									return `<label style='color:#A0643D'>${el.name}</label>`;
 								if (el.name.toLowerCase().includes('blog'))
-									return `<label style='color:#397894'>${el.name}</label>`;
+									return `<label style='color:#337c4c'>${el.name}</label>`;
 								if (el.name.toLowerCase().includes('press'))
 									return `<label style='color:#871D3D'>${el.name}</label>`;
 							}).join(', ')
@@ -71,12 +81,12 @@ import {
   ITSHelpers
 } from "../../utils/ITSUtilities";
 export default {
-	props:["sorting","keys","cat"],
 	data() {
 		return {
 			eventKey:null,
 			keywords:'',
 			category:'all',
+			language:null,
 			nextPage:false,
 			updates:[],
 			isLoaded:false,
@@ -85,6 +95,7 @@ export default {
 				key: 'latest',
 			},
 			category_options:[],
+			language_options:[],
 			page:1,
 			sort_options: [
 				{
@@ -108,7 +119,7 @@ export default {
 			if (Element.toLowerCase().includes('news'))
 				return `background-color:#A0643D`;
 			else if (Element.toLowerCase().includes('blog'))
-				return `background-color:#397894`;
+				return `background-color:#337c4c`;
 			else (Element.toLowerCase().includes('press'))
 				return `background-color:#871D3D`;
 		},
@@ -117,13 +128,16 @@ export default {
             let formData = {
                 page: page,
                 perpage: 6,
-                language: this.$settings.language,
+                // language: this.$settings.language,
             };
 			if (this.category && this.category !='all') {
                 formData.categories = this.category.key;
 			}
 			if (this.sort) {
                 formData.sortby = this.sort.key;
+			}
+			if (this.language) {
+                formData.lang = this.language.key;
 			}
 			if (this.keywords != '') {
                 formData.keywords = this.keywords;
@@ -132,12 +146,15 @@ export default {
                 this.updates.push(...data.posts);
 				this.nextPage = data.nextPage;
 				const url = new URL(window.location);
-				if (this.category)
+				if (this.category && this.category !="all")
 					url.searchParams.set('cat', this.category.key);
-				if (this.keywords != '')
+				if (this.keywords && this.keywords != '')
 					url.searchParams.set('keywords', this.keywords);
 				if (this.sort)
 					url.searchParams.set('sort', this.sort.key);
+				if (this.language)
+					url.searchParams.set('lang', this.language.key);
+					
 				window.history.pushState({}, '', url);
 				this.isLoaded = true;
             });
@@ -146,9 +163,14 @@ export default {
 			let formData = {
                 language: this.$settings.language,
             };
-      this.category_options.push({"key":"all","label":"All"});
+      		this.category_options.push({"key":"all","label":"All"});
 			return this.$api.Posts.getCategories(formData).then(({ data }) => {
 				this.category_options.push(...data);
+			});
+		},
+		getLanguage() {
+			return this.$api.Posts.getLanguage().then(({ data }) => {
+				this.language_options.push(...data);
 			});
 		},
 		submitFilter() {
@@ -157,22 +179,32 @@ export default {
 			this.getData(this.page);
 		},
 		getDefaultData() {
-			if (this.cat) {
+			let param = ITSHelpers.getParam(window.location.href);
+			if (param.hasOwnProperty("cat")) {
 				let hasCat = this.category_options.filter(v=>{
-					return v.key == this.cat;
+					return v.key == param.cat;
 				});
 				if (hasCat) {
 					this.category = hasCat[0];
 				}
 			}
 
-			if (this.keys) {
-				this.keywords = this.keys;
+			if (param.hasOwnProperty("cat")) {
+				let hasLang = this.language_options.filter(v=>{
+					return v.key == param.lang;
+				});
+				if (hasLang) {
+					this.language = hasLang[0];
+				}
 			}
 
-			if (this.sorting) {
+			if (param.hasOwnProperty("cat")) {
+				this.keywords = param.keys;
+			}
+
+			if (param.hasOwnProperty("sorting")) {
 				let hasSort = this.sort_options.filter(v=>{
-					return v.key == this.sorting;
+					return v.key == param.sorting;
 				});
 
 				if (hasSort) {
@@ -203,17 +235,27 @@ export default {
 		category() {
 			if (!this.isLoaded) return;
 			this.submitFilter();
+		},
+		language() {
+			if (!this.isLoaded) return;
+			this.submitFilter();
 		}
 	},
 	created() {
-		this.getCategories().then(()=> {
+		let _this = this;
+		async function init() {
+			await _this.getCategories();
+			await _this.getLanguage();
+
 			let param = ITSHelpers.getParam(window.location.href);
-			if (param.hasOwnProperty("keywords") || param.hasOwnProperty("sort") || param.hasOwnProperty("cat")) {
-				this.getDefaultData();
+			if (param.hasOwnProperty("keywords") || param.hasOwnProperty("sort") || param.hasOwnProperty("lang") || param.hasOwnProperty("cat")) {
+				_this.getDefaultData();
 			}else{
-				this.getData(this.page);
+				_this.getData(_this.page);
 			}
-		});
+		}
+
+		init();
     },
 };
 </script>
