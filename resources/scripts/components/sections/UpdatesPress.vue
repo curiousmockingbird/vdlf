@@ -57,7 +57,7 @@
 						</span>
 						<h3 class="font-bold text-2xl leading-tight">{{ item.title }}</h3>
 						<span class="text-gray-400 font-display w-full inline-block mt-1 mb-4">{{ item.date }}</span>
-						<div class="mb-2 font-display" v-html="item.excerpt"></div>
+						<div class="mb-2 font-display overflow-hidden break-words" v-html="item.excerpt"></div>
 					</div>
 					<button 
 						class="text-left text-black py-8 px-7 rounded-b-md text-white mt-auto font-bold underline text-xl block"
@@ -198,13 +198,13 @@ export default {
 				}
 			}
 
-			if (param.hasOwnProperty("cat")) {
-				this.keywords = param.keys;
+			if (param.hasOwnProperty("keywords")) {
+				this.keywords = param.keywords;
 			}
 
-			if (param.hasOwnProperty("sorting")) {
+			if (param.hasOwnProperty("sort")) {
 				let hasSort = this.sort_options.filter(v=>{
-					return v.key == param.sorting;
+					return v.key == param.sort;
 				});
 
 				if (hasSort) {
@@ -242,20 +242,16 @@ export default {
 		}
 	},
 	created() {
-		let _this = this;
-		async function init() {
-			await _this.getCategories();
-			await _this.getLanguage();
-
-			let param = ITSHelpers.getParam(window.location.href);
-			if (param.hasOwnProperty("keywords") || param.hasOwnProperty("sort") || param.hasOwnProperty("lang") || param.hasOwnProperty("cat")) {
-				_this.getDefaultData();
-			}else{
-				_this.getData(_this.page);
-			}
-		}
-
-		init();
+		this.getCategories().then(()=>{
+			this.getLanguage().then(()=> {
+				let param = ITSHelpers.getParam(window.location.href);
+				if (param.hasOwnProperty("keywords") || param.hasOwnProperty("sort") || param.hasOwnProperty("lang") || param.hasOwnProperty("cat")) {
+					this.getDefaultData();
+				}else{
+					this.getData(this.page);
+				}
+			});
+		});
     },
 };
 </script>

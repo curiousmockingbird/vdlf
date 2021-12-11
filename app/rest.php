@@ -45,6 +45,8 @@ function get_cpt_data($params, $type = array("post"))
     $exclude = $params["exclude"] ?? null;
     $language = $params["language"] ?? null;
     $custom_lang = $params["lang"] ?? null;
+    $month = $params["month"] ?? null;
+    $year = $params["year"] ?? null;
 
     $args = array(
         'post_type' => $types,
@@ -80,7 +82,7 @@ function get_cpt_data($params, $type = array("post"))
     if ($categories && $categories != "all") {
         $categories = explode(",", $categories);
         foreach ($categories as $category) {
-            if ($taxonomy == "category" && $language != "en") {
+            if ($taxonomy == "category" && $language && $language != "en") {
                 $category = $category."-".$language;
             }
             $tax_query[] = array('taxonomy' => $taxonomy, 'field' => 'slug', 'terms' => array($category));
@@ -99,6 +101,17 @@ function get_cpt_data($params, $type = array("post"))
     }
     if (count($tax_query) > 1) {
         $tax_query['relation'] = 'OR';
+    }
+    if ($month || $year) {
+        if ($year) {
+            $date_query["year"] = $year;
+        }
+
+        if ($month) {
+            $date_query["month"] = $month;
+        }
+
+        $args["date_query"] = $date_query;
     }
 
     $args['tax_query'] = $tax_query;
@@ -245,6 +258,22 @@ function get_custom_language() {
     return $result;
 }
 
+function get_topic() {
+    $args = [
+        'hide_empty' => true,
+        'orderby'    => 'count',
+    ];
+    $categories = get_terms('topic', $args);
+    $result = array();
+    foreach ($categories as $cat) {
+        $result[] = [
+            "label" => $cat->name,
+            "key"   => $cat->slug
+        ];
+    }
+    return $result;
+}
+
 function get_all_staff($request) {
     $params = $request->get_params() ?? array();
     $perpage = $params["perpage"] ?? -1;
@@ -323,6 +352,11 @@ add_action('rest_api_init', function () {
     register_rest_route('categories', 'all', array(
         'methods'             => 'POST',
         'callback'            => 'get_post_categories',
+        'permission_callback' => '__return_true',
+    ));
+    register_rest_route('topic', 'all', array(
+        'methods'             => 'POST',
+        'callback'            => 'get_topic',
         'permission_callback' => '__return_true',
     ));
     register_rest_route('language', 'all', array(

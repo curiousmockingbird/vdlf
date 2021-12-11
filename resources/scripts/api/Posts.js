@@ -14,8 +14,11 @@ export default class Stories {
     static getCategories(formData) {
         return httpClient.post('/categories/all', formData);
     }
-    static getLanguage(formData) {
-        return httpClient.post('/language/all', formData);
+    static getTopic() {
+        return httpClient.post('/topic/all');
+    }
+    static getLanguage() {
+        return httpClient.post('/language/all');
     }
     static getStaff(formData) {
         return httpClient.post('/staff/all', formData);

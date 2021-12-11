@@ -1,6 +1,44 @@
 <template>
 	<section class=" min-h-screen bg-gray-100 pb-10" id="filter-section">
 		<div class="container">
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-10 gap-3 py-10">
+				<div
+					class="select-container border-2 col-span-2 rounded-lg py-3 pl-3 inline-flex items-center bg-white">
+					<label for="month" class="text-gray-500 text-base font-medium">Month:</label>
+					<v-select
+						class="select w-full ml-3 font-medium"
+						id="month"
+						:options="month_options"
+						v-model="month"
+					></v-select>
+				</div>
+				<div
+					class="select-container border-2 col-span-2 rounded-lg py-3 pl-3 inline-flex items-center bg-white">
+					<label for="year" class="text-gray-500 text-base font-medium">Year:</label>
+					<v-select
+						class="select w-full ml-3 font-medium"
+						id="year"
+						:options="year_options"
+						v-model="year"
+					></v-select>
+				</div>
+				<div
+					class="select-container border-2 col-span-3 rounded-lg py-3 pl-3 inline-flex items-center bg-white">
+					<label for="topic" class="text-gray-500 text-base font-medium">Topic:</label>
+					<v-select
+						class="select w-full ml-3 font-medium"
+						id="topic"
+						:options="topic_options"
+						v-model="topic"
+					></v-select>
+				</div>
+				<div
+					class="border-2 rounded-lg py-3 col-span-3 px-3 inline-flex items-center bg-white border-themeBrown"
+				>
+					<input id="search" type="text" placeholder="Type here" v-model="keywords" class="border-0 w-full outline-none font-medium">
+					<svg-vue icon="search-dark" width="18" height="18" class="fill-current text-white"></svg-vue>
+				</div>
+			</div>
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-7 my-10" v-if="updates && updates.length>0">
 				<a :href="item.link?item.link:'#'" target="_blank" v-for="(item, i) in updates" :key="i" class="mention-card">
 					<div class="p-7">
@@ -37,16 +75,20 @@ import {
   ITSHelpers
 } from "../../utils/ITSUtilities";
 export default {
-	props:["sorting","keys","cat"],
 	data() {
 		return {
 			eventKey:null,
 			keywords:'',
-			category:'all',
+			month:null,
+			year:null,
 			nextPage:false,
 			updates:[],
 			isLoaded:false,
+			topic:null,
+			month_options:[],
+			year_options:[],
 			page:1,
+			topic_options: [],
 		};
 	},
 	methods: {
@@ -55,17 +97,155 @@ export default {
             let formData = {
                 page: page,
                 perpage: 6,
-                language: this.$settings.language,
+                // year: this.$settings.year,
             };
+			if (this.month) {
+                formData.month = this.month.key;
+			}
+			if (this.topic) {
+                formData.taxonomy = "topic";
+				formData.categories = this.topic.key;
+			}
+			if (this.year) {
+                formData.year = this.year.key;
+			}
+			if (this.keywords != '') {
+                formData.keywords = this.keywords;
+			}
             this.$api.Posts.getMentions(formData).then(({ data }) => {
                 this.updates.push(...data.posts);
 				this.nextPage = data.nextPage;
+				const url = new URL(window.location);
+				if (this.month)
+					url.searchParams.set('select_month', this.month.key);
+				if (this.keywords && this.keywords != '')
+					url.searchParams.set('keywords', this.keywords);
+				if (this.topic)
+					url.searchParams.set('topic', this.topic.key);
+				if (this.year)
+					url.searchParams.set('select_year', this.year.key);
+					
+				window.history.pushState({}, '', url);
 				this.isLoaded = true;
             });
         },
+		getTopic() {
+			return this.$api.Posts.getTopic().then(({ data }) => {
+				data.forEach((item) => {
+					let newItem = {
+						key:item.key,
+						label:item.label.replace(/&amp;/g, '&')
+					}
+					this.topic_options.push(newItem);
+				})
+			});
+		},
+		getYear() {
+			let currentYear = new Date().getFullYear();
+			for (let i=currentYear; i>=currentYear-5; i--) {
+				this.year_options.push({
+					"key":i,
+					"label":i
+				})
+			}
+		},
+		getMonth() {
+			this.month_options= [
+				{"key": "01", "label": "January"},
+				{"key": "02", "label": "February"},
+				{"key": "03", "label": "March"},
+				{"key": "04", "label": "April"},
+				{"key": "05", "label": "May"},
+				{"key": "06", "label": "June"},
+				{"key": "07", "label": "July"},
+				{"key": "08", "label": "August"},
+				{"key": "09", "label": "September"},
+				{"key": "10", "label": "October"},
+				{"key": "11", "label": "November"},
+				{"key": "12", "label": "December"},
+			];
+		},
+		submitFilter() {
+			this.updates=[];
+			this.page = 1;
+			this.getData(this.page);
+		},
+		getDefaultData() {
+			let param = ITSHelpers.getParam(window.location.href);
+			if (param.hasOwnProperty("select_month")) {
+				let hasMonth = this.month_options.filter(v=>{
+					return v.key == param.select_month;
+				});
+				if (hasMonth) {
+					this.month = hasMonth[0];
+				}
+			}
+
+			if (param.hasOwnProperty("topic")) {
+				let hasTopic = this.topic_options.filter(v=>{
+					return v.key == param.topic;
+				});
+
+				if (hasTopic) {
+					this.topic = hasTopic[0];
+				}
+			}
+
+			if (param.hasOwnProperty("select_year")) {
+				let hasYear = this.year_options.filter(v=>{
+					return v.key == param.select_year;
+				});
+
+				if (hasYear) {
+					this.year = hasYear[0];
+				}
+			}
+
+			if (param.hasOwnProperty("keywords")) {
+				this.keywords = param.keywords;
+			}
+
+			this.getData(this.page);
+			this.scrollToFilter();
+		},
+		scrollToFilter() {
+            setTimeout(() => {
+                ITSHelpers.scrollToElement("#filter-section");
+            }, 800);
+        }
     },
+	watch:{
+		keywords() {
+			if (!this.isLoaded) return;
+			clearTimeout(this.eventKey);
+			this.eventKey = setTimeout(() => {
+				this.submitFilter();
+			}, 1000);
+		},
+		topic() {
+			if (!this.isLoaded) return;
+			this.submitFilter();
+		},
+		month() {
+			if (!this.isLoaded) return;
+			this.submitFilter();
+		},
+		year() {
+			if (!this.isLoaded) return;
+			this.submitFilter();
+		}
+	},
 	created() {
-		this.getData(this.page);
+		this.getYear();
+		this.getMonth();
+		this.getTopic().then(()=>{
+			let param = ITSHelpers.getParam(window.location.href);
+			if (param.hasOwnProperty("keywords") || param.hasOwnProperty("topic") || param.hasOwnProperty("lang") || param.hasOwnProperty("cat")) {
+				this.getDefaultData();
+			}else{
+				this.getData(this.page);
+			}
+		});
     },
 };
 </script>

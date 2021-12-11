@@ -6,7 +6,7 @@
                 <StaffCard
                     v-for="(staffItem, index) in cate.staff"
                     :key="index"
-                    clickable="false"
+                    :clickable="false"
                     :avatar="staffItem.avatar"
                     :imagePosition="staffItem.image_position"
                     :title="staffItem.title"
