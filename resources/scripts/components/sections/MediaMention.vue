@@ -240,7 +240,7 @@ export default {
 		this.getMonth();
 		this.getTopic().then(()=>{
 			let param = ITSHelpers.getParam(window.location.href);
-			if (param.hasOwnProperty("keywords") || param.hasOwnProperty("topic") || param.hasOwnProperty("lang") || param.hasOwnProperty("cat")) {
+			if (param.hasOwnProperty("keywords") || param.hasOwnProperty("topic") || param.hasOwnProperty("select_month") || param.hasOwnProperty("select_year")) {
 				this.getDefaultData();
 			}else{
 				this.getData(this.page);
