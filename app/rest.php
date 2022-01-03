@@ -207,6 +207,59 @@ function import_media_mention() {
     echo "Media content imported";
 }
 
+function import_update_topic() {
+    if ($_GET["token"] != "60195446176DRT65ff6bed6b6d2f") {
+        return "failed token";
+    }
+
+    $posts = json_decode(file_get_contents(get_template_directory_uri() . "/data/update-topics.json"));
+    $x=1;
+    foreach($posts as $post) {;
+        if ($post->On_website == "No") {
+            continue;
+        }
+        $data = get_page_by_title($post->Title, OBJECT, 'media_mentions');
+        if ($data) {
+            $post_id = $data->ID;
+            wp_set_object_terms($post_id, $post->Topic, "topic", false);
+            $x++;
+        }else{
+            if ($post->Language == "English") {
+                $lang = "en";
+            }else{
+                $lang = "es";
+            }
+            $postData = array(
+                'post_title' => $post->Title,
+                'post_date' => $post->Date,
+                'post_status' => "publish",
+                'post_type' => "media_mentions",
+                'post_author' => get_current_user_id() ?? 1,
+            );
+            kses_remove_filters();
+            $post_id = wp_insert_post($postData);
+    
+            $attrs = array(
+                'title' => $post->Title,
+                'url' => $post->Link,
+                'target' => "_blank",
+            );
+    
+            update_field('link', $attrs,  $post_id);
+            update_field("reporter", $post->Reporter_Author,$post_id);
+            update_field("media_market", $post->Media,$post_id);
+            update_field("quoted", $post->Quoted,$post_id);
+            update_field("connected_to_event", $post->Connected_to_event,$post_id);
+            kses_init_filters();
+            wp_set_object_terms($post_id, $post->Topic,"topic", true);
+            wp_set_object_terms($post_id, $post->Media_Source,"media_source", true);
+            pll_set_post_language($post_id, $lang);
+            $x++;
+        }
+    }
+    echo $x." updated";
+}
+
 function get_actions($request) {
     return get_cpt_data($request->get_params(),array("take_actions"));
 }
@@ -319,6 +372,11 @@ function get_all_staff($request) {
 }
 
 add_action('rest_api_init', function () {
+    register_rest_route('medias', 'update', array(
+        'methods'             => 'GET',
+        'callback'            => 'import_update_topic',
+        'permission_callback' => '__return_true',
+    ));
     register_rest_route('medias', 'import', array(
         'methods'             => 'GET',
         'callback'            => 'import_media_mention',
