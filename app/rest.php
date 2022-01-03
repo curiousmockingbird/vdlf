@@ -277,7 +277,8 @@ function get_post_categories($request) {
     $language = $params["language"] ?? null;
     $args = [
         'hide_empty' => true,
-        'orderby'    => 'count',
+        'orderby'    => 'name',
+        'order'      => 'asc',
     ];
     if ($language) {
         $args['lang'] = $language;
@@ -298,7 +299,9 @@ function get_post_categories($request) {
 function get_custom_language() {
     $args = [
         'hide_empty' => true,
-        'orderby'    => 'count',
+        'orderby'    => 'name',
+        'order'      => 'asc',
+        'fields'     => 'all', 
     ];
     $categories = get_terms('post_lang', $args);
     $result = array();
@@ -314,9 +317,14 @@ function get_custom_language() {
 function get_topic() {
     $args = [
         'hide_empty' => true,
-        'orderby'    => 'count',
+        'orderby'    => 'name',
+        'order'      => 'asc',
+        'fields'     => 'all', 
     ];
     $categories = get_terms('topic', $args);
+    usort($categories, function($a, $b){
+        return strcmp($a->name, $b->name);
+    });
     $result = array();
     foreach ($categories as $cat) {
         $result[] = [
