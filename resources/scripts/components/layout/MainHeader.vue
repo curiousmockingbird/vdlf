@@ -56,23 +56,25 @@
                     class="py-8 font-bold px-4 text-base xl:text-lg "
                     >{{ $settings.label.membership }}</a
                 >
-                <a
-                    :href="$settings.donatePage"
-                    class="text-white bg-gradient-to-r from-primary text-base xl:text-lg  to-secondary py-8 font-bold pl-6 pr-4 relative left-1"
-                    >{{ $settings.label.donate }}</a
-                >
-                <button
-                    class="py-8 h-full border-0 bg-secondary border-0 px-4 hover:outline-none active:outline-none fill-current outline-none relative"
-                    :class="bgPrimary ? 'text-white' : 'text-primary'"
-                    @click="openSearchBar()"
-                >
-                    <svg-vue
-                        icon="search"
-                        height="19px"
-                        width="19px"
-                        style="fill: none; "
-                    ></svg-vue>
-                </button>
+                <div class="inline-flex items-center text-white bg-gradient-to-r from-primary text-base xl:text-lg  to-secondary font-bold pl-6 pr-4 relative left-1">
+                    <a
+                        :href="$settings.donatePage"
+                        class="text-white py-8"
+                        >{{ $settings.label.donate }}</a
+                    >
+                    <button
+                        class="py-8 h-full border-0 border-0 px-4 hover:outline-none active:outline-none fill-current outline-none relative"
+                        :class="bgPrimary ? 'text-white' : 'text-primary'"
+                        @click="openSearchBar()"
+                    >
+                        <svg-vue
+                            icon="search"
+                            height="19px"
+                            width="19px"
+                            style="fill: none; "
+                        ></svg-vue>
+                    </button>
+                </div>
             </div>
             <nav
                 class="mobile-nav transition-transform transform-gpu duration-700 shadow-lg"
