@@ -56,6 +56,10 @@ module.exports = {
         'half': '50%',
         'full': '100%'
       },
+      borderWidth: {
+        '0': '0px',
+        '3': '3px',
+      },
       colors: {
         white: '#fff',
         black: '#000',

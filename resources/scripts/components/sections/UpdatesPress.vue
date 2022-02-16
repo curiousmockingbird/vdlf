@@ -41,7 +41,9 @@
 			</div>
 
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-7 my-10" v-if="updates && updates.length>0">
-				<a :href="item.link?item.link:'#'" v-for="(item, i) in updates" :key="i" class="press-card">
+				<a :href="item.link?item.link:'#'" v-for="(item, i) in updates" :key="i" class="press-card border-3"
+					:style="styleBorder(item)"
+				>
 					<div class="p-7">
 						<span class="my-2 w-full inline-block font-bold tracking-wider leading-normal" 
 							v-html="item.categories.length
@@ -117,11 +119,20 @@ export default {
 		styleButton(item) {
 			let Element = item.categories[0].name;
 			if (Element.toLowerCase().includes('news'))
-				return `background-color:#A0643D`;
+				return `background-color:#A0643D;`;
 			else if (Element.toLowerCase().includes('blog'))
-				return `background-color:#337c4c`;
+				return `background-color:#337c4c;`;
 			else (Element.toLowerCase().includes('press'))
-				return `background-color:#871D3D`;
+				return `background-color:#871D3D;`;
+		},
+		styleBorder(item) {
+			let Element = item.categories[0].name;
+			if (Element.toLowerCase().includes('news'))
+				return `border-color:#A0643D`;
+			else if (Element.toLowerCase().includes('blog'))
+				return `border-color:#337c4c`;
+			else (Element.toLowerCase().includes('press'))
+				return `border-color:#871D3D`;
 		},
         getData(page) {
 			this.isLoaded = false;
@@ -257,7 +268,7 @@ export default {
 </script>
 <style lang="scss">
 .press-card {
-	@apply cursor-pointer flex flex-col h-full rounded-lg hover:shadow-2xl bg-white;
+	@apply cursor-pointer flex flex-col h-full rounded-xl hover:shadow-2xl bg-white;
 	&:hover {
 		@apply bg-gradient-to-b from-primary to-secondary text-white;
 		h3, span, button, label {
