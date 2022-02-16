@@ -33,7 +33,7 @@
 					></v-select>
 				</div>
 				<div
-					class="border-2 rounded-lg py-3 px-3 inline-flex items-center bg-white border-themeBrown"
+					class="border-2 rounded-lg py-3 px-3 inline-flex items-center bg-white border-themeBlue"
 				>
 					<input id="search" type="text" placeholder="Type here" v-model="keywords" class="border-0 w-full outline-none font-medium">
 					<svg-vue icon="search-dark" width="18" height="18" class="fill-current text-white"></svg-vue>
@@ -41,7 +41,7 @@
 			</div>
 
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-7 my-10" v-if="updates && updates.length>0">
-				<a :href="item.link?item.link:'#'" v-for="(item, i) in updates" :key="i" class="press-card border-3"
+				<a :href="item.link?item.link:'#'" v-for="(item, i) in updates" :key="i" class="press-card"
 					:style="styleBorder(item)"
 				>
 					<div class="p-7">
@@ -72,7 +72,7 @@
 			</div>
 
 			<div class="w-full inline-flex justify-center pt-10 mb-24" v-if="nextPage">
-				<button class="bg-white border-2 border-themeGreen px-16 py-5 rounded-xl font-bold hover:shadow-2xl transition-shadow" @click="getData(++page)">Load More</button>
+				<button class="bg-white border-2 border-themeBlue px-16 py-5 rounded-xl font-bold hover:shadow-2xl transition-shadow" @click="getData(++page)">Load More</button>
 			</div>
 
 		</div>
@@ -119,11 +119,11 @@ export default {
 		styleButton(item) {
 			let Element = item.categories[0].name;
 			if (Element.toLowerCase().includes('news'))
-				return `background-color:#A0643D;`;
+				return `background-color:#A0643D; margin:-1.2px`;
 			else if (Element.toLowerCase().includes('blog'))
-				return `background-color:#337c4c;`;
+				return `background-color:#337c4c; margin:-1.2px`;
 			else (Element.toLowerCase().includes('press'))
-				return `background-color:#871D3D;`;
+				return `background-color:#871D3D; margin:-1.2px`;
 		},
 		styleBorder(item) {
 			let Element = item.categories[0].name;
@@ -268,9 +268,9 @@ export default {
 </script>
 <style lang="scss">
 .press-card {
-	@apply cursor-pointer flex flex-col h-full rounded-xl hover:shadow-2xl bg-white;
+	@apply box-border cursor-pointer flex flex-col h-full rounded-xl hover:shadow-2xl bg-white border-3;
 	&:hover {
-		@apply bg-gradient-to-b from-primary to-secondary text-white;
+		@apply bg-gradient-to-b from-primary to-secondary text-white border-gray-100 #{!important};
 		h3, span, button, label {
 			color:#FFF !important;
 			background-color: transparent !important;
@@ -278,18 +278,19 @@ export default {
 	}
 }
 .select-container{
-	&:nth-child(1){
-		@apply border-themeBlue;
-	}
-	&:nth-child(2){
-		@apply border-themeMagenta;
-	}
-	&:nth-child(3){
-		@apply border-themeRed;
-	}
-	&:nth-child(4){
-		@apply border-themeBrown;
-	}
+	@apply border-themeBlue;
+	// &:nth-child(1){
+	// 	@apply border-themeBlue;
+	// }
+	// &:nth-child(2){
+	// 	@apply border-themeMagenta;
+	// }
+	// &:nth-child(3){
+	// 	@apply border-themeRed;
+	// }
+	// &:nth-child(4){
+	// 	@apply border-themeBrown;
+	// }
 }
 .select  .vs__search::placeholder,
 .select  .vs__dropdown-toggle
