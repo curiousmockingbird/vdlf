@@ -7,8 +7,8 @@
         <div class="container relative z-20">
             <div class="w-full md:flex items-center justify-between mb-10">
                 <img
-                    :src="$images + '/logo-footer.png'"
-                    class="icon max-w-full h-auto"
+                    :src="$images + '/VDLF-logo-footer.png'"
+                    class="icon max-w-full h-auto flex-shrink-0"
                     alt="VDLF"
                     width="282px"
                     height="120px"

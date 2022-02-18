@@ -9,8 +9,8 @@
             <div class="flex  justify-center self-center items-center">
                 <a :href="$settings.app_url" class="logo self-center font-display font-hairline">
                     <img
-                        :src="$images + '/VDLF-logo.png'"
-                        class="icon max-w-full h-auto"
+                        :src="$images + '/VDLF-logo-header.png'"
+                        class="icon max-w-full h-auto flex-shrink-0"
                         alt="VDLF"
                         width="192px"
                         height="81px"
@@ -88,7 +88,7 @@
                         >
                             <img
                                 :src="$images + '/logo-footer.png'"
-                                class="icon max-w-full h-auto"
+                                class="icon max-w-full h-auto flex-shrink-0"
                                 alt="VDLF"
                                 width="137px"
                                 height="57px"
