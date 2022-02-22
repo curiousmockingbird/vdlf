@@ -12,15 +12,16 @@
         </h4>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
-            <UpdatesCard
+            <UpdatesCardNew
                 v-for="(item, i) in updates"
                 :key="i"
                 :title="item.title"
-                :description="item.excerpt"
+                :excerpt="item.excerpt"
+                :categories="item.categories"
                 :date="item.date"
-                :link="item.link"
+                :link="item.link ? item.link : '#'"
                 :moreLabel="content.button_more_text"
-            ></UpdatesCard>
+            ></UpdatesCardNew>
         </div>
         <a
             :href="content.button_link.url"
@@ -67,7 +68,7 @@ export default {
             let formData = {
                 page: this.page,
                 perpage: this.content.perpage,
-                categories: "press-release",
+                // categories: "press-release",
                 language: this.$settings.language,
                 sortby: "latest",
             };

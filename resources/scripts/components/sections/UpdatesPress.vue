@@ -3,7 +3,7 @@
 		<div class="container">
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 py-10">
 				<div
-					class="select-container border-2 rounded-lg py-3 pl-3 inline-flex items-center bg-white">
+					class="select-container">
 					<label for="sort" class="text-gray-500 text-base font-medium">Sort:</label>
 					<v-select
 						class="select w-full ml-3 font-medium"
@@ -13,7 +13,7 @@
 					></v-select>
 				</div>
 				<div
-					class="select-container border-2 rounded-lg py-3 pl-3 inline-flex items-center bg-white">
+					class="select-container">
 					<label for="category" class="text-gray-500 text-base font-medium">Category:</label>
 					<v-select
 						class="select w-full ml-3 font-medium"
@@ -23,7 +23,7 @@
 					></v-select>
 				</div>
 				<div
-					class="select-container border-2 rounded-lg py-3 pl-3 inline-flex items-center bg-white">
+					class="select-container">
 					<label for="language" class="text-gray-500 text-base font-medium">Language:</label>
 					<v-select
 						class="select w-full ml-3 font-medium"
@@ -33,46 +33,31 @@
 					></v-select>
 				</div>
 				<div
-					class="border-2 rounded-lg py-3 px-3 inline-flex items-center bg-white border-themeBlue"
+					class="input-keywords pr-3"
 				>
 					<input id="search" type="text" placeholder="Type here" v-model="keywords" class="border-0 w-full outline-none font-medium">
 					<svg-vue icon="search-dark" width="18" height="18" class="fill-current text-white"></svg-vue>
 				</div>
 			</div>
 
-			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-7 my-10" v-if="updates && updates.length>0">
-				<a :href="item.link?item.link:'#'" v-for="(item, i) in updates" :key="i" class="press-card"
-					:style="styleBorder(item)"
-				>
-					<div class="p-7">
-						<span class="my-2 w-full inline-block font-bold tracking-wider leading-normal" 
-							v-html="item.categories.length
-							? item.categories.map((el) => {
-								if (el.name.toLowerCase().includes('news'))
-									return `<label style='color:#A0643D'>${el.name}</label>`;
-								if (el.name.toLowerCase().includes('blog'))
-									return `<label style='color:#337c4c'>${el.name}</label>`;
-								if (el.name.toLowerCase().includes('press'))
-									return `<label style='color:#871D3D'>${el.name}</label>`;
-							}).join(', ')
-							: ''">
-						</span>
-						<h3 class="font-bold text-2xl leading-tight">{{ item.title }}</h3>
-						<span class="text-gray-400 font-display w-full inline-block mt-1 mb-4">{{ item.date }}</span>
-						<div class="mb-2 font-display overflow-hidden break-words" v-html="item.excerpt"></div>
-					</div>
-					<button 
-						class="text-left text-black py-8 px-7 rounded-b-md text-white mt-auto font-bold underline text-xl block"
-						:style="styleButton(item)"
-					>Continue Reading</button>
-				</a>
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-7 mt-2" v-if="updates && updates.length>0">
+				<UpdatesCardNew
+                v-for="(item, i) in updates"
+                :key="i"
+                :title="item.title"
+                :excerpt="item.excerpt"
+                :categories="item.categories"
+                :date="item.date"
+                :link="item.link ? item.link : '#'"
+                moreLabel="Continue Reading"
+            ></UpdatesCardNew>
 			</div>
 			<div v-else-if="isLoaded">
 				<p>No data found</p>
 			</div>
 
-			<div class="w-full inline-flex justify-center pt-10 mb-24" v-if="nextPage">
-				<button class="bg-white border-2 border-themeBlue px-16 py-5 rounded-xl font-bold hover:shadow-2xl transition-shadow" @click="getData(++page)">Load More</button>
+			<div class="w-full inline-flex justify-center py-16" v-if="nextPage">
+				<button class="more-press" @click="getData(++page)">Load More</button>
 			</div>
 
 		</div>
@@ -267,18 +252,9 @@ export default {
 };
 </script>
 <style lang="scss">
-.press-card {
-	@apply box-border cursor-pointer flex flex-col h-full rounded-xl hover:shadow-2xl bg-white border-3;
-	&:hover {
-		@apply bg-gradient-to-b from-primary to-secondary text-white border-gray-100 #{!important};
-		h3, span, button, label {
-			color:#FFF !important;
-			background-color: transparent !important;
-		}
-	}
-}
-.select-container{
-	@apply border-themeBlue;
+.select-container,
+.input-keywords{
+	@apply border-themeRed border-3 rounded-lg py-3 pl-3 inline-flex items-center bg-white;
 	// &:nth-child(1){
 	// 	@apply border-themeBlue;
 	// }
@@ -304,5 +280,11 @@ export default {
 .select  .vs__clear,
 .select  .vs__open-indicator {
   fill: #394066;
+}
+.more-press {
+	@apply bg-white border-3 border-themeRed px-16 py-5 rounded-xl text-xl transition-shadow;
+	&:hover {
+		@apply bg-gradient-to-b from-primary to-secondary text-white border-gray-100 #{!important};
+	}
 }
 </style>

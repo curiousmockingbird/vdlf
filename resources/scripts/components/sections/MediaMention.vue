@@ -1,9 +1,9 @@
 <template>
 	<section class=" min-h-screen bg-gray-100 pb-10" id="filter-section">
 		<div class="container">
-			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-10 gap-3 py-10">
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 py-10">
 				<div
-					class="select-container border-2 col-span-2 rounded-lg py-3 pl-3 inline-flex items-center bg-white">
+					class="select-container">
 					<label for="month" class="text-gray-500 text-base font-medium">Month:</label>
 					<v-select
 						class="select w-full ml-3 font-medium"
@@ -13,7 +13,7 @@
 					></v-select>
 				</div>
 				<div
-					class="select-container border-2 col-span-2 rounded-lg py-3 pl-3 inline-flex items-center bg-white">
+					class="select-container">
 					<label for="year" class="text-gray-500 text-base font-medium">Year:</label>
 					<v-select
 						class="select w-full ml-3 font-medium"
@@ -23,7 +23,7 @@
 					></v-select>
 				</div>
 				<div
-					class="select-container border-2 col-span-3 rounded-lg py-3 pl-3 inline-flex items-center bg-white">
+					class="select-container">
 					<label for="topic" class="text-gray-500 text-base font-medium">Topic:</label>
 					<v-select
 						class="select w-full ml-3 font-medium"
@@ -33,13 +33,13 @@
 					></v-select>
 				</div>
 				<div
-					class="border-2 rounded-lg py-3 col-span-3 px-3 inline-flex items-center bg-white border-themeBrown"
+					class="input-keywords pr-3"
 				>
 					<input id="search" type="text" placeholder="Type here" v-model="keywords" class="border-0 w-full outline-none font-medium">
 					<svg-vue icon="search-dark" width="18" height="18" class="fill-current text-white"></svg-vue>
 				</div>
 			</div>
-			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-7 my-10" v-if="updates && updates.length>0">
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-7 my-5" v-if="updates && updates.length>0">
 				<a :href="item.link?item.link:'#'" target="_blank" v-for="(item, i) in updates" :key="i" class="mention-card">
 					<div class="p-7">
 						<span class="my-2 w-full inline-block font-bold tracking-wider leading-normal" 
@@ -63,8 +63,8 @@
 				<p>No data found</p>
 			</div>
 
-			<div class="w-full inline-flex justify-center pt-10 mb-24" v-if="nextPage">
-				<button class="bg-white border-2 border-themeBlue px-16 py-5 rounded-xl font-bold hover:shadow-2xl" @click="getData(++page)">Load More</button>
+			<div class="w-full inline-flex justify-center py-16" v-if="nextPage">
+				<button class="more-press" @click="getData(++page)">Load More</button>
 			</div>
 
 		</div>
@@ -251,9 +251,9 @@ export default {
 </script>
 <style lang="scss">
 .mention-card {
-	@apply cursor-pointer flex flex-col h-full rounded-lg hover:shadow-2xl bg-white;
+	@apply cursor-pointer flex flex-col h-full rounded-lg border-3 border-themeBlue bg-white rounded-xl;
 	&:hover {
-		@apply bg-gradient-to-b from-primary to-secondary text-white;
+		@apply bg-gradient-to-b from-primary to-secondary text-white border-gray-100 #{!important};
 		h3, span, button, label {
 			color:#FFF !important;
 			background-color: transparent !important;
