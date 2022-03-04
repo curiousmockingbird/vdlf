@@ -1,6 +1,7 @@
 <template>
-	<section class=" min-h-screen bg-gray-100 pb-10" id="filter-section">
-		<div class="container">
+	<section class=" min-h-screen bg-gray-100 pb-10 relative" id="filter-section">
+		<img :src="$images + '/services-circles.png'" class="absolute -top-96 -right-96 bg-circle z-0" />
+		<div class="container relative">
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 py-10">
 				<div
 					class="select-container">
@@ -282,7 +283,7 @@ export default {
   fill: #394066;
 }
 .more-press {
-	@apply bg-white border-3 border-themeRed px-16 py-5 rounded-xl text-xl transition-shadow;
+	@apply bg-white font-display font-semibold border-3 border-themeRed px-8 py-5 rounded-xl text-xl transition-shadow;
 	&:hover {
 		@apply bg-gradient-to-b from-primary to-secondary text-white border-gray-100 #{!important};
 	}

@@ -1,6 +1,7 @@
 <template>
-	<section class=" min-h-screen bg-gray-100 pb-10" id="filter-section">
-		<div class="container">
+	<section class=" min-h-screen bg-gray-100 pb-10 relative" id="filter-section">
+		<img :src="$images + '/services-circles.png'" class="absolute -top-96 -right-96 bg-circle z-0" />
+		<div class="container relative">
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 py-10">
 				<div
 					class="select-container">
