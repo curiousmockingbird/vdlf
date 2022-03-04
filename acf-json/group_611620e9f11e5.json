@@ -93,6 +93,21 @@
             "return_format": "url"
         },
         {
+            "key": "field_62222596a740a",
+            "label": "Press Page Es",
+            "name": "press_page_es",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url"
+        },
+        {
             "key": "field_6191b6ab266f6",
             "label": "Donate page",
             "name": "donate_page",
@@ -108,9 +123,39 @@
             "return_format": "url"
         },
         {
+            "key": "field_6222243d1abd6",
+            "label": "Donate page Es",
+            "name": "donate_page_es",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url"
+        },
+        {
             "key": "field_6191b6bf266f7",
             "label": "Membership page",
             "name": "membership_page",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url"
+        },
+        {
+            "key": "field_622224481abd7",
+            "label": "Membership page Es",
+            "name": "membership_page_es",
             "type": "link",
             "instructions": "",
             "required": 0,
@@ -251,5 +296,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1636939468
+    "show_in_rest": 0,
+    "modified": 1646405022
 }

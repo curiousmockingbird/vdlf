@@ -15,10 +15,10 @@
                 />
 
                 <div class="button-actions hidden lg:block my-3 md:my-0 -mx-5">
-                    <a href="#" class="text-2xl font-bold font-arial-black p-5 text-primary">{{
+                    <a :href="$settings.membershipPage" class="text-2xl font-bold font-arial-black p-5 text-primary">{{
                         $settings.label.membership
                     }}</a>
-                    <a href="#" class="text-2xl font-bold font-arial p-5 text-primary">{{
+                    <a :href="$settings.donatePage" class="text-2xl font-bold font-arial p-5 text-primary">{{
                         $settings.label.donate
                     }}</a>
                 </div>
