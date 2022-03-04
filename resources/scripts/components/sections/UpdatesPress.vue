@@ -255,7 +255,7 @@ export default {
 <style lang="scss">
 .select-container,
 .input-keywords{
-	@apply border-themeRed border-3 rounded-lg py-3 pl-3 inline-flex items-center bg-white;
+	@apply border-altRed border-3 rounded-lg py-3 pl-3 inline-flex items-center bg-white;
 	// &:nth-child(1){
 	// 	@apply border-themeBlue;
 	// }
@@ -283,7 +283,7 @@ export default {
   fill: #394066;
 }
 .more-press {
-	@apply bg-white font-display font-semibold border-3 border-themeRed px-8 py-5 rounded-xl text-xl transition-shadow;
+	@apply bg-white font-display border-3 border-altRed px-8 py-5 rounded-xl text-xl transition-shadow;
 	&:hover {
 		@apply bg-gradient-to-b from-primary to-secondary text-white border-gray-100 #{!important};
 	}

@@ -75,6 +75,7 @@ module.exports = {
         themeGray: '#636363',
         themeBlue: '#397894',
         themeBlackAlt: '#3E1A00',
+        altRed:'#C32B27',
       },
     },
   },
