@@ -5,9 +5,9 @@
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 py-10">
 				<div
 					class="select-container">
-					<label for="sort" class="text-gray-500 text-base font-medium">Sort:</label>
+					<label for="sort" class="text-gray-500 text-base font-medium">{{$settings.label.sort}}:</label>
 					<v-select
-						class="select w-full ml-3 font-medium"
+						class="select w-full font-medium"
 						id="sort"
 						:options="sort_options"
 						v-model="sort"
@@ -15,9 +15,9 @@
 				</div>
 				<div
 					class="select-container">
-					<label for="category" class="text-gray-500 text-base font-medium">Category:</label>
+					<label for="category" class="text-gray-500 text-base font-medium">{{$settings.label.category}}:</label>
 					<v-select
-						class="select w-full ml-3 font-medium"
+						class="select w-full font-medium"
 						id="category"
 						:options="category_options"
 						v-model="category"
@@ -25,19 +25,22 @@
 				</div>
 				<div
 					class="select-container">
-					<label for="language" class="text-gray-500 text-base font-medium">Language:</label>
+					<label for="language" class="text-gray-500 text-base font-medium">{{$settings.label.language}}:</label>
 					<v-select
-						class="select w-full ml-3 font-medium"
+						class="select w-full font-medium"
 						id="language"
 						:options="language_options"
 						v-model="language"
 					></v-select>
 				</div>
 				<div
-					class="input-keywords pr-3"
+					class="input-keywords"
 				>
-					<input id="search" type="text" placeholder="Type here" v-model="keywords" class="border-0 w-full outline-none font-medium">
-					<svg-vue icon="search-dark" width="18" height="18" class="fill-current text-white"></svg-vue>
+					<label for="keywords" class="pl-0 text-gray-500 text-base font-medium">{{ $settings.label.type_here }}</label>
+					<div class="inline-flex items-center w-full pr-3">
+						<input id="search" type="text" placeholder="......................." v-model="keywords" class="pl-3 border-0 w-full outline-none font-medium">
+						<svg-vue icon="search-dark" width="18" height="18" class="fill-current text-white"></svg-vue>
+					</div>
 				</div>
 			</div>
 
@@ -50,15 +53,15 @@
                 :categories="item.categories"
                 :date="item.date"
                 :link="item.link ? item.link : '#'"
-                moreLabel="Continue Reading"
+                :moreLabel="$settings.label.continue_reading"
             ></UpdatesCardNew>
 			</div>
 			<div v-else-if="isLoaded">
-				<p>No data found</p>
+				<p>{{ $settings.label.no_data_found }}</p>
 			</div>
 
 			<div class="w-full inline-flex justify-center py-16" v-if="nextPage">
-				<button class="more-press" @click="getData(++page)">Load More</button>
+				<button class="more-press" @click="getData(++page)">{{ $settings.label.load_more }}</button>
 			</div>
 
 		</div>
@@ -79,7 +82,7 @@ export default {
 			updates:[],
 			isLoaded:false,
 			sort:{
-				label: 'Latest First',
+				label: this.$settings.label.latest_first,
 				key: 'latest',
 			},
 			category_options:[],
@@ -87,15 +90,15 @@ export default {
 			page:1,
 			sort_options: [
 				{
-					label: 'Latest First',
+					label: this.$settings.label.latest_first,
 					key: 'latest',
 				},
 				{
-					label: 'Oldest First',
+					label: this.$settings.label.oldest_first,
 					key: 'oldest',
 				},
 				{
-					label: 'Featured',
+					label: this.$settings.label.featured,
 					key: 'featured',
 				},
 			],
@@ -166,7 +169,10 @@ export default {
 			});
 		},
 		getLanguage() {
-			return this.$api.Posts.getLanguage().then(({ data }) => {
+			let formData = {
+                language: this.$settings.language,
+            };
+			return this.$api.Posts.getLanguage(formData).then(({ data }) => {
 				this.language_options.push(...data);
 			});
 		},
@@ -253,9 +259,13 @@ export default {
 };
 </script>
 <style lang="scss">
-.select-container,
-.input-keywords{
-	@apply border-altRed border-3 rounded-lg py-3 pl-3 inline-flex items-center bg-white;
+.input-keywords,
+.select-container{
+	@apply border-altRed border-3 rounded-lg pt-2 pb-2 pl-2 inline-flex flex-wrap items-start bg-white;
+	label {
+		@apply w-full mx-2 pb-2 text-sm #{!important};
+		border-bottom: solid 1px rgba(0,0,0,.0725);
+	}
 	// &:nth-child(1){
 	// 	@apply border-themeBlue;
 	// }

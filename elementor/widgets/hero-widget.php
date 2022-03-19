@@ -222,7 +222,7 @@ class HeroWidget extends Widget_Base
 			[
 				'label' => __( 'Take Action', 'sage' ),
 				'type' => \Elementor\Controls_Manager::RAW_HTML,
-				'raw' => __( '<br><a  href="/wp-admin/edit.php?post_type=take_actions" target="_blank" class="elementor-button elementor-button-default  elementor-go-pro elementor-control-type-tab">Add, edit or remove content in this section</a>', 'sage' ),
+				'raw' => '<br><a  href="/wp-admin/edit.php?post_type=take_actions" target="_blank" class="elementor-button elementor-button-default  elementor-go-pro elementor-control-type-tab">Add, edit or remove content in this section</a>',
 				'content_classes' => 'your-class',
 			]
 		);

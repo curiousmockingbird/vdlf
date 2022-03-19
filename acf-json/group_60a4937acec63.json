@@ -22,6 +22,25 @@
             "maxlength": ""
         },
         {
+            "key": "field_62359e00d9696",
+            "label": "Es Profession",
+            "name": "profession_es",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_615bf5b3fbb92",
             "label": "Year",
             "name": "year",
@@ -151,5 +170,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1633416647
+    "show_in_rest": 0,
+    "modified": 1647681072
 }

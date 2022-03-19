@@ -5,9 +5,9 @@
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 py-10">
 				<div
 					class="select-container">
-					<label for="month" class="text-gray-500 text-base font-medium">Month:</label>
+					<label for="month" class="text-gray-500 text-base font-medium">{{$settings.label.month}}:</label>
 					<v-select
-						class="select w-full ml-3 font-medium"
+						class="select w-full font-medium"
 						id="month"
 						:options="month_options"
 						v-model="month"
@@ -15,9 +15,9 @@
 				</div>
 				<div
 					class="select-container">
-					<label for="year" class="text-gray-500 text-base font-medium">Year:</label>
+					<label for="year" class="text-gray-500 text-base font-medium">{{$settings.label.year}}:</label>
 					<v-select
-						class="select w-full ml-3 font-medium"
+						class="select w-full font-medium"
 						id="year"
 						:options="year_options"
 						v-model="year"
@@ -25,19 +25,22 @@
 				</div>
 				<div
 					class="select-container">
-					<label for="topic" class="text-gray-500 text-base font-medium">Topic:</label>
+					<label for="topic" class="text-gray-500 text-base font-medium">{{$settings.label.topic}}:</label>
 					<v-select
-						class="select w-full ml-3 font-medium"
+						class="select w-full font-medium"
 						id="topic"
 						:options="topic_options"
 						v-model="topic"
 					></v-select>
 				</div>
 				<div
-					class="input-keywords pr-3"
+					class="input-keywords"
 				>
-					<input id="search" type="text" placeholder="Type here" v-model="keywords" class="border-0 w-full outline-none font-medium">
-					<svg-vue icon="search-dark" width="18" height="18" class="fill-current text-white"></svg-vue>
+					<label for="keywords" class="pl-0 text-gray-500 text-base font-medium">{{ $settings.label.type_here }}</label>
+					<div class="inline-flex items-center w-full pr-3">
+						<input id="search" type="text" placeholder="......................." v-model="keywords" class="pl-3 border-0 w-full outline-none font-medium">
+						<svg-vue icon="search-dark" width="18" height="18" class="fill-current text-white"></svg-vue>
+					</div>
 				</div>
 			</div>
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-7 my-5" v-if="updates && updates.length>0">
@@ -61,11 +64,11 @@
 				</a>
 			</div>
 			<div v-else-if="isLoaded" class="p-5">
-				<p>No data found</p>
+				<p>{{ $settings.label.no_data_found }}</p>
 			</div>
 
 			<div class="w-full inline-flex justify-center py-16" v-if="nextPage">
-				<button class="more-press" @click="getData(++page)">Load More</button>
+				<button class="more-press" @click="getData(++page)">{{ $settings.label.load_more }}</button>
 			</div>
 
 		</div>
@@ -119,19 +122,33 @@ export default {
 				const url = new URL(window.location);
 				if (this.month)
 					url.searchParams.set('select_month', this.month.key);
+				else
+					url.searchParams.delete('select_month');
+
 				if (this.keywords && this.keywords != '')
 					url.searchParams.set('keywords', this.keywords);
+				else
+					url.searchParams.delete('keywords');
+
 				if (this.topic)
 					url.searchParams.set('topic', this.topic.key);
+				else
+					url.searchParams.delete('topic');
+
 				if (this.year)
 					url.searchParams.set('select_year', this.year.key);
+				else
+					url.searchParams.delete('select_year');
 					
 				window.history.pushState({}, '', url);
 				this.isLoaded = true;
             });
         },
 		getTopic() {
-			return this.$api.Posts.getTopic().then(({ data }) => {
+			let formData = {
+                language: this.$settings.language,
+            };
+			return this.$api.Posts.getTopic(formData).then(({ data }) => {
 				data.forEach((item) => {
 					let newItem = {
 						key:item.key,
@@ -152,18 +169,18 @@ export default {
 		},
 		getMonth() {
 			this.month_options= [
-				{"key": "01", "label": "January"},
-				{"key": "02", "label": "February"},
-				{"key": "03", "label": "March"},
-				{"key": "04", "label": "April"},
-				{"key": "05", "label": "May"},
-				{"key": "06", "label": "June"},
-				{"key": "07", "label": "July"},
-				{"key": "08", "label": "August"},
-				{"key": "09", "label": "September"},
-				{"key": "10", "label": "October"},
-				{"key": "11", "label": "November"},
-				{"key": "12", "label": "December"},
+				{"key": "01", "label": this.$settings.label.january},
+				{"key": "02", "label": this.$settings.label.february},
+				{"key": "03", "label": this.$settings.label.march},
+				{"key": "04", "label": this.$settings.label.april},
+				{"key": "05", "label": this.$settings.label.may},
+				{"key": "06", "label": this.$settings.label.june},
+				{"key": "07", "label": this.$settings.label.july},
+				{"key": "08", "label": this.$settings.label.august},
+				{"key": "09", "label": this.$settings.label.september},
+				{"key": "10", "label": this.$settings.label.october},
+				{"key": "11", "label": this.$settings.label.november},
+				{"key": "12", "label": this.$settings.label.december},
 			];
 		},
 		submitFilter() {

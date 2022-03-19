@@ -16,9 +16,9 @@
             {{ year }}
         </div>
         <div class="block break-all text-base p-3 m-0 text-black mt-auto" v-if="email">
-            <p><span class="font-semibold border-b inline-block border-primary mr-2">Phone </span>{{ phone }}</p>
+            <p><span class="font-semibold border-b inline-block border-primary mr-2">{{ $settings.label.phone}} </span>{{ phone }}</p>
             <a :href="mailto(this.email)" class="break-words relative z-10 cursor-pointer" target="_blank">
-                <span class="font-semibold border-b inline-block border-primary mr-2">Email </span>
+                <span class="font-semibold border-b inline-block border-primary mr-2">{{ $settings.label.email}} </span>
                 {{ email }}
             </a>
         </div>

@@ -280,14 +280,12 @@ function get_post_categories($request) {
         'orderby'    => 'name',
         'order'      => 'asc',
     ];
-    if ($language) {
-        $args['lang'] = $language;
-    }
     $categories = get_terms('category', $args);
     $result = array();
     foreach ($categories as $cat) {
+        $name = $language == "es" ? get_field('es_name', $cat->taxonomy . '_' . $cat->term_id) : $cat->name;
         $result[] = [
-            "label" => $cat->name,
+            "label" =>$name ?? $cat->name,
             "key"   => $cat->slug
         ];
     }
@@ -296,7 +294,9 @@ function get_post_categories($request) {
 }
 
 
-function get_custom_language() {
+function get_custom_language($request) {
+    $params = $request->get_params();
+    $language = $params["language"] ?? null;
     $args = [
         'hide_empty' => true,
         'orderby'    => 'name',
@@ -306,15 +306,18 @@ function get_custom_language() {
     $categories = get_terms('post_lang', $args);
     $result = array();
     foreach ($categories as $cat) {
+        $name = $language == "es" ? get_field('es_name', $cat->taxonomy . '_' . $cat->term_id) : $cat->name;
         $result[] = [
-            "label" => $cat->name,
+            "label" => $name ?? $cat->name,
             "key"   => $cat->slug
         ];
     }
     return $result;
 }
 
-function get_topic() {
+function get_topic($request) {
+    $params = $request->get_params();
+    $language = $params["language"] ?? null;
     $args = [
         'hide_empty' => true,
         'orderby'    => 'name',
@@ -327,8 +330,9 @@ function get_topic() {
     });
     $result = array();
     foreach ($categories as $cat) {
+        $name = $language == "es" ? get_field('es_name', $cat->taxonomy . '_' . $cat->term_id) : $cat->name;
         $result[] = [
-            "label" => $cat->name,
+            "label" => $name ?? $cat->name,
             "key"   => $cat->slug
         ];
     }
@@ -340,7 +344,7 @@ function get_all_staff($request) {
     $perpage = $params["perpage"] ?? -1;
     $paged = $params["page"] ?? 1;
     $language = $params["language"] ?? "en";
-    $args = array('taxonomy' => "staff_category", 'lang'=>$language, 'orderby' => "name", 'show_count' => 0, 'pad_counts' => 0, 'hierarchical' => 0, 'hide_empty' => 1);
+    $args = array('taxonomy' => "staff_category", 'orderby' => "name", 'show_count' => 0, 'pad_counts' => 0, 'hierarchical' => 0, 'hide_empty' => 1);
     $all_categories = get_categories($args);
     foreach ($all_categories as $categories) {
         $args = array('post_type' => 'staff', 'posts_per_page' => $perpage, 'paged' => $paged, 'order' => 'DESC');
@@ -356,7 +360,7 @@ function get_all_staff($request) {
         foreach ($posts as $key => $post) {
             $post_categories = get_the_terms($post->ID, "staff_category");
             $post = [
-                "profession"     => get_field("profession", $post->ID),
+                "profession"     => $language == "es" && get_field("profession_es", $post->ID) != ""? get_field("profession_es", $post->ID) : get_field("profession", $post->ID),
                 "avatar"         => get_field("avatar", $post->ID) && get_field("avatar", $post->ID) != "" ? get_field("avatar", $post->ID): asset("images/logo.png")->uri(),
                 "image_position" => get_field("image_position", $post->ID) ?? "center",
                 "email"          => get_field("email", $post->ID),
@@ -371,8 +375,9 @@ function get_all_staff($request) {
             ];
             $staff[] = $post;
         }
+        $name = $language == "es" ? get_field('es_name', $categories->taxonomy . '_' . $categories->term_id) : $categories->name;
         $data[] = [
-            "category_name" => $categories->name,
+            "category_name" => $name ?? $categories->name,
             "staff" => $staff,
         ];
     }

@@ -45,7 +45,7 @@
                     <div class="staff-info mt-5">
                         <p class="block m-0 text-base text-white" v-if="staffData.email">
                             <span class="font-semibold border-b inline-block border-white mr-2"
-                                >Email </span
+                                >{{ $settings.label.email}} </span
                             ><a :href="mailto(staffData.email)" class="break-words" v-html="staffData.email"></a>
                         </p>
                     </div>
