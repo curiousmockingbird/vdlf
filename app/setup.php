@@ -55,7 +55,6 @@ function get_setting_translations()
         "follow_us"         => __("Follow us on", "sage"),
         "membership"        => __("Membership", "sage"),
         "donate"            => __("Donate", "sage"),
-        "type_here"         => __("Type Here...", "sage"),
         "form"              => [
             "first_name"    => __("First Name", "sage"),
             "last_name"     => __("Last Name", "sage"), 

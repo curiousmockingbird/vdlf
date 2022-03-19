@@ -16,7 +16,13 @@ function mapping_posts($post)
         "content"     => apply_filters("the_content", get_the_content("", false, $post->ID)),
         "excerpt"     => get_the_excerpt($post->ID) ?? substr(strip_tags($post->post_content), 0, 120),
         "author_name" => get_the_author_meta('display_name', $post->post_author),
-        "categories"  => wp_get_post_terms($post->ID, 'category'),
+        "categories"  => array_map(function($item){
+            return [
+                "name"    => $item->name,
+                "es_name" => get_field('es_name', $item->taxonomy . '_' . $item->term_id),
+                "slug"    => $item->slug
+            ];
+        },wp_get_post_terms($post->ID, 'category')),
         "type"        => get_post_type($post->ID),
     ];
     if (get_post_type($post->ID) == "take_actions") {

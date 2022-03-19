@@ -146,7 +146,7 @@ class PressReleases extends Widget_Base
 			[
 				'label' => __( 'Press Releases', 'sage' ),
 				'type' => \Elementor\Controls_Manager::RAW_HTML,
-				'raw' => __( '<br><a  href="/wp-admin/edit.php?category_name=press-release" target="_blank" class="elementor-button elementor-button-default  elementor-go-pro elementor-control-type-tab">Add, edit or remove content in this section</a>', 'sage' ),
+				'raw' => '<br><a  href="/wp-admin/edit.php?category_name=press-release" target="_blank" class="elementor-button elementor-button-default  elementor-go-pro elementor-control-type-tab">Add, edit or remove content in this section</a>',
 				'content_classes' => 'your-class',
 			]
 		);
