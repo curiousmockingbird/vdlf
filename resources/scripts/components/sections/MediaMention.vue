@@ -60,7 +60,7 @@
 						<span class="text-gray-400 font-display w-full inline-block mt-1 mb-4">{{ item.date }}</span>
 						<div class="mb-2 font-display" v-html="item.excerpt"></div>
 					</div>
-					<button class="text-left text-black py-8 px-7 rounded-b-md bg-themeBlue text-white mt-auto font-bold underline text-xl block">Continue Reading</button>
+					<button class="text-left text-black py-8 px-7 rounded-b-md bg-themeBlue text-white mt-auto font-bold underline text-xl block">{{ $settings.label.continue_reading }}</button>
 				</a>
 			</div>
 			<div v-else-if="isLoaded" class="p-5">

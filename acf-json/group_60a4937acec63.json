@@ -41,25 +41,6 @@
             "maxlength": ""
         },
         {
-            "key": "field_615bf5b3fbb92",
-            "label": "Year",
-            "name": "year",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
             "key": "field_60a493d31b910",
             "label": "Avatar",
             "name": "avatar",
@@ -171,5 +152,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1647681072
+    "modified": 1647945680
 }

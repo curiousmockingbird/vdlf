@@ -91,6 +91,7 @@ function get_setting_translations()
         "december"         => __('December',"sage"),
         "phone"            => __('Phone',"sage"),
         "email"            => __('Email',"sage"),
+        "all"              => __('All', "sage"),
     ];
 }
 

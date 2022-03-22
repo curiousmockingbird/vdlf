@@ -163,7 +163,7 @@ export default {
 			let formData = {
                 language: this.$settings.language,
             };
-      		this.category_options.push({"key":"all","label":"All"});
+      		this.category_options.push({"key":"all","label":this.$settings.label.all});
 			return this.$api.Posts.getCategories(formData).then(({ data }) => {
 				this.category_options.push(...data);
 			});
@@ -293,7 +293,7 @@ export default {
   fill: #394066;
 }
 .more-press {
-	@apply bg-white font-display border-3 border-altRed px-8 py-5 rounded-xl text-xl transition-shadow;
+	@apply bg-white font-display border-3 border-altRed px-6 py-2 rounded-xl text-xl transition-shadow;
 	&:hover {
 		@apply bg-gradient-to-b from-primary to-secondary text-white border-gray-100 #{!important};
 	}
