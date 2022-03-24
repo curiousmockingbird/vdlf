@@ -1,4 +1,5 @@
 @php 
+
 $image = get_the_post_thumbnail_url(get_the_ID()) ? get_the_post_thumbnail_url(get_the_ID(), 'original') : null;
 $tags = get_the_tags() ? array_map(function($tag) {
     return $tag->slug;
@@ -14,8 +15,14 @@ $categorySlug = wp_get_post_terms(get_the_ID(), 'category') ? array_map(function
 
 $tagSlug = get_the_tags() ? implode(",",$tags) : null;
 $tagString = get_the_tags() ? implode(",",$tagName) : null;
+
 $categories  = wp_get_post_terms(get_the_ID(), 'category'); 
-$categorySlug = implode(",",$categorySlug);
+
+if ($categorySlug) {
+  $categorySlug = implode(",",$categorySlug);
+}else{
+  $categorySlug = "/";
+}
 
 @endphp
 <section class="elementor-section elementor-section-boxed">
