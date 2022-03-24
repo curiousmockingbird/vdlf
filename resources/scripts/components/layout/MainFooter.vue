@@ -68,10 +68,10 @@
                             class="bg-primary w-12 h-full top-0 right-0 flex items-center justify-center absolute rounded-md"
                         >
                             <ChevronRightIcon
-                                class="text-white h-5 w-5 cursor-pointer self-center"
+                                class="text-white h-8 w-8 cursor-pointer self-center"
                                 aria-hidden="true"
                                 stroke-width="1"
-                                size="1.5x"
+                                size="2x"
                             />
                         </button>
                     </form>

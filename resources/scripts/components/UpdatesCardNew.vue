@@ -7,7 +7,7 @@
             <span class="press-categories" 
                 v-html="categories.length
                 ? categories.map((el) => {
-                    let name = this.$settings.language == 'es' ? el.es_name : el.name;
+                    let name = this.$settings.language == 'es' ? el.es_name : el.name?el.name:'-';
                     if (el.name.toLowerCase().includes('news'))
                         return `<label style='color:#A0643D'>${name}</label>`;
                     if (el.name.toLowerCase().includes('blog'))
@@ -46,22 +46,28 @@ export default {
     },
     methods: {
         styleButton(categories) {
-			let Element = categories[0].name;
-			if (Element.toLowerCase().includes('news'))
-				return `background-color:#A0643D; margin:-1.2px`;
-			else if (Element.toLowerCase().includes('blog'))
-				return `background-color:#337c4c; margin:-1.2px`;
-			else (Element.toLowerCase().includes('press'))
-				return `background-color:#871D3D; margin:-1.2px`;
+            if (categories[0] && categories[0].hasOwnProperty("name") && categories[0].name) {
+                let Element = categories[0].name;
+                if (Element.toLowerCase().includes('news'))
+                    return `background-color:#A0643D; margin:-1.2px`;
+                else if (Element.toLowerCase().includes('blog'))
+                    return `background-color:#337c4c; margin:-1.2px`;
+                else (Element.toLowerCase().includes('press'))
+                    return `background-color:#871D3D; margin:-1.2px`;
+            }
+            return `background-color:#871D3D; margin:-1.2px`;
 		},
 		styleBorder(categories) {
-			let Element = categories[0].name;
-			if (Element.toLowerCase().includes('news'))
-				return `border-color:#A0643D`;
-			else if (Element.toLowerCase().includes('blog'))
-				return `border-color:#337c4c`;
-			else (Element.toLowerCase().includes('press'))
-				return `border-color:#871D3D`;
+            if (categories[0] && categories[0].hasOwnProperty("name") && categories[0].name) {
+                let Element = categories[0].name;
+                if (Element.toLowerCase().includes('news'))
+                    return `border-color:#A0643D`;
+                else if (Element.toLowerCase().includes('blog'))
+                    return `border-color:#337c4c`;
+                else (Element.toLowerCase().includes('press'))
+                    return `border-color:#871D3D`;
+            }
+            return `border-color:#871D3D`;
 		},
     },
 };

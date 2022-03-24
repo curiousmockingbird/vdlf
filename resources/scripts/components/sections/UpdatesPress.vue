@@ -21,6 +21,7 @@
 						id="category"
 						:options="category_options"
 						v-model="category"
+						:defaultValue="$settings.label.all"
 					></v-select>
 				</div>
 				<div
@@ -76,7 +77,7 @@ export default {
 		return {
 			eventKey:null,
 			keywords:'',
-			category:'all',
+			category:this.$settings.label.all,
 			language:null,
 			nextPage:false,
 			updates:[],
@@ -130,7 +131,7 @@ export default {
                 perpage: 6,
                 // language: this.$settings.language,
             };
-			if (this.category && this.category !='all') {
+			if (this.category && this.category.key !=this.$settings.label.all) {
                 formData.categories = this.category.key;
 			}
 			if (this.sort) {
@@ -146,7 +147,7 @@ export default {
                 this.updates.push(...data.posts);
 				this.nextPage = data.nextPage;
 				const url = new URL(window.location);
-				if (this.category && this.category !="all")
+				if (this.category && this.category !=this.$settings.label.all)
 					url.searchParams.set('cat', this.category.key);
 				if (this.keywords && this.keywords != '')
 					url.searchParams.set('keywords', this.keywords);
@@ -163,7 +164,7 @@ export default {
 			let formData = {
                 language: this.$settings.language,
             };
-      		this.category_options.push({"key":"all","label":this.$settings.label.all});
+      		this.category_options.push({"key":this.$settings.label.all,"label":this.$settings.label.all});
 			return this.$api.Posts.getCategories(formData).then(({ data }) => {
 				this.category_options.push(...data);
 			});

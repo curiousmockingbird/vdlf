@@ -15,7 +15,7 @@
 
   <input
     type="submit"
-    class="px-3 py-1 text-white bg-indigo-500 cursor-pointer"
+    class="px-3 py-1 text-white bg-primary cursor-pointer"
     value="{{ esc_attr_x('Search', 'submit button', 'sage') }}"
   >
 </form>
