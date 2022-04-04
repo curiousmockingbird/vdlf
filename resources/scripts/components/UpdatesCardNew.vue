@@ -7,12 +7,19 @@
             <span class="press-categories" 
                 v-html="categories.length
                 ? categories.map((el) => {
-                    let name = this.$settings.language && el[this.$settings.language+`_name`] != null ? el[this.$settings.language+`_name`] : el.name?el.name:'-';
+                    let name = '';
+                    if ($settings.language == 'en')
+                        name = el.en_name;
+                    else if ($settings.language == 'es')
+                        name = el.es_name;
+                    else
+                        name = el.name;
+                    
                     if (name.toLowerCase().includes('news') || name.toLowerCase().includes('noticias'))
                         return `<label style='color:#A0643D'>${name}</label>`;
                     if (name.toLowerCase().includes('blog') || name.toLowerCase().includes('blog'))
                         return `<label style='color:#337c4c'>${name}</label>`;
-                    if (name.toLowerCase().includes('press') || name.toLowerCase().includes('Comunicado'))
+                    if (name.toLowerCase().includes('press') || name.toLowerCase().includes('comunicado'))
                         return `<label style='color:#871D3D'>${name}</label>`;
                 }).join(', ')
                 : ''">

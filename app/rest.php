@@ -20,7 +20,7 @@ function mapping_posts($post)
             return [
                 "name"    => $item->name,
                 "es_name" => get_field('es_name', $item->taxonomy . '_' . $item->term_id),
-                "en_name" => get_field('en_name', $item->taxonomy . '_' . $item->term_id),
+                "en_name" => get_field('en_name', $item->taxonomy . '_' . $item->term_id) ?? $item->name,
                 "slug"    => $item->slug
             ];
         },wp_get_post_terms($post->ID, 'category')),
@@ -301,7 +301,7 @@ function get_post_categories($request) {
     $categories = get_terms('category', $args);
     $result = array();
     foreach ($categories as $cat) {
-        $name = $language == "es" ? get_field('es_name', $cat->taxonomy . '_' . $cat->term_id) : $cat->name;
+        $name = $language ? get_field($language.'_name', $cat->taxonomy . '_' . $cat->term_id) : $cat->name;
         $result[] = [
             "label" =>$name ?? $cat->name,
             "key"   => $cat->slug
@@ -324,7 +324,7 @@ function get_custom_language($request) {
     $categories = get_terms('post_lang', $args);
     $result = array();
     foreach ($categories as $cat) {
-        $name = $language == "es" ? get_field('es_name', $cat->taxonomy . '_' . $cat->term_id) : $cat->name;
+        $name = $language ? get_field($language.'_name', $cat->taxonomy . '_' . $cat->term_id) : $cat->name;
         $result[] = [
             "label" => $name ?? $cat->name,
             "key"   => $cat->slug
@@ -348,7 +348,7 @@ function get_topic($request) {
     });
     $result = array();
     foreach ($categories as $cat) {
-        $name = $language == "es" ? get_field('es_name', $cat->taxonomy . '_' . $cat->term_id) : $cat->name;
+        $name = $language ? get_field($language.'_name', $cat->taxonomy . '_' . $cat->term_id) : $cat->name;
         $result[] = [
             "label" => $name ?? $cat->name,
             "key"   => $cat->slug
@@ -393,7 +393,7 @@ function get_all_staff($request) {
             ];
             $staff[] = $post;
         }
-        $name = $language == "es" ? get_field('es_name', $categories->taxonomy . '_' . $categories->term_id) : $categories->name;
+        $name = $language ? get_field($language.'_name', $cat->taxonomy . '_' . $cat->term_id) : $cat->name;
         $data[] = [
             "category_name" => $name ?? $categories->name,
             "staff" => $staff,
