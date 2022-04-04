@@ -20,6 +20,7 @@ function mapping_posts($post)
             return [
                 "name"    => $item->name,
                 "es_name" => get_field('es_name', $item->taxonomy . '_' . $item->term_id),
+                "en_name" => get_field('en_name', $item->taxonomy . '_' . $item->term_id),
                 "slug"    => $item->slug
             ];
         },wp_get_post_terms($post->ID, 'category')),
@@ -86,12 +87,21 @@ function get_cpt_data($params, $type = array("post"))
     $tax_query = array();
 
     if ($categories && $categories != "all") {
+        $mappingCategory = [
+            "news"          => ["news","noticias"],
+            "press-release" => ["press-release","comunicado-de-prensa"],
+            "blog-post"     => ["blog-post","blog"],
+        ];
         $categories = explode(",", $categories);
         foreach ($categories as $category) {
-            if ($taxonomy == "category" && $language && $language != "en") {
-                $category = $category."-".$language;
+            if (array_key_exists($category, $mappingCategory)) {
+                $categoryAll = $mappingCategory[$category];
+                foreach ($categoryAll as $new_category) {
+                    $tax_query[] = array('taxonomy' => $taxonomy, 'field' => 'slug', 'terms' => array($new_category));
+                }
+            }else{
+                $tax_query[] = array('taxonomy' => $taxonomy, 'field' => 'slug', 'terms' => array($category));
             }
-            $tax_query[] = array('taxonomy' => $taxonomy, 'field' => 'slug', 'terms' => array($category));
         }
     }
 
