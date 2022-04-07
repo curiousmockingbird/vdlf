@@ -397,7 +397,7 @@ function get_all_staff($request) {
         }
         $name = $language ? get_field($language.'_name', $categories->taxonomy . '_' . $categories->term_id) : $categories->name;
         $data[] = [
-            "category_name" => $categories->name,
+            "category_name" => $name ?? $categories->name,
             "staff" => $staff,
         ];
     }
