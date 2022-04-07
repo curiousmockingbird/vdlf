@@ -77,7 +77,7 @@
                 </div>
             </div>
             <nav
-                class="mobile-nav transition-transform transform-gpu duration-700 shadow-lg"
+                class="mobile-nav transition-transform transform-gpu duration-700 shadow-lg flex flex-col"
                 :class="{ '-translate-x-full': !navOpen, 'translate-x-0': navOpen }"
             >
                 <div class="container">
@@ -106,6 +106,33 @@
                     </div>
                 </div>
                 <slot name="mobile" />
+                <div
+                    class="w-full flex membership-menu items-center justify-center gap-3 mt-auto"
+                >
+                    <a
+                        :href="$settings.membershipPage"
+                        class="w-1/2 py-8 font-bold px-4 text-center text-white xl:text-lg "
+                        >{{ $settings.label.membership }}</a
+                    >
+                    <div class="w-1/2 inline-flex items-center justify-center text-white bg-gradient-to-r from-primary text-base xl:text-lg  to-secondary font-bold pl-6 pr-4 relative left-1">
+                        <a
+                            :href="$settings.donatePage"
+                            class="text-white py-8"
+                            >{{ $settings.label.donate }}</a
+                        >
+                        <button
+                            class="py-8 h-full text-white border-0 border-0 px-4 hover:outline-none active:outline-none fill-current outline-none relative"
+                            @click="openSearchBar()"
+                        >
+                            <svg-vue
+                                icon="search"
+                                height="19px"
+                                width="19px"
+                                style="fill: none; "
+                            ></svg-vue>
+                        </button>
+                    </div>
+                </div>
             </nav>
         </div>
         <SearchBar></SearchBar>

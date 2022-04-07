@@ -364,6 +364,7 @@ function get_all_staff($request) {
     $language = $params["language"] ?? "en";
     $args = array('taxonomy' => "staff_category", 'orderby' => "name", 'show_count' => 0, 'pad_counts' => 0, 'hierarchical' => 0, 'hide_empty' => 1);
     $all_categories = get_categories($args);
+    
     foreach ($all_categories as $categories) {
         $args = array('post_type' => 'staff', 'posts_per_page' => $perpage, 'paged' => $paged, 'order' => 'DESC');
         $args["tax_query"] = array(
@@ -374,6 +375,7 @@ function get_all_staff($request) {
             ),
         );
         $staff = array();
+        
         $posts = get_posts($args);
         foreach ($posts as $key => $post) {
             $post_categories = get_the_terms($post->ID, "staff_category");
@@ -393,9 +395,9 @@ function get_all_staff($request) {
             ];
             $staff[] = $post;
         }
-        $name = $language ? get_field($language.'_name', $cat->taxonomy . '_' . $cat->term_id) : $cat->name;
+        $name = $language ? get_field($language.'_name', $categories->taxonomy . '_' . $categories->term_id) : $categories->name;
         $data[] = [
-            "category_name" => $name ?? $categories->name,
+            "category_name" => $categories->name,
             "staff" => $staff,
         ];
     }
