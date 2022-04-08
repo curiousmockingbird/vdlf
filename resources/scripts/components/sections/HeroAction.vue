@@ -1,8 +1,8 @@
 <template>
-    <section class="md:min-h-screen relative px-5 lg:px-0" id="hero-action">
+    <section class="md:min-h-content relative px-5 lg:px-0" id="hero-action">
         <img :src="$images + '/hero-circle.png'" class=" bg-circle z-0" />
 
-        <VueSlickCarousel v-bind="sliderSettings" class=" slideshow " v-if="slideshow.length >0">
+        <VueSlickCarousel v-bind="sliderSettings" class="slideshow lg:max-h-content" v-if="slideshow.length >0">
             <template #prevArrow>
                 <div class="VueCarousel-navigation-prev">
                     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -76,7 +76,7 @@ export default {
     data() {
         return {
             sliderSettings: {
-                dots: false,
+                dots: true,
                 fade: true,
                 infinite: true,
                 autoplaySpeed: 8000,
@@ -85,6 +85,14 @@ export default {
                 slidesToScroll: 1,
                 arrows: true,
                 autoplay: true,
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            arrows:false
+                        },
+                    },
+                ],
             },
         };
     },
@@ -108,6 +116,15 @@ export default {
     },
 };
 </script>
+<style lang="scss">
+    #hero-action {
+        .slick-dots {
+            bottom:25px;
+            display: flex !important;
+            @apply container mx-auto transform flex lg:px-7 inset-x-1/2 -translate-x-1/2;
+        }
+    }
+</style>
 <style lang="scss" scoped>
 #hero-action {
     .VueCarousel-navigation-prev,
@@ -129,9 +146,11 @@ export default {
 }
 
 .hero-image {
-    position: absolute;
-    height: 100%;
-    object-fit: cover;
+    @screen lg {
+        position: absolute;
+        height: 100%;
+        object-fit: cover;
+    }
 }
 
 .bg-circle {
@@ -153,11 +172,11 @@ export default {
 }
 
 .slideshow {
-    @apply min-h-screen w-full;
+    @apply min-h-content w-full;
 }
 
 .slide {
-    @apply h-screen z-10;
+    @apply h-content z-10;
 }
 
 .content-text {

@@ -49,7 +49,14 @@ module.exports = {
       minHeight: {
         '20': '5rem',
         '24': '6rem',
-        '28': '7rem'
+        '28': '7rem',
+        'content': 'calc(100vh - 88px)'
+      },
+      maxHeight: {
+        'content': 'calc(100vh - 88px)'
+      },
+      height: {
+        'content': 'calc(100vh - 88px)'
       },
       minWidth: {
         '0': '0',

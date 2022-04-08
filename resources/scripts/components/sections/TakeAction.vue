@@ -1,6 +1,6 @@
 <template>
     <SectionContainer
-        containerClasses="md:min-h-screen flex flex-col justify-center py-20 lg:py-0"
+        containerClasses="md:min-h-content flex flex-col justify-center py-20 lg:py-0"
         :style="`background-color:${background}`"
     >
         <h3 class="text-xl md:text-4xl tracking-widest font-bold text-white mb-5">{{ title }}</h3>
@@ -161,10 +161,10 @@ export default {
 }
 @screen lg {
     .VueCarousel-navigation-prev {
-        left: -50px !important;
+        left: 20px !important;
     }
     .VueCarousel-navigation-next {
-        right: -50px !important;
+        right: 20px !important;
     }
 }
 .slick-track {
