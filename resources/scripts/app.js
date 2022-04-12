@@ -5,6 +5,7 @@ import mixins from './mixins';
 import SvgVue from 'svg-vue';
 import api from './api/index';
 import vSelect from 'vue-select';
+import vmodal from 'vue-js-modal';
 import 'vue-select/dist/vue-select.css';
 
 Vue.component('v-select', vSelect);
@@ -18,6 +19,7 @@ Vue.prototype.$settings = SETTINGS;
 Vue.prototype.$images = SETTINGS.images;
 Vue.config.productionTip = false;
 Vue.use(SvgVue);
+Vue.use(vmodal);
 Vue.mixin(mixins);
 
 const files = require.context('./', true, /\.vue$/i);

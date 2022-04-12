@@ -21,6 +21,7 @@ class Widget_Loader
         require_once __DIR__ . '/widgets/take-action.php';
         require_once __DIR__ . '/widgets/panel-box.php';
         require_once __DIR__ . '/widgets/hero-image.php';
+        require_once __DIR__ . '/widgets/reusable-popup.php';
     }
 
     public function register_widgets()
@@ -32,6 +33,7 @@ class Widget_Loader
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type(new Widgets\PressReleases());
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type(new Widgets\TakeActionWidget());
         \Elementor\Plugin::instance()->widgets_manager->register_widget_type(new Widgets\HeroImage());
+        \Elementor\Plugin::instance()->widgets_manager->register_widget_type(new Widgets\ReusablePopup());
     }
 
     public function __construct()

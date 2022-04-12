@@ -77,7 +77,7 @@
                 </div>
             </div>
             <nav
-                class="mobile-nav transition-transform transform-gpu duration-700 shadow-lg flex flex-col"
+                class="mobile-nav transition-transform transform-gpu duration-700 shadow-lg"
                 :class="{ '-translate-x-full': !navOpen, 'translate-x-0': navOpen }"
             >
                 <div class="container">
@@ -105,9 +105,8 @@
                         </button>
                     </div>
                 </div>
-                <slot name="mobile" />
                 <div
-                    class="w-full flex membership-menu items-center justify-center gap-3 mt-auto"
+                    class="w-full flex membership-menu items-center justify-center gap-3"
                 >
                     <a
                         :href="$settings.membershipPage"
@@ -133,6 +132,7 @@
                         </button>
                     </div>
                 </div>
+                <slot name="mobile" />
             </nav>
         </div>
         <SearchBar></SearchBar>
