@@ -85,6 +85,7 @@ export default {
 			keywords:'',
 			month:null,
 			year:null,
+			language:null,
 			nextPage:false,
 			updates:[],
 			isLoaded:false,
@@ -101,6 +102,7 @@ export default {
             let formData = {
                 page: page,
                 perpage: 6,
+				language: this.$settings.language
                 // year: this.$settings.year,
             };
 			if (this.month) {

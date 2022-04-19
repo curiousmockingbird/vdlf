@@ -302,7 +302,7 @@ export default {
   fill: #394066;
 }
 .more-press {
-	@apply bg-white font-display border-3 border-altRed px-6 py-2 rounded-xl text-xl transition-shadow #{!important};
+	@apply bg-white font-display text-black border-3 border-altRed px-6 py-2 rounded-xl text-xl transition-shadow #{!important};
 	&:hover {
 		@apply bg-gradient-to-b from-primary to-secondary text-white border-gray-100 #{!important};
 	}
