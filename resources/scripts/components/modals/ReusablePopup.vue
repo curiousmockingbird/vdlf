@@ -30,14 +30,14 @@
                     </h1>
                     <a
                         :href="btn_link"
-                        class="block mt-6 text-2xl md:text-3xl text-white font-bold"
+                        class="block mt-6 text-2xl md:text-3xl flex items-center text-white font-bold"
                     >
                         <img
                             v-if="image_icon.id != ''"
                             :src="image_icon.url"
                             height="54px"
                             width="54px"
-                            class="inline-block mr-5 svg"
+                            class="inline-block mr-5 py-5 svg"
                         />{{ btn_text }}</a
                     >
                 </div>

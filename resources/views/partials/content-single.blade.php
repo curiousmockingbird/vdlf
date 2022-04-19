@@ -25,8 +25,8 @@ if ($categorySlug) {
 }
 
 @endphp
-<section class="elementor-section elementor-section-boxed">
-  <article class="elementor-container">
+<section class="container">
+  <article>
       <article-header 
         title="{!! $title !!}" 
         author="{{ get_the_author() }}" 

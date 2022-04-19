@@ -58,7 +58,7 @@
 						</span>
 						<h3 class="font-bold text-2xl leading-tight">{{ item.title }}</h3>
 						<span class="text-gray-400 font-display w-full inline-block mt-1 mb-4">{{ item.date }}</span>
-						<div class="mb-2 font-display" v-html="item.excerpt"></div>
+						<div class="mb-2 font-display text-base text-black" v-html="item.excerpt"></div>
 					</div>
 					<button class="text-left text-black py-8 px-7 rounded-b-md bg-themeBlue text-white mt-auto font-bold underline text-xl block">{{ $settings.label.continue_reading }}</button>
 				</a>
@@ -160,7 +160,7 @@ export default {
 		},
 		getYear() {
 			let currentYear = new Date().getFullYear();
-			for (let i=currentYear; i>=currentYear-5; i--) {
+			for (let i=currentYear; i>=currentYear-2; i--) {
 				this.year_options.push({
 					"key":i,
 					"label":i
@@ -272,7 +272,7 @@ export default {
 	@apply cursor-pointer flex flex-col h-full rounded-lg border-3 border-themeBlue bg-white rounded-xl;
 	&:hover {
 		@apply bg-gradient-to-b from-primary to-secondary text-white border-gray-100 #{!important};
-		h3, span, button, label {
+		h3, span, button, label, div {
 			color:#FFF !important;
 			background-color: transparent !important;
 		}

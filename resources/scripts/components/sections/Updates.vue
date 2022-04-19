@@ -69,7 +69,7 @@ export default {
                 page: this.page,
                 perpage: this.content.perpage,
                 // categories: "press-release",
-                // language: this.$settings.language,
+                language: this.$settings.language,
                 sortby: "latest",
             };
             this.$api.Posts.getUpdates(formData).then(({ data }) => {

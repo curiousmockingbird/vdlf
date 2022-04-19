@@ -36,14 +36,14 @@
                             </h1>
                             <a
                                 :href="slide.btn_link"
-                                class="block mt-6 text-2xl md:text-3xl text-white font-bold"
+                                class="block mt-6 text-2xl flex items-center md:text-3xl text-white font-bold"
                             >
                                 <img
                                     v-if="slide.image_icon.id != ''"
                                     :src="slide.image_icon.url"
                                     height="54px"
                                     width="54px"
-                                    class="inline-block mr-5 svg"
+                                    class="inline-block mr-5 svg py-5"
                                 />{{ slide.btn_text }}</a
                             >
                         </div>
@@ -76,7 +76,7 @@ export default {
     data() {
         return {
             sliderSettings: {
-                dots: true,
+                dots: false,
                 fade: true,
                 infinite: true,
                 autoplaySpeed: 8000,
@@ -85,14 +85,6 @@ export default {
                 slidesToScroll: 1,
                 arrows: true,
                 autoplay: true,
-                responsive: [
-                    {
-                        breakpoint: 1024,
-                        settings: {
-                            arrows:false
-                        },
-                    },
-                ],
             },
         };
     },
@@ -129,7 +121,7 @@ export default {
 #hero-action {
     .VueCarousel-navigation-prev,
     .VueCarousel-navigation-next {
-        @apply bg-white inset-y-1/2 bg-opacity-20 rounded-lg px-1 absolute  z-30;
+        @apply bg-white inset-y-1/2 bg-opacity-0 lg:bg-opacity-20 rounded-lg px-1 absolute  z-30;
         display: inline-table;
         svg {
             @apply h-10 w-10 text-white;

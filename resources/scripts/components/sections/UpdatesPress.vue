@@ -248,7 +248,15 @@ export default {
 	created() {
 		this.getCategories().then(()=>{
 			this.getLanguage().then(()=> {
+				let hasLang = this.language_options.filter(v=>{
+					return v.key == this.$settings.language;
+				});
+				if (hasLang) {
+					this.language = hasLang[0];
+				}
+
 				let param = ITSHelpers.getParam(window.location.href);
+
 				if (param.hasOwnProperty("keywords") || param.hasOwnProperty("sort") || param.hasOwnProperty("lang") || param.hasOwnProperty("cat")) {
 					this.getDefaultData();
 				}else{
@@ -294,7 +302,7 @@ export default {
   fill: #394066;
 }
 .more-press {
-	@apply bg-white font-display border-3 border-altRed px-6 py-2 rounded-xl text-xl transition-shadow;
+	@apply bg-white font-display border-3 border-altRed px-6 py-2 rounded-xl text-xl transition-shadow #{!important};
 	&:hover {
 		@apply bg-gradient-to-b from-primary to-secondary text-white border-gray-100 #{!important};
 	}

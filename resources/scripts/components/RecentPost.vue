@@ -1,20 +1,22 @@
 <template>
-    <SectionContainer class="pt-10 pb-32">
-        <SectionTitle>{{ title }}</SectionTitle>
+    <div>
+        <SectionContainer class="pt-10 pb-32" v-if="updates && updates.length >0">
+            <SectionTitle>{{ title }}</SectionTitle>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
-            <UpdatesCard
-                v-for="(item, i) in updates"
-                :key="i"
-                :title="item.title"
-                :description="item.excerpt"
-                :date="item.date"
-                :link="item.link"
-                moreLabel="Continue Reading"
-                class="border-2 border-themeBlue hover:border-opacity-100 hover:shadow-2xl transition-shadow"
-            ></UpdatesCard>
-        </div>
-    </SectionContainer>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+                <UpdatesCard
+                    v-for="(item, i) in updates"
+                    :key="i"
+                    :title="item.title"
+                    :description="item.excerpt"
+                    :date="item.date"
+                    :link="item.link"
+                    moreLabel="Continue Reading"
+                    class="border-2 border-themeBlue hover:border-opacity-100 hover:shadow-2xl transition-shadow"
+                ></UpdatesCard>
+            </div>
+        </SectionContainer>
+    </div>
 </template>
 
 <script>

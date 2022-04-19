@@ -97,11 +97,13 @@ function get_cpt_data($params, $type = array("post"))
             if (array_key_exists($category, $mappingCategory)) {
                 $categoryAll = $mappingCategory[$category];
                 foreach ($categoryAll as $new_category) {
-                    $tax_query[] = array('taxonomy' => $taxonomy, 'field' => 'slug', 'terms' => array($new_category));
+                    $tx[] = array('taxonomy' => $taxonomy, 'field' => 'slug', 'terms' => array($new_category));
                 }
             }else{
-                $tax_query[] = array('taxonomy' => $taxonomy, 'field' => 'slug', 'terms' => array($category));
+                $tx[] = array('taxonomy' => $taxonomy, 'field' => 'slug', 'terms' => array($category));
             }
+            $tx['relation'] = 'OR';
+            $tax_query[] = $tx;
         }
     }
 
@@ -116,8 +118,9 @@ function get_cpt_data($params, $type = array("post"))
         $args['s'] = $keywords;
     }
     if (count($tax_query) > 1) {
-        $tax_query['relation'] = 'OR';
+        $tax_query['relation'] = 'AND';
     }
+
     if ($month || $year) {
         if ($year) {
             $date_query["year"] = $year;
@@ -129,7 +132,7 @@ function get_cpt_data($params, $type = array("post"))
 
         $args["date_query"] = $date_query;
     }
-
+    // print_r($tax_query);
     $args['tax_query'] = $tax_query;
 
     $query = new \WP_Query($args);

@@ -149,7 +149,7 @@ export default {
 }
 .VueCarousel-navigation-prev,
 .VueCarousel-navigation-next {
-    @apply bg-themeOrange inset-y-1/2 bg-opacity-10 rounded-lg px-1 absolute  z-30;
+    @apply bg-themeOrange inset-y-1/2 bg-opacity-0 lg:bg-opacity-20 rounded-lg px-1 absolute  z-30;
     display: inline-table;
     svg {
         @apply h-10 w-10 text-black;
