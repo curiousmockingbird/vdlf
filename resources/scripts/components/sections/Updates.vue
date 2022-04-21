@@ -1,5 +1,5 @@
 <template>
-    <SectionContainer containerClasses="min-h-screen flex flex-col justify-center py-20">
+    <SectionContainer containerClasses="min-h-screen flex flex-col justify-center py-5 md:py-20">
         <template slot="beforeContainer">
             <img
                 class="section-bg"

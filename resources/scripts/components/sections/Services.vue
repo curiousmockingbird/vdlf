@@ -1,5 +1,5 @@
 <template>
-    <SectionContainer containerClasses="min-h-screen flex flex-col justify-center py-20" v-if="content.length>0 && options.title">
+    <SectionContainer containerClasses="min-h-screen flex flex-col justify-center py-5 md:py-20" v-if="content.length>0 && options.title">
         <template slot="beforeContainer">
             <img :src="$images + '/services-circles.png'" class="bg-circle z-0" />
         </template>

@@ -22,15 +22,20 @@
                 />
             </button>
         </div>
-        <div class="flex flex-col bg-gradiant lg:flex-row justify-center items-center" :style="{'background':this.background_color}">
-            <div class="content-text">
+        <div class="flex flex-col bg-themeBlack relative overflow-hidden lg:flex-row justify-center items-center container pr-0" :style="{'background':this.background_color}">
+            <img
+                class="absolute p-10 w-full h-full left-0 top-0 z-10 object-contain object-center"
+                :src="$images + '/bg-footer.png'"
+                style="mix-blend-mode: luminosity"
+            />
+            <div class="content-text relative z-20">
                 <div class="heading p-10">
-                    <h1 class="font-bold text-3xl md:text-4xl leading-tight">
+                    <h1 class="text-white font-bold text-3xl md:text-4xl leading-tight">
                         {{ title }}
                     </h1>
                     <a
                         :href="btn_link"
-                        class="block mt-6 text-2xl md:text-3xl flex items-center text-white font-bold"
+                        class="block mt-6 text-2xl md:text-3xl flex items-center text-primary font-bold"
                     >
                         <img
                             v-if="image_icon.id != ''"
