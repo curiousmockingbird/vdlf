@@ -12,8 +12,8 @@
       :draggable="true"
       styles="overflow-y: auto; border-radius: 16px; background: transparent;"
     >
-        <div class="header-modal flex items-center justify-end">
-            <button @click.prevent="hide">
+        <div class="relative flex flex-col popup-bg relative overflow-hidden lg:flex-row justify-center items-center container pr-0">
+            <button class="absolute top-3 right-0" @click.prevent="hide">
                 <XIcon
                     class="h-12 w-12 cursor-pointer self-center text-white"
                     aria-hidden="true"
@@ -21,21 +21,14 @@
                     size="1"
                 />
             </button>
-        </div>
-        <div class="flex flex-col bg-themeBlack relative overflow-hidden lg:flex-row justify-center items-center container pr-0" :style="{'background':this.background_color}">
-            <img
-                class="absolute p-10 w-full h-full left-0 top-0 z-10 object-contain object-center"
-                :src="$images + '/bg-footer.png'"
-                style="mix-blend-mode: luminosity"
-            />
             <div class="content-text relative z-20">
                 <div class="heading p-10">
-                    <h1 class="text-white font-bold text-3xl md:text-4xl leading-tight">
+                    <h1 class="text-black font-bold text-3xl md:text-4xl leading-tight">
                         {{ title }}
                     </h1>
                     <a
                         :href="btn_link"
-                        class="block mt-6 text-2xl md:text-3xl flex items-center text-primary font-bold"
+                        class="block mt-6 text-2xl md:text-3xl flex items-center text-white font-bold"
                     >
                         <img
                             v-if="image_icon.id != ''"
@@ -154,6 +147,13 @@ export default {
 };
 </script>
 <style lang="scss">
+.popup-bg {
+    background: linear-gradient(180deg, #f0a341 0%, #c22d28 100%);
+}
+
+.vm--modal {
+    @apply flex items-center;
+}
 .vm--overlay {
     background-color: rgba(0, 0, 0, 0.4);
 }

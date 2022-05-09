@@ -131,14 +131,14 @@ class ReusablePopup extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'background_color',
-            [
-                'label' => __('Background Color', 'sage'),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => '#f0a341'
-            ]
-        );
+        // $this->add_control(
+        //     'background_color',
+        //     [
+        //         'label' => __('Background Color', 'sage'),
+        //         'type' => \Elementor\Controls_Manager::TEXT,
+        //         'default' => '#f0a341'
+        //     ]
+        // );
 
         $this->add_control(
             'image',
@@ -211,7 +211,7 @@ class ReusablePopup extends Widget_Base
         $label = $settings["label"] ?? "";
         $show_button = $settings["show_button"] == "yes" ? "true" : "false";
         $autoshow = $settings["autoshow"] == "yes" ? "true" : "false";
-        $background_color = $settings["background_color"] && $settings["background_color"] != '' ? $settings["background_color"] : 'linear-gradient(180deg, #f0a341 0%, #c22d28 100%)';
+        // $background_color = $settings["background_color"] && $settings["background_color"] != '' ? $settings["background_color"] : 'linear-gradient(180deg, #f0a341 0%, #c22d28 100%)';
 
         if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
         ?>
@@ -235,7 +235,6 @@ class ReusablePopup extends Widget_Base
             label="<?php echo $label; ?>"
             :show_button="<?php echo $show_button; ?>"
             :autoshow="<?php echo $autoshow; ?>"
-            background_color="<?php echo $background_color; ?>"
         ></reusable-popup>
 	<?php
     }
