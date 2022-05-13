@@ -11,7 +11,7 @@ $limitEnd = $limitStart+300;
 >
   <h1 class="text-3xl">Search Result for "{{ the_title() }}" </h1>
 </page-header>
-  <div class="container text-formatting-enable text-content px-5 pt-10 pb-14">
+  <div class="container paragraph text-content px-5 pt-10 pb-14">
     <div class="mt-7 mb-5">{!! get_search_form(false) !!}</div>
     @if (have_posts())
       @while(have_posts()) @php(the_post())

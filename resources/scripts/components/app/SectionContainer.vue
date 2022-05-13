@@ -1,7 +1,7 @@
 <template>
     <section class="section relative" :class="[sectionClasses]">
         <slot name="beforeContainer" />
-        <div class="container mx-auto z-10 relative" :class="containerClasses">
+        <div class="container mx-auto z-10 relative paragraph" :class="containerClasses">
             <slot />
         </div>
         <slot name="afterContainer" />

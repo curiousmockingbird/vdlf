@@ -63,7 +63,7 @@
                     <br>{{ staffData.year }}
                     <div
                         v-html="staffData.content"
-                        class="text-formatting-enable md:text-lg mt-10 font-regular"
+                        class="paragraph md:text-lg mt-10 font-regular"
                     ></div>
                 </div>
             </div>
