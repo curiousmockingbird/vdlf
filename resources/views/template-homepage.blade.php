@@ -1,11 +1,9 @@
 {{-- 
-    Template Name: Homepage (dev temp)
+    Template Name: Homepage
 --}}
 
 @extends('layouts.app')
 
 @section('content')
-    <hero></hero>
-    <services></services>
-    <Updates></Updates>
+    @php(the_content())
 @endsection

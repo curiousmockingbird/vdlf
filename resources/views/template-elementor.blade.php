@@ -6,8 +6,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="list-style-enable">
+    <div class="paragraph">
         @php(the_content())
     </div>
-
 @endsection

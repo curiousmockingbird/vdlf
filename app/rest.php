@@ -301,6 +301,9 @@ function get_post_categories($request) {
         'orderby'    => 'name',
         'order'      => 'asc',
     ];
+    if ($language) {
+        $args["lang"] = $language;
+    }
     $categories = get_terms('category', $args);
     $result = array();
     foreach ($categories as $cat) {
@@ -345,6 +348,9 @@ function get_topic($request) {
         'order'      => 'asc',
         'fields'     => 'all', 
     ];
+    if ($language) {
+        $args["lang"] = $language;
+    }
     $categories = get_terms('topic', $args);
     usort($categories, function($a, $b){
         return strcmp($a->name, $b->name);
