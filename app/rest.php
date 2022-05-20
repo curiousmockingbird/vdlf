@@ -308,12 +308,13 @@ function get_post_categories($request) {
     $result = array();
     foreach ($categories as $cat) {
         $name = $language ? get_field($language.'_name', $cat->taxonomy . '_' . $cat->term_id) : $cat->name;
-        $result[] = [
-            "label" =>$name ?? $cat->name,
-            "key"   => $cat->slug
-        ];
+        if($cat->slug != "uncategorized") {
+            $result[] = [
+                "label" =>$name ?? $cat->name,
+                "key"   => $cat->slug
+            ];
+        }
     }
-
     return $result;
 }
 
