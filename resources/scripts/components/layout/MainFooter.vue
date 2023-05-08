@@ -96,7 +96,7 @@
                 <div class="designby font-display small">
                     {{ $settings.label.developed_by }}
                     <a
-                        href="http://indietechsolutions.com/"
+                        href="https://indietechsolutions.com/?utm_source=footer&utm_campaign=vocesdelafrontera"
                         class="font-semibold hover:text-primary"
                         target="_blank"
                         >IndieTech Solutions</a
