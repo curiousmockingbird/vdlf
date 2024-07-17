@@ -29,7 +29,7 @@
                         {{ $settings.label.contact_us }}
                     </h3>
                     <p class="opacity-80 text-base font-display mb-4">
-                        Welcome Center Hours:  <br />9:00AM to 1:00PM / <br />1:30PM to 5:00PM
+                        Welcome Center Hours:  <br />9:00AM to 1:00PM / <br />1:30PM to 5:00PM.
                         <br /><br />
                         1027 S. 5th Street,
                         <br />Milwaukee, WI 53204 <br />Tel. 414-643-1620 <br />Fax. 414-643-1621
