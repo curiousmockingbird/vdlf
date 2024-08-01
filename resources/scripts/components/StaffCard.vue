@@ -16,7 +16,7 @@
             {{ year }}
         </div>
         <div class="block break-all text-base p-3 m-0 text-black mt-auto" v-if="email">
-            <!-- <p><span class="font-semibold border-b inline-block border-primary mr-2">{{ $settings.label.phone}} </span>{{ phone }}</p> -->
+            <p><span class="font-semibold border-b inline-block border-primary mr-2">{{ $settings.label.phone}} </span>{{ phone }}</p>
             
             <p>
                 <span class="font-semibold border-b inline-block border-primary mr-2">{{ $settings.label.email}} </span>
