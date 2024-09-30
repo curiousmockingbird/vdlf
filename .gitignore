@@ -1,6 +1,15 @@
 /node_modules
 npm-debug.log
 yarn-error.log
+# Public directory with compiled assets
+#/public/
+
+# Ignore specific compiled files, if needed
+#/public/styles/
+#/public/scripts/
+#/public/fonts/
+#/public/images/
+
 # Local eslint environtment
 .eslintignore
 .eslintrc.json
