@@ -14,24 +14,14 @@
   \*****************************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("/* provided dependency */ var $ = __webpack_require__(/*! jquery */ \"jquery\");\n/**\n * This file allows you to add functionality to the Theme Customizer\n * live preview. jQuery is readily available.\n *\n * {@link https://codex.wordpress.org/Theme_Customization_API}\n */\n\n/**\n * Change the blog name value.\n *\n * @param {string} value\n */\nwp.customize('blogname', function (value) {\n  value.bind(function (to) {\n    return $('.brand').text(to);\n  });\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9yZXNvdXJjZXMvc2NyaXB0cy9jdXN0b21pemVyLmpzIiwibWFwcGluZ3MiOiI7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBQSxFQUFFLENBQUZBLFNBQUFBLENBQUFBLFVBQUFBLEVBQXlCLGlCQUFTO0FBQ2hDQyxFQUFBQSxLQUFLLENBQUxBLElBQUFBLENBQVcsY0FBRTtBQUFBLFdBQUlDLENBQUMsQ0FBREEsUUFBQyxDQUFEQSxDQUFBQSxJQUFBQSxDQUFKLEVBQUlBLENBQUo7QUFBYkQsR0FBQUE7QUFERkQsQ0FBQUEiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9zYWdlLy4vcmVzb3VyY2VzL3NjcmlwdHMvY3VzdG9taXplci5qcz84NDgzIl0sInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogVGhpcyBmaWxlIGFsbG93cyB5b3UgdG8gYWRkIGZ1bmN0aW9uYWxpdHkgdG8gdGhlIFRoZW1lIEN1c3RvbWl6ZXJcbiAqIGxpdmUgcHJldmlldy4galF1ZXJ5IGlzIHJlYWRpbHkgYXZhaWxhYmxlLlxuICpcbiAqIHtAbGluayBodHRwczovL2NvZGV4LndvcmRwcmVzcy5vcmcvVGhlbWVfQ3VzdG9taXphdGlvbl9BUEl9XG4gKi9cblxuLyoqXG4gKiBDaGFuZ2UgdGhlIGJsb2cgbmFtZSB2YWx1ZS5cbiAqXG4gKiBAcGFyYW0ge3N0cmluZ30gdmFsdWVcbiAqL1xud3AuY3VzdG9taXplKCdibG9nbmFtZScsIHZhbHVlID0+IHtcbiAgdmFsdWUuYmluZCh0byA9PiAkKCcuYnJhbmQnKS50ZXh0KHRvKSk7XG59KTtcbiJdLCJuYW1lcyI6WyJ3cCIsInZhbHVlIiwiJCJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./resources/scripts/customizer.js\n");
-
-/***/ }),
-
-/***/ "jquery":
-/*!*************************!*\
-  !*** external "jQuery" ***!
-  \*************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = window["jQuery"];
+eval("/* provided dependency */ var $ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\");\n/**\n * This file allows you to add functionality to the Theme Customizer\n * live preview. jQuery is readily available.\n *\n * {@link https://codex.wordpress.org/Theme_Customization_API}\n */\n\n/**\n * Change the blog name value.\n *\n * @param {string} value\n */\nwp.customize('blogname', function (value) {\n  value.bind(function (to) {\n    return $('.brand').text(to);\n  });\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9yZXNvdXJjZXMvc2NyaXB0cy9jdXN0b21pemVyLmpzIiwibWFwcGluZ3MiOiI7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBQSxFQUFFLENBQUNDLFNBQVMsQ0FBQyxVQUFVLEVBQUUsVUFBQUMsS0FBSyxFQUFJO0VBQ2hDQSxLQUFLLENBQUNDLElBQUksQ0FBQyxVQUFBQyxFQUFFO0lBQUEsT0FBSUMsQ0FBQyxDQUFDLFFBQVEsQ0FBQyxDQUFDQyxJQUFJLENBQUNGLEVBQUUsQ0FBQztFQUFBLEVBQUM7QUFDeEMsQ0FBQyxDQUFDIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vc2FnZS8uL3Jlc291cmNlcy9zY3JpcHRzL2N1c3RvbWl6ZXIuanM/Y2NlMCJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIFRoaXMgZmlsZSBhbGxvd3MgeW91IHRvIGFkZCBmdW5jdGlvbmFsaXR5IHRvIHRoZSBUaGVtZSBDdXN0b21pemVyXG4gKiBsaXZlIHByZXZpZXcuIGpRdWVyeSBpcyByZWFkaWx5IGF2YWlsYWJsZS5cbiAqXG4gKiB7QGxpbmsgaHR0cHM6Ly9jb2RleC53b3JkcHJlc3Mub3JnL1RoZW1lX0N1c3RvbWl6YXRpb25fQVBJfVxuICovXG5cbi8qKlxuICogQ2hhbmdlIHRoZSBibG9nIG5hbWUgdmFsdWUuXG4gKlxuICogQHBhcmFtIHtzdHJpbmd9IHZhbHVlXG4gKi9cbndwLmN1c3RvbWl6ZSgnYmxvZ25hbWUnLCB2YWx1ZSA9PiB7XG4gIHZhbHVlLmJpbmQodG8gPT4gJCgnLmJyYW5kJykudGV4dCh0bykpO1xufSk7XG4iXSwibmFtZXMiOlsid3AiLCJjdXN0b21pemUiLCJ2YWx1ZSIsImJpbmQiLCJ0byIsIiQiLCJ0ZXh0Il0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./resources/scripts/customizer.js\n");
 
 /***/ })
 
 },
 /******/ __webpack_require__ => { // webpackRuntimeModules
 /******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-/******/ var __webpack_exports__ = (__webpack_exec__("./resources/scripts/customizer.js"));
+/******/ __webpack_require__.O(0, ["/scripts/vendor"], () => (__webpack_exec__("./resources/scripts/customizer.js")));
+/******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);

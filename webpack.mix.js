@@ -1,5 +1,6 @@
 const mix = require('laravel-mix');
-require('@tinypixelco/laravel-mix-wp-blocks');
+// Removed the incompatible package
+// require('@tinypixelco/laravel-mix-wp-blocks');
 require('laravel-mix-svg-vue');
 
 /*
@@ -28,9 +29,11 @@ mix
 mix
   .js('resources/scripts/app.js', 'scripts')
   .js('resources/scripts/customizer.js', 'scripts')
+  .js('resources/scripts/editor.js', 'scripts') // Compiling editor.js
   .vue()
   .svgVue()
-  .blocks('resources/scripts/editor.js', 'scripts')
+  // Removed the .blocks() method
+  // .blocks('resources/scripts/editor.js', 'scripts')
   .autoload({ jquery: ['$', 'window.jQuery'] })
   .extract();
 
@@ -41,3 +44,14 @@ mix
 mix
   .sourceMaps()
   .version();
+
+// Configure externals to prevent bundling WordPress globals
+mix.webpackConfig({
+  externals: {
+    '@wordpress/blocks': ['wp', 'blocks'],
+    '@wordpress/i18n': ['wp', 'i18n'],
+    '@wordpress/element': ['wp', 'element'],
+    '@wordpress/components': ['wp', 'components'],
+    // Add other WordPress packages as needed
+  },
+});
