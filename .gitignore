@@ -18,4 +18,4 @@ yarn-error.log
 Thumbs.db
 
 #Comment out functions.php when changes into this file are needed
-functions.php
+wp-content/themes/your-theme/functions.php
