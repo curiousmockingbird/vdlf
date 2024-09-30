@@ -3,17 +3,6 @@ const mix = require('laravel-mix');
 // require('@tinypixelco/laravel-mix-wp-blocks');
 require('laravel-mix-svg-vue');
 
-/*
- |--------------------------------------------------------------------------
- | Mix Asset Management
- |--------------------------------------------------------------------------
- |
- | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Sage application. By default, we are compiling the Sass file
- | for your application, as well as bundling up your JS files.
- |
- */
-
 mix
   .setPublicPath('./public')
   .browserSync('vdlf.test');
@@ -32,8 +21,6 @@ mix
   .js('resources/scripts/editor.js', 'scripts') // Compiling editor.js
   .vue()
   .svgVue()
-  // Removed the .blocks() method
-  // .blocks('resources/scripts/editor.js', 'scripts')
   .autoload({ jquery: ['$', 'window.jQuery'] })
   .extract();
 
@@ -45,6 +32,11 @@ mix
   .sourceMaps()
   .version();
 
+// **Add this Babel configuration**
+mix.babelConfig({
+  presets: ['@wordpress/babel-preset-default'],
+});
+
 // Configure externals to prevent bundling WordPress globals
 mix.webpackConfig({
   externals: {
@@ -52,6 +44,7 @@ mix.webpackConfig({
     '@wordpress/i18n': ['wp', 'i18n'],
     '@wordpress/element': ['wp', 'element'],
     '@wordpress/components': ['wp', 'components'],
+    '@wordpress/block-editor': ['wp', 'blockEditor'],
     // Add other WordPress packages as needed
   },
 });
