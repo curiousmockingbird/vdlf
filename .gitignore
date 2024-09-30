@@ -16,3 +16,6 @@ yarn-error.log
 .env
 .DS_Store
 Thumbs.db
+
+#Comment out functions.php when changes into this file are needed
+functions.php
