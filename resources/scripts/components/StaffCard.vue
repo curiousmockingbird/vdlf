@@ -29,7 +29,7 @@
         </span>
         {{ phone }}
       </p>
-      <p v-if="email">
+      <!-- <p v-if="email">
         <span class="font-semibold border-b inline-block border-primary mr-2">
           {{ emailLabel }}
         </span>
@@ -40,7 +40,7 @@
         >
           {{ email }}
         </a>
-      </p>
+      </p> -->
     </div>
   </div>
 </template>
