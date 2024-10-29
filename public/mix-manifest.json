@@ -1,11 +1,13 @@
 {
-    "/scripts/app.js": "/scripts/app.js?id=f40f18add07d67356fdc1c64b07be10b",
-    "/scripts/customizer.js": "/scripts/customizer.js?id=167b36abcfaa31a620ba7c067041e7f5",
-    "/scripts/editor.js": "/scripts/editor.js?id=bfb479e1e32e5690040c0a8a851e2896",
+    "/scripts/app.js": "/scripts/app.js?id=a4c0303c6f49c4ab9595737bfbfb3225",
+    "/scripts/customizer.js": "/scripts/customizer.js?id=4511dc39b7d92cb154e784a9f484f407",
+    "/scripts/editor.js": "/scripts/editor.js?id=efbcb75fb5368d1bb4e973485465778c",
     "/scripts/manifest.js": "/scripts/manifest.js?id=07f3ad78e05f46cd62d30b1f52db8984",
     "/styles/editor.css": "/styles/editor.css?id=971935cb940004c1eb389e1b1dfd0f76",
     "/styles/app.css": "/styles/app.css?id=7e9de2ba02521f1f20a8e88c96f2befc",
-    "/scripts/vendor.js": "/scripts/vendor.js?id=5f71b15916347bded87e76e527eb103b",
+    "/scripts/vendor.js": "/scripts/vendor.js?id=a318d5315516f4c6a99cb12b0c67237b",
+    "/images/VDLF-logo-footer.png": "/images/VDLF-logo-footer.png?id=b9f0331e3e6dffd937b22b3f3e94e1a9",
+    "/images/VDLF-logo-header.png": "/images/VDLF-logo-header.png?id=64f7b5052b35cda4916bd465a616963a",
     "/images/bg-footer.png": "/images/bg-footer.png?id=597671d3413fac25a83476f2fcc1e534",
     "/images/header.jpeg": "/images/header.jpeg?id=a7983588a5bdc61ef5bef45347f4e335",
     "/images/header.png": "/images/header.png?id=f7eef2a675d47fba6ab32b856df5c161",
@@ -14,7 +16,5 @@
     "/images/logo-footer.png": "/images/logo-footer.png?id=fe7ce00b81a433347535c6b51e6f860d",
     "/images/logo.png": "/images/logo.png?id=e46f3c8da564bf37295558da68affe57",
     "/images/services-circles.png": "/images/services-circles.png?id=4d8c95b54fce4880f82d3c59364f8055",
-    "/images/updates-bg.png": "/images/updates-bg.png?id=84156ed8bdf8394aa5617181df02f182",
-    "/images/VDLF-logo-footer.png": "/images/VDLF-logo-footer.png?id=b9f0331e3e6dffd937b22b3f3e94e1a9",
-    "/images/VDLF-logo-header.png": "/images/VDLF-logo-header.png?id=64f7b5052b35cda4916bd465a616963a"
+    "/images/updates-bg.png": "/images/updates-bg.png?id=84156ed8bdf8394aa5617181df02f182"
 }

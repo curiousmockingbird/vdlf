@@ -25,19 +25,34 @@
                     :email="staffItem.email"
                     :phone="staffItem.phone"
                     :year="staffItem.year"
-                >
-                </StaffCard>
+                    @open-contact-modal="scrollToContactForm"
+                />
             </div>
         </div>
 
-        <!-- Rest of your template remains the same -->
+        <!-- Contact Form Section -->
+        <div id="contact-form-section" class="contact-form-section pt-10">
+            <ContactForm
+                v-if="selectedStaff"
+                :staffTitle="selectedStaff.title"
+                :staffProfession="selectedStaff.profession"
+                :staffEmail="selectedStaff.email"
+                @submit-contact-form="handleContactFormSubmission"
+            />
+        </div>
     </section>
 </template>
+
 <script>
 import VModal from "vue-js-modal";
 import Vue from "vue";
-Vue.use(VModal, { componentName: "vmodal" });
+Vue.use(VModal, { componentName: "v-modal", dynamic: true, injectModalsContainer: true });
+
+import StaffCard from "./StaffCard.vue";
+import ContactForm from "./ContactForm.vue";
 import { XIcon } from "@vue-hero-icons/outline";
+import axios from "axios";
+
 export default {
     props: {
         showCategoryTitle: {
@@ -46,28 +61,22 @@ export default {
         },
     },
     components: {
+        StaffCard,
+        ContactForm,
         XIcon,
     },
     data() {
         return {
-            staffData: {},
-            staff: [],
-            page: 1,
-            moreData: false,
-            categories: [],
+            categories: [{ category_name: '', staff: [] }],
+            selectedStaff: null,
         };
     },
     computed: {
         validCategories() {
             return this.categories.map((category) => {
-                // Filter out invalid staff entries
-                const validStaff = category.staff.filter((staffItem) => {
-                    return (
-                        staffItem &&
-                        staffItem.title &&
-                        staffItem.title.trim() !== ""
-                    );
-                });
+                const validStaff = category.staff.filter(
+                    (staffItem) => staffItem && staffItem.title && staffItem.title.trim() !== ""
+                );
                 return {
                     ...category,
                     staff: validStaff,
@@ -76,12 +85,33 @@ export default {
         },
     },
     methods: {
-        loadMore: function () {
-            this.getData(++this.page);
+        scrollToContactForm(staff) {
+            this.selectedStaff = staff;
+            this.$nextTick(() => {
+                const contactFormSection = document.getElementById('contact-form-section');
+                if (contactFormSection) {
+                    contactFormSection.scrollIntoView({ behavior: 'smooth', block: "center" });
+                }
+            });
         },
-        openModal: function (staffData) {
-            this.staffData = staffData;
-            this.$modal.show("staff-modals");
+        handleContactFormSubmission(payload) {
+
+            // Log the payload to verify it is received from the child component
+            console.log('Payload received in parent:', payload, payload.staffEmail);
+
+            // Adding staff email to the payload
+            // payload.staffEmail = this.selectedStaff.email;
+
+            // Call the API to send the email
+            axios.post('http://localhost:4000/api/send-contact-email', payload)
+                .then(() => {
+                    alert("Message sent successfully");
+                    this.selectedStaff = null;
+                })
+                .catch((error) => {
+                    console.error("Error sending contact email:", error);
+                    alert("An error occurred while sending the message. Please try again later.");
+                });
         },
         getData() {
             this.isLoaded = false;
@@ -90,6 +120,9 @@ export default {
             formData.append("language", this.$settings.language);
             this.$api.Posts.getStaff(formData).then(({ data }) => {
                 this.categories = data;
+            }).catch((error) => {
+                console.error("Error fetching staff data:", error);
+                alert("An error occurred while fetching staff data. Please try again later.");
             });
         },
     },
@@ -98,6 +131,7 @@ export default {
     },
 };
 </script>
+
 <style lang="scss">
 .staff-detail img[src*="logo.png"] {
     @apply p-5 bg-white;
@@ -113,7 +147,10 @@ svg[stroke-width="1"] {
         stroke-width: 1;
     }
 }
-.staff-modal {
-    @apply bg-themeBlack;
+
+.contact-form-section {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
 }
 </style>

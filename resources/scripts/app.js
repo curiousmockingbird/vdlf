@@ -3,7 +3,7 @@ import Vue from 'vue';
 window.axios = require('axios');
 import mixins from './mixins';
 import SvgVue from 'svg-vue';
-import api from './api/index';
+import api from '../../backend/api/index';
 import vSelect from 'vue-select';
 import vmodal from 'vue-js-modal';
 import 'vue-select/dist/vue-select.css';

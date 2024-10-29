@@ -1,6 +1,5 @@
 <template>
   <div
-    v-if="title"
     class="overflow-hidden border-2 bg-transparent rounded-lg border-secondary flex flex-col staff-item"
     :class="{'cursor-pointer': clickable}"
     @click="$emit('click', $event)"
@@ -21,26 +20,23 @@
     </div>
     <div
       class="block break-all text-base p-3 m-0 text-black mt-auto"
-      v-if="email || phone"
+      v-if="phone"
     >
-      <p v-if="phone">
+      <p>
         <span class="font-semibold border-b inline-block border-primary mr-2">
           {{ phoneLabel }}
         </span>
         {{ phone }}
       </p>
-      <!-- <p v-if="email">
-        <span class="font-semibold border-b inline-block border-primary mr-2">
-          {{ emailLabel }}
-        </span>
-        <a
-          :href="emailLink"
-          class="break-words relative z-10 cursor-pointer"
-          target="_blank"
-        >
-          {{ email }}
-        </a>
-      </p> -->
+    </div>
+    <!-- Contact Button -->
+    <div class="block text-base p-3 m-0 text-black mt-auto">
+      <button
+        @click.stop="emitScrollToContactForm"
+        class="px-4 py-2 bg-primary text-white rounded-lg cursor-pointer"
+      >
+        Contact
+      </button>
     </div>
   </div>
 </template>
@@ -84,17 +80,20 @@ export default {
       type: String,
       default: 'Phone',
     },
-    emailLabel: {
-      type: String,
-      default: 'Email',
-    },
   },
   computed: {
     imagePositionClass() {
       return `object-${this.imagePosition}`;
     },
-    emailLink() {
-      return `mailto:${this.email}`;
+  },
+  methods: {
+    emitScrollToContactForm() {
+      this.$emit("open-contact-modal", {
+        title: this.title,
+        email: this.email,
+        phone: this.phone,
+        profession: this.profession,
+      });
     },
   },
 };
