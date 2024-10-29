@@ -19,3 +19,12 @@ Thumbs.db
 
 #Comment out functions.php when changes into this file are needed
 wp-content/themes/vdlf/functions.php
+
+# Ignore node_modules folder to avoid committing dependencies
+backend/node_modules
+# Ignore logs, lock files, and environment variables within the backend folder
+backend/npm-debug.log
+backend/yarn-error.log
+backend/.env
+backend/.DS_Store
+backend/Thumbs.db

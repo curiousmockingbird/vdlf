@@ -88,12 +88,17 @@ export default {
   },
   methods: {
     emitScrollToContactForm() {
-      this.$emit("open-contact-modal", {
-        title: this.title,
-        email: this.email,
-        phone: this.phone,
-        profession: this.profession,
-      });
+      if (this.email && this.email.trim() !== '') {
+        console.log('email', this.email);
+        this.$emit("open-contact-modal", {
+          title: this.title,
+          email: this.email,
+          phone: this.phone,
+          profession: this.profession,
+        });
+      } else {
+        alert('Email unavailable');
+      }
     },
   },
 };
