@@ -95,24 +95,23 @@ export default {
             });
         },
         handleContactFormSubmission(payload) {
+        // Log the payload to verify it is received from the child component
+        console.log('Payload received in parent:', payload, payload.staffEmail);
 
-            // Log the payload to verify it is received from the child component
-            console.log('Payload received in parent:', payload, payload.staffEmail);
-
-            // Adding staff email to the payload
-            // payload.staffEmail = this.selectedStaff.email;
-
-            // Call the API to send the email
-            axios.post('https://contact-form-api-vert.vercel.app/api/send-contact-email', payload)
-                .then(() => {
-                    alert("Message sent successfully");
-                    this.selectedStaff = null;
-                })
-                .catch((error) => {
-                    console.error("Error sending contact email:", error);
-                    alert("An error occurred while sending the message. Please try again later.");
-                });
-        },
+axios.post('https://contact-form-last.vercel.app/api/email-api', payload, {
+    headers: {
+        'Content-Type': 'application/json',
+    },
+})
+.then(() => {
+    alert("Message sent successfully");
+    this.selectedStaff = null;
+})
+.catch((error) => {
+    console.error("Error sending contact email:", error.response ? error.response.data : error.message);
+    alert("An error occurred while sending the message. Please try again later.");
+});
+    },
         getData() {
             this.isLoaded = false;
             let formData = new FormData();
