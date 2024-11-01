@@ -51,7 +51,7 @@ Vue.use(VModal, { componentName: "v-modal", dynamic: true, injectModalsContainer
 import StaffCard from "./StaffCard.vue";
 import ContactForm from "./ContactForm.vue";
 import { XIcon } from "@vue-hero-icons/outline";
-// import axios from "axios";
+import axios from "axios";
 
 export default {
     props: {
@@ -98,29 +98,19 @@ export default {
         // Log the payload to verify it is received from the child component
         console.log('Payload received in parent:', payload, payload.staffEmail);
 
-        // Using fetch instead of axios to send the API request
-        fetch('https://contact-form-api-vert.vercel.app/api/send-contact-email', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload),
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('API Response:', data);
-            alert("Message sent successfully");
-            this.selectedStaff = null;
-        })
-        .catch(error => {
-            console.error("Error sending contact email:", error);
-            alert("An error occurred while sending the message. Please try again later.");
-        });
+axios.post('https://contact-form-last.vercel.app/api/email-api', payload, {
+    headers: {
+        'Content-Type': 'application/json',
+    },
+})
+.then(() => {
+    alert("Message sent successfully");
+    this.selectedStaff = null;
+})
+.catch((error) => {
+    console.error("Error sending contact email:", error.response ? error.response.data : error.message);
+    alert("An error occurred while sending the message. Please try again later.");
+});
     },
         getData() {
             this.isLoaded = false;
