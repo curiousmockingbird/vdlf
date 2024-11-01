@@ -103,7 +103,7 @@ export default {
             // payload.staffEmail = this.selectedStaff.email;
 
             // Call the API to send the email
-            axios.post('http://localhost:4000/api/send-contact-email', payload)
+            axios.post('https://contact-form-api-vert.vercel.app/api/send-contact-email', payload)
                 .then(() => {
                     alert("Message sent successfully");
                     this.selectedStaff = null;
