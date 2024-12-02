@@ -42,12 +42,7 @@ export default {
 
       try {
         const response = await axios.get(url);
-        // Extract events from the 'items' array in the response
         this.events = response.data.items || [];
-      
-      if (this.events[0]) {
-        console.log('Available properties:', Object.keys(this.events[0]));
-      }      
       } catch (err) {
         this.error = "Failed to load events. Please try again.";
         console.error(err.response || err);
@@ -63,7 +58,7 @@ export default {
   },
   mounted() {
     this.fetchEvents();
- },
+  },
 };
 </script>
 
