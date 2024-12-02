@@ -1,5 +1,6 @@
 <template>
     <section class="container our-staff-section">
+    <EventList />
         <div
             v-for="(cate, idx) in validCategories"
             :key="idx"
@@ -50,6 +51,7 @@ Vue.use(VModal, { componentName: "v-modal", dynamic: true, injectModalsContainer
 
 import StaffCard from "./StaffCard.vue";
 import ContactForm from "./ContactForm.vue";
+import EventList from "./EventList.vue"
 import { XIcon } from "@vue-hero-icons/outline";
 import axios from "axios";
 
@@ -64,6 +66,7 @@ export default {
         StaffCard,
         ContactForm,
         XIcon,
+        EventList,
     },
     data() {
         return {
