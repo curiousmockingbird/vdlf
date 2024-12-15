@@ -10,5 +10,4 @@
         </div>
     </page-header>
     <staff-board :show-category-title="{{ get_field("show_category_title") ? 'true' : 'false' }}"></staff-board>
-    
 @endsection

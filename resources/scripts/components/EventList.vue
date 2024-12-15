@@ -55,7 +55,6 @@ export default {
   methods: {
     async fetchEvents() {
       const url = "https://proxy-server-for-events-api.vercel.app/api/proxy";
-
       try {
         const response = await axios.get(url);
         this.events = response.data.items || [];
