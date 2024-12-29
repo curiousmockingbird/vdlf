@@ -3,7 +3,7 @@
     <h1 class="title">Upcoming Events</h1>
     <div v-if="loading" class="loading">Loading events...</div>
     <div v-else-if="error" class="error">{{ error }}</div>
-    <div v-else>
+    <div v-else class="event-list-wrapper">
       <div v-for="event in events" :key="event.id" class="event-item">
         <h3 class="event-name">{{ event.name }}</h3>
         <h6 class="event-type">{{ event.eventType.name }}</h6>
@@ -22,27 +22,14 @@
           </span>
           <span v-else>No location</span>
         </p>
-        <p class="event-description" style="white-space: pre-line;" v-if="event.description">{{ event.description }}</p>
+        <!-- <p class="event-description" style="white-space: pre-line;" v-if="event.description">{{ event.description }}</p>
         <p class="event-description" v-else>No description</p>
-        <button class="save-button" @click="handleSave(event)">Save to Calendar</button>
+        <button class="save-button" @click="handleSave(event)">Save to Calendar</button> -->
       </div>
 
-      <!-- Show Load More button if there are potentially more events -->
+      <!-- Show Load More button if there are more events -->
       <div v-if="hasMore && !loadingMore" style="text-align: center; margin: 20px 0;">
-        <div v-if="pagination === 1">
-        <button style="visibility: hidden">Next ></button>
-        <button style="margin: 0; color: black">{{ pagination }} of {{count}}</button>
-        <button style="color: red" @click="loadMore">Next ></button>
-        </div>
-        <div v-else-if="pagination > 1">
-        <button style="color: red" @click="loadMore">< Previous</button>
-        <button style="margin: 0; color: black">{{ pagination }} of {{count}}</button>
-        <button style="color: red" @click="loadMore">Next ></button>
-        </div>
-        <div v-else-if="pagination === count">
-        <button style="color: red" @click="loadMore">< Previous</button>
-        <button style="margin: 0; color: black">{{ pagination }} of {{count}}</button>
-        <button style="visibility: hidden">< Previous</button>
+        <button @click="loadMore">Load More</button>
         </div>
       </div>
 
@@ -80,21 +67,7 @@ export default {
       try {
         const response = await axios.get(url);
         const fetchedEvents = response.data.items || [];
-        if (page === 0) {
-          // Initial load
-          this.events = fetchedEvents;
-          this.count = Math.round(response.data.count / 10);
-        } else {
-          // Append new events for subsequent pages
-          this.events = [...fetchedEvents];
-          this.pagination += 1;
-          // return from response.data.count rounded to the nearest whole number
-          this.count = Math.round(response.data.count / 10);
-          // this.nextLink = nextPageLink;
-        }
-
-        this.hasMore = response.data.hasMore; 
-        // If using @odata.nextLink, you'd set hasMore based on whether nextLink exists.
+        this.events = fetchedEvents;
 
       } catch (err) {
         this.error = "Failed to load events. Please try again.";
@@ -116,32 +89,9 @@ export default {
       };
       return new Date(dateString).toLocaleDateString("en-EN", options);
     },
-    generateGoogleCalendarLink(event) {
-      const startDate = new Date(event.startDate)
-        .toISOString()
-        .replace(/-|:|\.\d\d\d/g, "");
-      const endDate = new Date(event.endDate)
-        .toISOString()
-        .replace(/-|:|\.\d\d\d/g, "");
-      const details = encodeURIComponent(event.description || "No description");
-      const location = encodeURIComponent(
-        event.locations &&
-          event.locations.length > 0 &&
-          event.locations[0].address
-          ? `${event.locations[0].address.addressLine1}, ${event.locations[0].address.city}, ${event.locations[0].address.stateOrProvince}, ${event.locations[0].address.zipOrPostalCode}`
-          : "No location"
-      );
-      return `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
-        event.name
-      )}&dates=${startDate}/${endDate}&details=${details}&location=${location}&sf=true&output=xml`;
-    },
-    handleSave(event) {
-      const url = this.generateGoogleCalendarLink(event);
-      window.open(url, "_blank");
-    },
     loadMore() {
-      this.currentPage += 1;
-      this.fetchEvents(this.currentPage);
+      const url = '/events-2';
+      window.open(url, "_blank");
     }
   },
   mounted() {
@@ -153,11 +103,22 @@ export default {
 <style scoped>
 .event-list {
   max-width: 800px;
-  margin: 0 auto;
+  margin: 2rem auto;
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+.event-list-wrapper {
+  /* Enable grid layout with 3 columns */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  /* Spacing between columns/rows */
+  gap: 20px;  
+  /* Optional: center the grid container in its parent */
+  max-width: 900px; /* enough width for 3 columns of 300px each */
+  margin: 0 auto;
 }
 
 .title {
@@ -205,24 +166,5 @@ export default {
 
 .event-location span {
   font-weight: bold;
-}
-
-.save-button {
-  background-color: #4caf50; /* Green */
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
-
-.save-button:hover {
-  background-color: #45a049;
 }
 </style>

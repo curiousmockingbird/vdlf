@@ -3,7 +3,7 @@
         containerClasses="md:min-h-content flex flex-col justify-center py-5 md:py-20 lg:py-0"
         :style="`background-color:${background}`"
     >
-    <EventList />
+    <EventListHome />
         <h3 class="text-xl md:text-4xl tracking-widest font-bold text-white mb-5">{{ title }}</h3>
         <div class="content-fellows w-full">
             <div id="fellow-slides" class="relative">
@@ -54,14 +54,14 @@
     </SectionContainer>
 </template>
 <script>
-import EventList from "./../EventList.vue";
+import EventListHome from "./../EventListHome.vue";
 import VueSlickCarousel from "vue-slick-carousel";
 import "vue-slick-carousel/dist/vue-slick-carousel.css";
 // optional style for arrows & dots
 import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
 
 export default {
-    components: { VueSlickCarousel, EventList },
+    components: { VueSlickCarousel, EventListHome },
     data() {
         return {
             ActionsData: [],
