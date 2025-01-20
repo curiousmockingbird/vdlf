@@ -27,16 +27,13 @@
         <button class="save-button" @click="handleSave(event)">Save to Calendar</button> -->
       </div>
 
+    </div>
+
       <!-- Show Load More button if there are more events -->
-      <div v-if="hasMore && !loadingMore" style="text-align: center; margin: 20px 0;">
-        <button @click="loadMore">Load More</button>
+      <div style="text-align: center; margin: 20px 0;">
+        <button @click="loadMore" style="color: black">Load More</button>
         </div>
       </div>
-
-      <div v-else-if="loadingMore" style="text-align: center; margin: 20px 0;">
-        Loading more events...
-      </div>
-    </div>
   </div>
 </template>
 
@@ -102,7 +99,6 @@ export default {
 
 <style scoped>
 .event-list {
-  max-width: 800px;
   margin: 2rem auto;
   padding: 20px;
   background-color: #f9f9f9;
@@ -117,7 +113,7 @@ export default {
   /* Spacing between columns/rows */
   gap: 20px;  
   /* Optional: center the grid container in its parent */
-  max-width: 900px; /* enough width for 3 columns of 300px each */
+  max-width: 950px; /* enough width for 3 columns of 300px each */
   margin: 0 auto;
 }
 
@@ -125,7 +121,7 @@ export default {
   font-size: 2.5rem;
   text-align: center;
   margin-bottom: 20px;
-  color: #333;
+  color: red;
 }
 
 .loading,
