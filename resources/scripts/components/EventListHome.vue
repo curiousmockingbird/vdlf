@@ -98,23 +98,26 @@ export default {
 </script>
 
 <style scoped>
+/* Base styling for larger screens */
 .event-list {
   margin: 2rem auto;
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* 
+  The grid automatically tries to fit columns of at least 300px.
+  If the parent container is ≥ 900px wide, you'll get 3 columns, 
+  but on smaller screens it'll drop to 2 or 1 column automatically. 
+*/
 .event-list-wrapper {
-  /* Enable grid layout with 3 columns */
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  /* Spacing between columns/rows */
-  gap: 20px;  
-  /* Optional: center the grid container in its parent */
-  max-width: 950px; /* enough width for 3 columns of 300px each */
-  margin: 0 auto;
+  gap: 20px; 
+  max-width: 950px;
+  margin: 0 auto; 
 }
 
 .title {
@@ -131,18 +134,21 @@ export default {
   color: #666;
 }
 
+/* Card styling */
 .event-item {
   padding: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 15px; /* grid gap handles columns, but you can keep margin for spacing below */
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
+/* Text styles */
 .event-name {
   font-size: 1.5rem;
   color: #333;
 }
+
 .event-type {
   font-size: 0.9rem;
   color: red;
@@ -156,11 +162,80 @@ export default {
   color: #555;
   margin-bottom: 5px;
 }
+
 .event-date .bold {
   font-weight: bold;
 }
 
 .event-location span {
   font-weight: bold;
+}
+
+/* 
+  =============================
+   MEDIA QUERIES FOR TABLETS
+  =============================
+  e.g., adjust for screens up to 768px wide
+*/
+@media (max-width: 768px) {
+  .event-list {
+    margin: 1rem auto; /* reduce outer margin */
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 2rem;
+    margin-bottom: 15px;
+  }
+
+  /* 
+    If you want to allow columns on tablets, keep auto-fit as is; 
+    or if you prefer only 2 columns max on tablets, you can use a 
+    narrower max-width or even a new grid-template, etc.
+  */
+
+  .event-list-wrapper {
+    max-width: 100%; /* let it use the full width of the container */
+    padding: 0 10px; /* add some side padding so cards don't touch edges */
+  }
+
+  .event-item {
+    margin-bottom: 20px;
+  }
+}
+
+/* 
+  =============================
+   MEDIA QUERIES FOR MOBILE
+  =============================
+  e.g., adjust for screens up to 480px or 576px
+*/
+@media (max-width: 576px) {
+  .title {
+    font-size: 1.7rem;
+    margin-bottom: 10px;
+  }
+
+  .event-list {
+    margin: 1rem auto;
+    padding: 10px;
+  }
+
+  .event-list-wrapper {
+    /* 
+      If you really want a single column on smaller phones, 
+      you could force it by overriding the grid rule:
+        grid-template-columns: 1fr;
+     */
+    max-width: 100%;
+  }
+
+  .event-item {
+    padding: 10px;
+  }
+
+  .event-name {
+    font-size: 1.2rem;
+  }
 }
 </style>
