@@ -4,7 +4,7 @@
     <div v-if="loading" class="loading">Loading events...</div>
     <div v-else-if="error" class="error">{{ error }}</div>
     <div v-else class="event-list-wrapper">
-      <div v-for="(event, index) in events.slice(0, 3)" :key="event.id" class="event-item">
+      <div v-for="(event, index) in events.slice(0, 6)" :key="event.id" class="event-item">
         <h3 class="event-name">{{ event.name }}</h3>
         <h6 class="event-type">{{ event.eventType.name }}</h6>
         <p class="event-date">
