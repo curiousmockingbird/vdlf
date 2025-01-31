@@ -1,6 +1,5 @@
 <template>
     <section class="container our-staff-section">
-    <EventList />
         <div
             v-for="(cate, idx) in validCategories"
             :key="idx"
