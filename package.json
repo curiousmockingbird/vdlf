@@ -55,7 +55,7 @@
     "axios": "^0.21.4",
     "crypto-js": "^4.1.1",
     "es6-promise": "^4.2.8",
-    "gsap": "^3.6.1",
+    "gsap": "^3.12.7",
     "jquery": "^3.5.1",
     "lodash": "^4.17.20",
     "nodemailer": "^6.9.15",
