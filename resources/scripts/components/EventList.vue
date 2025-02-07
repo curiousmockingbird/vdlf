@@ -1,10 +1,11 @@
+
 <template>
   <div class="event-list">
     <h1 class="title">Upcoming Events</h1>
     <div v-if="loading" class="loading">Loading events...</div>
     <div v-else-if="error" class="error">{{ error }}</div>
     <div v-else>
-      <div v-for="event in events" :key="event.id" class="event-item">
+        <div v-for="event in events" :key="event.id" class="event-item">
         <h3 class="event-name">{{ event.name }}</h3>
         <h6 class="event-type">{{ event.eventType.name }}</h6>
         <p class="event-date">
@@ -26,28 +27,17 @@
         <p class="event-description" v-else>No description</p>
         <button class="save-button" @click="handleSave(event)">Save to Calendar</button>
       </div>
-
-      <!-- Show Load More button if there are potentially more events -->
-      <div v-if="hasMore && !loadingMore" style="text-align: center; margin: 20px 0;">
-        <div v-if="pagination === 1">
-        <button style="visibility: hidden">Next ></button>
-        <button style="margin: 0; color: black">{{ pagination }} of {{count}}</button>
-        <button style="color: red" @click="loadMore">Next ></button>
-        </div>
-        <div v-else-if="pagination > 1">
-        <button style="color: red" @click="loadMore">< Previous</button>
-        <button style="margin: 0; color: black">{{ pagination }} of {{count}}</button>
-        <button style="color: red" @click="loadMore">Next ></button>
-        </div>
-        <div v-else-if="pagination === count">
-        <button style="color: red" @click="loadMore">< Previous</button>
-        <button style="margin: 0; color: black">{{ pagination }} of {{count}}</button>
-        <button style="visibility: hidden">< Previous</button>
-        </div>
       </div>
 
-      <div v-else-if="loadingMore" style="text-align: center; margin: 20px 0;">
-        Loading more events...
+      <!-- Page Navigation Controls -->
+      <div class="pagination-container">
+        <button :disabled="currentPage <= 1" @click="goToPreviousPage" class="pagination-button">
+          < Previous
+        </button>
+        <span>{{ currentPage }} of {{ totalPages }}</span>
+        <button :disabled="currentPage >= totalPages" @click="goToNextPage" class="pagination-button">
+          Next >
+        </button>
       </div>
     </div>
   </div>
@@ -57,51 +47,50 @@
 import axios from "axios";
 
 export default {
-  name: "EventList",
   data() {
     return {
       events: [],
-      nextLink: "",
       loading: true,
-      loadingMore: false,
       error: null,
-      currentPage: 0,
-      pagination: 1,
-      count: 1,
-      hasMore: false, // Will be set by the API response
+      currentPage: 1,
+      totalPages: 1,
+      pageSize: 10
     };
   },
   methods: {
-    async fetchEvents(page = 0) {
-      this.loading = page === 0; // Only show initial loader on first page
-      this.loadingMore = page > 0; // Show a "loading more" state when loading subsequent pages
-      const url = `https://proxy-server-for-events-api.vercel.app/api/proxy?page=${page}`;
+    async fetchEvents(page = 1) {
+      this.loading = true;
+      // if your proxy expects ?page=0-based:
+      // or you can pass ?page=page-1 and do skip = page * pageSize on the server
 
       try {
-        const response = await axios.get(url);
+        const response = await axios.get(
+          `https://proxy-server-for-events-api.vercel.app/api/proxy?page=${page}`
+        );
         const fetchedEvents = response.data.items || [];
-        if (page === 0) {
-          // Initial load
-          this.events = fetchedEvents;
-          this.count = Math.round(response.data.count / 10);
-        } else {
-          // Append new events for subsequent pages
-          this.events = [...fetchedEvents];
-          this.pagination += 1;
-          // return from response.data.count rounded to the nearest whole number
-          this.count = Math.round(response.data.count / 10);
-          // this.nextLink = nextPageLink;
-        }
+        this.events = fetchedEvents;
 
-        this.hasMore = response.data.hasMore; 
-        // If using @odata.nextLink, you'd set hasMore based on whether nextLink exists.
+        // If the API returns a total event count:
+        const totalCount = response.data.count || 0;
+        this.totalPages = Math.ceil(totalCount / this.pageSize);
 
+        this.currentPage = page;
+        this.error = null;
       } catch (err) {
         this.error = "Failed to load events. Please try again.";
-        console.error(err.response || err);
+        console.error(err);
       } finally {
         this.loading = false;
-        this.loadingMore = false;
+      }
+    },
+    goToNextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.fetchEvents(this.currentPage + 1);
+      }
+    },
+    goToPreviousPage() {
+      if (this.currentPage > 1) {
+        this.fetchEvents(this.currentPage - 1);
       }
     },
     formatDate(dateString) {
@@ -139,14 +128,13 @@ export default {
       const url = this.generateGoogleCalendarLink(event);
       window.open(url, "_blank");
     },
-    loadMore() {
-      this.currentPage += 1;
-      this.fetchEvents(this.currentPage);
-    }
   },
   mounted() {
-    this.fetchEvents();
-  },
+    this.fetchEvents(1); // start with page 1
+
+  }
+  
+
 };
 </script>
 
@@ -224,5 +212,26 @@ export default {
 
 .save-button:hover {
   background-color: #45a049;
+}
+
+.pagination-container {
+  color: red;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.pagination-button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 </style>
