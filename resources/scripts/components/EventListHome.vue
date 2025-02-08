@@ -4,7 +4,7 @@
     <div v-if="loading" class="loading">Loading events...</div>
     <div v-else-if="error" class="error">{{ error }}</div>
     <div v-else class="event-list-wrapper">
-      <div v-for="(event, index) in events.slice(0, 6)" :key="event.id" class="event-item">
+        <div v-for="event in events" :key="event.id" class="event-item">
         <h3 class="event-name">{{ event.name }}</h3>
         <h6 class="event-type">{{ event.eventType.name }}</h6>
         <p class="event-date">
@@ -28,12 +28,26 @@
       </div>
 
     </div>
+      <div class="pagination-container">
+        <button :disabled="currentPage <= 1" @click="goToPreviousPage" class="pagination-button">
+          <
+        </button>
+        <span>{{ currentPage }} of {{ totalPages }}</span>
+        <button :disabled="currentPage >= totalPages" @click="goToNextPage" class="pagination-button">
+          >
+        </button>
+      </div>
 
       <!-- Show Load More button if there are more events -->
-      <div style="text-align: center; margin: 20px 0;">
-        <button @click="loadMore" style="color: black">Load More</button>
-        </div>
-      </div>
+      <div style="text-align: center;">
+  <button
+    style="background-color:rgb(167, 14, 40);"
+    class="pagination-button"
+    onclick="window.open('/upcoming-events', '_blank');"
+  >
+    See full list
+  </button>
+</div>
   </div>
 </template>
 
@@ -45,33 +59,48 @@ export default {
   data() {
     return {
       events: [],
-      nextLink: "",
       loading: true,
-      loadingMore: false,
       error: null,
-      currentPage: 0,
-      pagination: 1,
-      count: 1,
-      hasMore: false, // Will be set by the API response
+      currentPage: 1,
+      totalPages: 1,
+      pageSize: 6
+      // hasMore: false, // Will be set by the API response
     };
   },
   methods: {
-    async fetchEvents(page = 0) {
-      this.loading = page === 0; // Only show initial loader on first page
-      this.loadingMore = page > 0; // Show a "loading more" state when loading subsequent pages
-      const url = `https://proxy-server-for-events-api.vercel.app/api/proxy?page=${page}`;
+    async fetchEvents(page = 1) {
+      this.loading = true;
+      // if your proxy expects ?page=0-based:
+      // or you can pass ?page=page-1 and do skip = page * pageSize on the server
 
       try {
-        const response = await axios.get(url);
+        const response = await axios.get(
+          `https://proxy-server-for-events-api.vercel.app/api/proxy?page=${page}`
+        );
         const fetchedEvents = response.data.items || [];
         this.events = fetchedEvents;
 
+        // If the API returns a total event count:
+        const totalCount = response.data.count || 0;
+        this.totalPages = Math.ceil(totalCount / this.pageSize);
+
+        this.currentPage = page;
+        this.error = null;
       } catch (err) {
         this.error = "Failed to load events. Please try again.";
-        console.error(err.response || err);
+        console.error(err);
       } finally {
         this.loading = false;
-        this.loadingMore = false;
+      }
+    },
+    goToNextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.fetchEvents(this.currentPage + 1);
+      }
+    },
+    goToPreviousPage() {
+      if (this.currentPage > 1) {
+        this.fetchEvents(this.currentPage - 1);
       }
     },
     formatDate(dateString) {
@@ -85,15 +114,12 @@ export default {
         minute: "2-digit",
       };
       return new Date(dateString).toLocaleDateString("en-EN", options);
-    },
-    loadMore() {
-      const url = '/upcoming-events';
-      window.open(url, "_blank");
     }
   },
   mounted() {
-    this.fetchEvents();
-  },
+    this.fetchEvents(1); // start with page 1
+
+  }
 };
 </script>
 
@@ -202,6 +228,32 @@ export default {
   .event-item {
     margin-bottom: 20px;
   }
+}
+
+.pagination-container {
+  color: red;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.pagination-button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* 
