@@ -54,7 +54,7 @@ export default {
       error: null,
       currentPage: 1,
       totalPages: 1,
-      pageSize: 10
+      pageSize: 6
     };
   },
   methods: {
@@ -234,4 +234,11 @@ export default {
   border-radius: 4px;
   transition: background-color 0.3s ease;
 }
+
+button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
 </style>
