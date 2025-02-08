@@ -1,5 +1,5 @@
 <template>
-  <div class="event-list">
+  <div class="event-list" id="event-list">
     <h1 class="title">Upcoming Events</h1>
     <div v-if="loading" class="loading">Loading events...</div>
     <div v-else-if="error" class="error">{{ error }}</div>
